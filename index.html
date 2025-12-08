@@ -214,7 +214,7 @@
     <!-- Mobile Header -->
     <header
         class="md:hidden bg-white border-b border-slate-200 p-4 flex justify-between items-center sticky top-0 z-50">
-        <div class="font-bold text-xl text-slate-800">Cueprise<span class="text-sky-600">Enterprise</span></div>
+        <div class="font-bold text-xl text-slate-800">Cueprise</div>
         <button id="mobile-menu-btn" class="text-slate-600 focus:outline-none">
             &#9776; <!-- Hamburger Icon -->
         </button>
@@ -224,7 +224,7 @@
     <nav id="sidebar"
         class="hidden md:flex flex-col w-64 bg-slate-900 text-slate-300 h-screen sticky top-0 transition-transform transform md:translate-x-0 z-40">
         <div class="p-6 border-b border-slate-800">
-            <h1 class="font-bold text-2xl text-white tracking-tight">Cueprise<span class="text-sky-500">.</span></h1>
+            <h1 class="font-bold text-2xl text-white tracking-tight">Cueprise</h1>
             <p class="text-xs text-slate-500 mt-1">Enterprise Proposal v1.0</p>
         </div>
 
@@ -257,7 +257,7 @@
                     class="w-8 h-8 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-xs">
                     CS</div>
                 <div>
-                    <p class="text-sm font-medium text-white">Cuesoft Team</p>
+                    <p class="text-sm font-medium text-white">Cuesoft Inc. Team</p>
                     <p class="text-xs text-slate-500">24/7 Support Active</p>
                 </div>
             </div>
@@ -1067,7 +1067,7 @@
             btn.classList.add('opacity-75');
             spinner.classList.remove('hidden');
 
-            const systemPrompt = `You are a Senior Solutions Architect for Cueprise, an ERP for the Nigerian Gas Logistics industry. 
+            const systemPrompt = `You are a Senior Solutions Architect for Cueprise, an ERP for the Nigerian Gas Logistics industry by Cuesoft Inc. 
             The user will describe a custom module requirement. You must generate a technical specification that matches the existing UI design.
             
             Strictly output raw HTML containing exactly TWO div elements with NO Markdown formatting, NO \`\`\` wrappers.
@@ -1132,11 +1132,11 @@
             const systemPrompt = `You are the Cueprise AI Sales Assistant. You are embedded in a proposal website for "Gas Logistics Co.".
             
             Your Context:
-            - Product: Cueprise Enterprise (ERP for Gas/Logistics).
+            - Product: Cueprise (ERP for Gas/Logistics) by Cuesoft Inc.
             - Key Selling Points: Custom Built, Azure Native, Local Nigerian Support (24/7), Naira Pricing (stable).
             - Modules: Gas Logistics (Route Opt, Waybills), Asset Mgmt (Cylinders), HR (Nigerian Tax), ERP (Financials).
             - Architecture: React/Mobile users -> Azure AD (SSO) -> App Service -> SQL/Blob Storage.
-            - Roadmap: 6 months (Discovery -> Dev -> Test -> Live).
+            - Roadmap: 3-6 months (Discovery -> Dev -> Test -> Live).
             
             Goal: Answer user questions professionally and persuasively to close the deal. Keep answers short (under 3 sentences) unless asked for detail. Use markdown for bolding key points.`;
 
