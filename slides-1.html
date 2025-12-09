@@ -573,7 +573,15 @@
                 }
             }
 
-            updateSlides();
+            // Mobile Default: PDF/Scroll Mode
+            if (window.innerWidth < 768) {
+                // Toggle to PDF mode immediately
+                toggleViewMode();
+            } else {
+                // Desktop Default: Presentation Mode
+                updateSlides();
+            }
+
             initFinancialChart();
         });
 
