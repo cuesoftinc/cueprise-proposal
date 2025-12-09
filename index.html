@@ -29,7 +29,7 @@
 
     <!-- Sidebar Navigation -->
     <nav id="sidebar"
-        class="hidden md:flex flex-col w-64 bg-slate-900 text-slate-300 h-screen sticky top-0 transition-transform transform md:translate-x-0 z-40">
+        class="hidden flex md:flex flex-col w-64 bg-slate-900 text-slate-300 h-screen sticky top-0 transition-transform transform md:translate-x-0 z-40">
         <div class="p-6 border-b border-slate-800">
             <h1 class="font-bold text-2xl text-white tracking-tight">Cueprise</h1>
             <p class="text-xs text-slate-500 mt-1">Enterprise Proposal v1.0</p>
@@ -68,7 +68,7 @@
             </ul>
         </div>
 
-        <div class="p-6 border-t border-slate-800 bg-slate-900">
+        <div class="p-6 border-t border-slate-800 bg-slate-900 mt-auto">
             <div class="flex items-center gap-3">
                 <div
                     class="w-8 h-8 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-xs">
@@ -826,7 +826,7 @@
             });
 
             if (window.innerWidth < 768) {
-                sidebar.classList.add('hidden');
+                closeMobileMenu();
             }
 
             if (targetId === 'comparison') {
@@ -857,10 +857,25 @@
         window.addEventListener('load', handleHashNavigation);
         window.addEventListener('hashchange', handleHashNavigation);
 
+        // Centralized Close Function
+        function closeMobileMenu() {
+            sidebar.classList.add('hidden', 'sticky'); // Restore sticky for desktop flow if resized
+            sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[60]', 'shadow-2xl', 'flex', 'flex-col');
+            document.body.classList.remove('overflow-hidden'); // Unlock background scroll
+        }
+
         mobileMenuBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('hidden');
-            sidebar.classList.toggle('absolute');
-            sidebar.classList.toggle('z-50');
+            const isClosed = sidebar.classList.contains('hidden');
+
+            if (isClosed) {
+                // Open Menu - Use FIXED overlay with high Z-index to guaranteed sit on top
+                // Remove sticky to avoid flex interactions
+                sidebar.classList.remove('hidden', 'sticky');
+                sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-[60]', 'shadow-2xl', 'flex', 'flex-col');
+                document.body.classList.add('overflow-hidden'); // Lock background scroll
+            } else {
+                closeMobileMenu();
+            }
         });
 
         // -- Module Tab Logic --
@@ -1047,6 +1062,11 @@
             const systemPrompt = `You are a Senior Solutions Architect for Cueprise, an ERP for the Nigerian Gas Logistics industry by Cuesoft Inc. 
             The user will describe a custom module requirement. You must generate a technical specification that matches the existing UI design.
             
+            **Critical Industry Context (from Strategic Advisory Report):**
+            - Focus on **"Returnable Transport Items" (RTIs)** like cylinders, versus fixed infrastructure.
+            - Prioritize **NMDPRA / DPR Regulatory Compliance** (permits, safety checks).
+            - Emphasize **Offline-First** capabilities for field operations.
+            
             Strictly output raw HTML containing exactly TWO div elements with NO Markdown formatting, NO \`\`\` wrappers.
             
             Structure:
@@ -1106,32 +1126,26 @@
             msgList.scrollTop = msgList.scrollHeight;
 
             // 3. Prepare Context & Call API
-            const systemPrompt = `You are the Cueprise AI Sales Assistant. You are embedded in a proposal website for "Gas Logistics Co.".
+            const systemPrompt = `You are the Cueprise AI Sales Assistant. You are embedded in a proposal website for a Nigerian Gas Logistics Client.
             
-            Your Context (Solution Requirements & Strategic Report):
+            **Your Strategic Context (from Advisory Report):**
             
-            1. **Client Needs**: 
-               - Centralized cloud ERP for Gas Logistics & Asset Management.
-               - Must integrate with existing Microsoft 365 (10-15 users -> 20+).
-               - 24/7 availability, offline resilience, and data sovereignty (Client's Azure Tenant).
+            1. **The Client's Reality ("The Missing Middle"):**
+               - Too complex for basic tools (Excel/M365 alone), but underserved by global giants (SAP/Dynamics).
+               - **Critical Pain Point:** Managing "Returnable Transport Items" (RTIs) like cylinders vs fixed assets.
+               - **Regulatory Imperative:** Must comply with **NMDPRA / DPR** regulations (permits, CASHES reporting).
             
-            2. **The Result - Cueprise**:
-               - **Why Us?**: We are the *only* option offering localized Nigerian gas workflows + Naira-denominated fixed pricing + Direct Engineering Support (CueTA).
-               - **Vs Competitors**: 
-                 - Dynamics 365/SAP: Costly USD licensing, remote partner support. 
-                 - Zoho/Odoo: Public cloud (sovereignty risk) or heavy customization needed.
-               - **Architecture**: 
-                 - Azure App Service + Azure SQL + Blob Storage.
-                 - Integrated with Entra ID (Single Sign-On).
-                 - Offline PWA for drivers.
+            2. **Why Cueprise is the ONLY Choice:**
+               - **Sovereignty:** Deployed in *their* Azure Tenant (Data Sovereignty), unlike Zoho/Odoo (Public Cloud).
+               - **Economics:** **Naira-denominated fixed pricing** (immune to USD FX volatility), unlike SAP/Dynamics.
+               - **Local Support:** "CueTA" model provides 20+ local Nigerian engineers for 24/7 support.
             
-            3. **Implementation Roadmap (6 Months)**:
-               - Phase 1 (Wk 1-4): Discovery & Azure Setup.
-               - Phase 2 (Wk 5-12): Core ERP (Finance/HR).
-               - Phase 3 (Wk 13-20): Gas Logistics & Asset Modules.
-               - Phase 4 (Wk 21-24): Training & Hypercare.
+            3. **Architecture & Roadmap:**
+               - **Stack:** Azure App Service + Azure SQL + Entra ID (SSO).
+               - **Offline PWA:** For drivers/field staff in low-connectivity areas.
+               - **Timeline:** 3-6 Months total. Wk 13-20 is specifically for Custom Gas Logistics Modules.
             
-            Goal: Answer user questions professionally and persuasively to close the deal. Keep answers short (under 3 sentences) unless asked for detail. Use markdown for bolding key points.`;
+            Goal: Answer user questions professionally, citing these specific strategic advantages. Keep answers short (under 3 sentences) unless asked for detail. Use markdown for bolding key points.`;
 
             const aiResponse = await callGeminiAPI(userText, systemPrompt);
 
