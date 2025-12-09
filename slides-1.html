@@ -9,140 +9,43 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Phosphor Icons (Duotone) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        /* Layout Utilities */
-        .slide {
-            display: none;
-            height: 100%;
-            width: 100%;
-            flex-direction: column;
-        }
-
-        .slide.active {
-            display: flex;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Tab Transitions */
-        .tab-content {
-            display: none;
-            animation: fadeFast 0.3s ease-in-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeFast {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-
-            #app-container {
-                width: 100%;
-                max-width: none;
-                height: auto;
-                box-shadow: none;
-                aspect-ratio: auto;
-            }
-
-            .slide {
-                display: flex !important;
-                page-break-after: always;
-                height: 100vh;
-                border-bottom: 1px solid #ddd;
-            }
-
-            .no-print {
-                display: none !important;
-            }
-
-            .bg-gradient-to-br {
-                background: #3c0c96 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-
-        /* Presentation Mode Toggle Styles */
-        .print-mode-container {
-            height: auto !important;
-            max-width: 1000px !important;
-            aspect-ratio: auto !important;
-            background: transparent !important;
-            box-shadow: none !important;
-        }
-
-        .print-mode-slide {
-            display: flex !important;
-            margin-bottom: 40px;
-            height: 56.25vw !important;
-            max-height: 600px !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 0.75rem;
-            background: white;
-            overflow: hidden;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-gray-900 flex flex-col items-center justify-center min-h-screen p-4 text-gray-800">
+<body class="antialiased bg-slate-900 flex flex-col items-center justify-center min-h-screen p-4 text-slate-800">
 
-    <!-- Controls -->
-    <div class="fixed top-4 right-4 z-50 flex gap-2 no-print">
-        <a href="index.html"
-            class="bg-violet-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2 hover:bg-violet-500 transition text-sm">
-            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Interactive Overview
-        </a>
-        <button onclick="toggleViewMode()" id="viewModeBtn"
-            class="bg-white text-gray-900 px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2 hover:bg-gray-100 transition text-sm">
-            <i data-lucide="printer" class="w-4 h-4"></i> Print / PDF View
-        </button>
+    <!-- Utility Bar -->
+    <div id="deck-utility" class="w-full max-w-6xl mb-6 no-print">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+                <p class="type-label text-slate-400 mb-1">Cueprise Narrative Deck</p>
+                <p class="text-sm text-slate-400 font-medium">Use the interactive site for technical deep dives.</p>
+            </div>
+            <div class="deck-controls flex gap-3">
+                <a href="index.html"
+                    class="bg-sky-600 text-white px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2 hover:bg-sky-500 transition text-sm">
+                    <i class="ph-duotone ph-squares-four w-4 h-4"></i> Interactive Overview
+                </a>
+                <button onclick="toggleViewMode()" id="viewModeBtn"
+                    class="bg-white text-slate-900 px-4 py-2 rounded-lg font-bold shadow-lg flex items-center gap-2 hover:bg-slate-100 transition text-sm">
+                    <i class="ph-duotone ph-printer w-4 h-4"></i> Print / PDF View
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Deck Container (16:9 Aspect Ratio Fixed) -->
+    <!-- Main Deck Container -->
     <div id="app-container"
-        class="w-full max-w-6xl aspect-video bg-white rounded-2xl shadow-2xl overflow-hidden relative flex flex-col transition-all duration-300">
-
-        <!-- Background Decorations (Fixed) -->
-        <div
-            class="absolute top-0 right-0 w-64 h-64 bg-violet-50 rounded-full blur-3xl -z-0 translate-x-1/2 -translate-y-1/2 no-print pointer-events-none">
-        </div>
-        <div
-            class="absolute bottom-0 left-0 w-96 h-96 bg-violet-50 rounded-full blur-3xl -z-0 -translate-x-1/3 translate-y-1/3 no-print pointer-events-none">
-        </div>
+        class="w-full max-w-6xl aspect-video bg-slate-50 rounded-2xl shadow-xl overflow-hidden relative flex flex-col transition-all duration-300">
 
         <!-- Slides Wrapper -->
         <div id="slides-wrapper" class="flex-grow relative w-full h-full z-10">
@@ -150,25 +53,25 @@
             <!-- SLIDE 1: Title -->
             <div class="slide active" id="slide-0">
                 <div
-                    class="w-full h-full bg-gradient-to-br from-violet-900 to-indigo-950 text-white p-12 flex flex-col items-center justify-center text-center">
+                    class="w-full h-full bg-gradient-to-br from-sky-900 to-slate-900 text-white p-12 flex flex-col items-center justify-center text-center">
                     <div
-                        class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-2xl mb-8 shadow-lg text-violet-700">
-                        <i data-lucide="database" class="w-10 h-10"></i>
+                        class="inline-flex items-center justify-center w-28 h-28 bg-white rounded-3xl mb-8 shadow-2xl text-sky-700 shadow-sky-900/20">
+                        <i class="ph-duotone ph-database text-7xl"></i>
                     </div>
                     <h1 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">Strategic
                         Proposal:<br />Enterprise Resource Transformation</h1>
-                    <p class="text-xl md:text-2xl text-violet-200 mb-10 max-w-2xl mx-auto">Tailored ERP Solution for
+                    <p class="text-xl md:text-2xl text-sky-200 mb-10 max-w-2xl mx-auto">Tailored ERP Solution for
                         Downstream Gas Logistics & Asset Management</p>
                     <div
                         class="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-8 py-4 text-left inline-block">
-                        <div class="grid grid-cols-2 gap-8 text-sm">
+                        <div class="grid grid-cols-2 gap-8 text-sm mobile-stack">
                             <div>
-                                <p class="text-violet-300 uppercase tracking-wider font-semibold text-xs">Prepared For
+                                <p class="text-sky-300 uppercase tracking-wider font-semibold text-xs">Prepared For
                                 </p>
                                 <p class="text-lg font-bold">Prospective Client</p>
                             </div>
                             <div>
-                                <p class="text-violet-300 uppercase tracking-wider font-semibold text-xs">Presented By
+                                <p class="text-sky-300 uppercase tracking-wider font-semibold text-xs">Presented By
                                 </p>
                                 <p class="text-lg font-bold">Cuesoft Inc.</p>
                             </div>
@@ -179,550 +82,449 @@
 
             <!-- SLIDE 2: Context -->
             <div class="slide" id="slide-1">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
-                    <div>
-                        <h1 class="text-3xl font-bold text-gray-900">The Inflection Point</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">Bridging the 'Missing Middle' Gap</h2>
-                    </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-8 grid grid-cols-2 gap-8 items-center overflow-hidden">
-                    <div class="space-y-5">
-                        <div class="bg-orange-50 border-l-4 border-orange-500 p-5 rounded-r-lg">
-                            <h3 class="text-lg font-bold text-orange-700 flex items-center gap-2"><i
-                                    data-lucide="alert-triangle" class="w-5 h-5"></i> The Challenge</h3>
-                            <p class="text-sm text-gray-700 mt-1 leading-snug">Operating high-risk logistics with simple
-                                office tools (Microsoft 365) creates operational gaps and lost documents.</p>
+                <div class="slide-content flex flex-col h-full">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                        <div>
+                            <h1 class="type-title">The Inflection Point</h1>
+                            <p class="type-subheading">bridging the gap between basic office tools and rigid global
+                                ERPs.</p>
                         </div>
-                        <div class="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-lg">
-                            <h3 class="text-lg font-bold text-blue-700 flex items-center gap-2"><i
-                                    data-lucide="file-text" class="w-5 h-5"></i> Regulatory Risk</h3>
-                            <p class="text-sm text-gray-700 mt-1 leading-snug">A missing pressure test certificate isn't
-                                just admin—it's a facility shutdown violation (NMDPRA/DPR).</p>
-                        </div>
-                        <div class="bg-violet-50 border-l-4 border-violet-500 p-5 rounded-r-lg">
-                            <h3 class="text-lg font-bold text-violet-700 flex items-center gap-2"><i data-lucide="truck"
-                                    class="w-5 h-5"></i> Asset Complexity</h3>
-                            <p class="text-sm text-gray-700 mt-1 leading-snug">Generic ERPs fail at <strong>LPG
-                                    Cylinders</strong>—assets that constantly rotate between depots and customers.</p>
+                        <div class="flex items-center gap-2 type-label text-sky-700">
+                            <i class="ph-duotone ph-target text-4xl"></i> Your context first
                         </div>
                     </div>
-                    <div
-                        class="bg-gray-100 rounded-xl p-8 border border-gray-200 shadow-inner h-full flex flex-col justify-center">
-                        <h3 class="text-sm font-bold text-gray-500 mb-6 uppercase tracking-widest text-center">Market
-                            Positioning</h3>
-                        <div class="space-y-4 w-full max-w-sm mx-auto">
-                            <div class="flex items-center text-sm">
-                                <div class="w-1/3 text-right pr-4 text-gray-500">Basic Apps</div>
-                                <div class="w-2/3 py-2 bg-gray-300 rounded text-gray-500 pl-3">Too Simple</div>
+                    <div class="flex-grow flex flex-col justify-center space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="bg-orange-50 border border-orange-200 rounded-2xl p-5 space-y-2">
+                                <div class="flex items-center gap-3 type-label text-orange-700">
+                                    <i class="ph-duotone ph-warning-octagon text-4xl"></i> Operational drag
+                                </div>
+                                <p class="text-sm text-slate-700">Manual trackers can't keep up with depot volume,
+                                    paperwork
+                                    gets lost, and response times stretch.</p>
                             </div>
-                            <div class="flex items-center relative text-base">
-                                <div class="w-1/3 text-right pr-4 text-violet-700 font-bold leading-tight">"Missing
-                                    Middle"</div>
-                                <div class="w-2/3 py-4 bg-violet-600 rounded text-white shadow-lg pl-3 font-bold">YOUR
-                                    BUSINESS</div>
+                            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 space-y-2">
+                                <div class="flex items-center gap-3 type-label text-blue-700">
+                                    <i class="ph-duotone ph-file-x text-4xl"></i> Regulatory exposure
+                                </div>
+                                <p class="text-sm text-slate-700">One missing pressure test certificate triggers
+                                    NMDPRA/DPR
+                                    shutdowns and reputational risk.</p>
                             </div>
-                            <div class="flex items-center text-sm">
-                                <div class="w-1/3 text-right pr-4 text-gray-500">Global ERPs</div>
-                                <div class="w-2/3 py-2 bg-gray-300 rounded text-gray-500 pl-3">Too Rigid/Costly</div>
+                            <div class="bg-sky-50 border border-sky-200 rounded-2xl p-5 space-y-2">
+                                <div class="flex items-center gap-3 type-label text-sky-700">
+                                    <i class="ph-duotone ph-arrows-clockwise text-4xl"></i> Rotating assets
+                                </div>
+                                <p class="text-sm text-slate-700">Cylinders constantly move between depots, trucks, and
+                                    customers—generic ERPs simply lose them.</p>
                             </div>
+                        </div>
+                        <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col gap-3">
+                            <p class="type-label text-sky-200">Takeaway</p>
+                            <p class="text-base text-slate-100">You need a purpose-built control tower, not another
+                                "all-in-one" license. The <a href="index.html#overview"
+                                    class="text-sky-400 font-semibold hover:text-sky-300 underline underline-offset-4">interactive
+                                    overview</a> details our market positioning.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 3: Comparison -->
+            <!-- SLIDE 3: Requirement Fit -->
             <div class="slide" id="slide-2">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Comparative Analysis</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">Why Local Context Matters</h2>
+                        <h1 class="type-title">Requirement Alignment</h1>
+                        <p class="type-subheading">Directly addressing your core operational and technical needs.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl flex-grow content-center">
+                        <div class="premium-card space-y-4">
+                            <p class="type-label">What you asked for</p>
+                            <h3 class="type-heading font-bold text-2xl">Four non-negotiables</h3>
+                            <ul class="space-y-3 type-body">
+                                <li><strong class="text-slate-900">Secure collaboration:</strong> One workspace,
+                                    departmental controls.</li>
+                                <li><strong class="text-slate-900">Accounting-first core:</strong> HRIS/CRM optional,
+                                    workflows automated.</li>
+                                <li><strong class="text-slate-900">Gas logistics DNA:</strong> Cylinder lifecycle plus
+                                    fixed assets.</li>
+                                <li><strong class="text-slate-900">Microsoft 365 identity:</strong> 15 users today, 20+
+                                    tomorrow without rework.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-sky-200 rounded-2xl p-6 space-y-4 shadow-sm">
+                            <p class="type-label text-sky-500">How Cueprise responds</p>
+                            <h3 class="text-2xl font-bold text-slate-900">Built into the base offer</h3>
+                            <ul class="space-y-3 text-sm text-slate-700">
+                                <li>Azure App Service, SharePoint, and Blob storage managed through Entra roles.</li>
+                                <li>Finance + workflow kernel live on Day 1; HRIS/CRM accelerators unlock when you are
+                                    ready.</li>
+                                <li>Natural Gas modules already map depot > truck > customer loops.</li>
+                                <li>Autoscaling plus CueTA onboarding keeps performance steady as the team grows.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="flex-grow px-10 py-6 flex items-center justify-center">
-                    <div class="w-full bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="p-4 border-b text-gray-500 font-medium text-sm">Feature</th>
-                                    <th class="p-4 border-b bg-violet-50 text-violet-800 font-bold text-lg w-1/4">
-                                        Cueprise</th>
-                                    <th class="p-4 border-b text-gray-700 font-semibold w-1/5 text-sm">Dynamics 365</th>
-                                    <th class="p-4 border-b text-gray-700 font-semibold w-1/5 text-sm">SAP B1</th>
-                                    <th class="p-4 border-b text-gray-700 font-semibold w-1/5 text-sm">Zoho One</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm">
-                                <tr class="border-b border-gray-100">
-                                    <td class="p-4 font-medium text-gray-600">Hosting Model</td>
-                                    <td class="p-4 bg-violet-50/30 text-violet-700 font-bold">Private Azure Tenant</td>
-                                    <td class="p-4 text-gray-600">Public Cloud</td>
-                                    <td class="p-4 text-gray-600">On-Prem / Cloud</td>
-                                    <td class="p-4 text-gray-600">Public Cloud</td>
-                                </tr>
-                                <tr class="border-b border-gray-100">
-                                    <td class="p-4 font-medium text-gray-600">Currency Risk</td>
-                                    <td class="p-4 bg-violet-50/30 text-green-600 font-bold flex items-center gap-2"><i
-                                            data-lucide="check-circle" class="w-4 h-4"></i> Naira (Fixed)</td>
-                                    <td class="p-4 text-red-500">USD (Volatile)</td>
-                                    <td class="p-4 text-red-500">USD/EUR</td>
-                                    <td class="p-4 text-orange-500">NGN (Variable)</td>
-                                </tr>
-                                <tr class="border-b border-gray-100">
-                                    <td class="p-4 font-medium text-gray-600">Gas Asset Logic</td>
-                                    <td class="p-4 bg-violet-50/30 text-violet-700 font-bold">Native Cylinder Tracking
-                                    </td>
-                                    <td class="p-4 text-gray-600">Paid Add-on Req.</td>
-                                    <td class="p-4 text-gray-600">Heavy Custom</td>
-                                    <td class="p-4 text-gray-600">Generic / Low Code</td>
-                                </tr>
-                                <tr>
-                                    <td class="p-4 font-medium text-gray-600">Support Model</td>
-                                    <td class="p-4 bg-violet-50/30 text-violet-700 font-bold">Direct Engineering</td>
-                                    <td class="p-4 text-gray-600">Expensive Partners</td>
-                                    <td class="p-4 text-gray-600">Expensive Partners</td>
-                                    <td class="p-4 text-gray-600">Email / Ticket</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="text-sm text-slate-500">View detailed feature validation in the <a
+                            href="index.html#comparison"
+                            class="font-semibold text-sky-600 hover:text-sky-800 underline underline-offset-4">Interactive
+                            Overview &rarr; Solution Fit
+                            Checklist</a>.</div>
                 </div>
             </div>
 
-            <!-- SLIDE 4: Solution -->
+            <!-- SLIDE 4: Comparison -->
             <div class="slide" id="slide-3">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">The Solution: Cuesoft Trinity</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">More than software, a strategic partnership</h2>
+                        <h1 class="type-title">Why Cueprise Wins Locally</h1>
+                        <p class="type-subheading">Key differentiators that drive local value and operational control.
+                        </p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-8 flex items-center justify-center">
-                    <div class="w-full">
-                        <p class="text-sm text-gray-500 text-center mb-6">Cuesoft is the company; Cueprise is the ERP
-                            product within this trio alongside CueTA talent and CueLABS engineering.</p>
-                        <div class="grid grid-cols-3 gap-6 w-full h-3/4">
-                            <div
-                                class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 flex flex-col items-center text-center justify-center">
-                                <div
-                                    class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mb-4">
-                                    <i data-lucide="database" class="w-8 h-8"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-3">1. The Product</h3>
-                                <p class="text-sm text-gray-600 leading-relaxed">A sovereign, enterprise-grade ERP
-                                    kernel
-                                    built on modern microservices architecture.</p>
-                            </div>
-                            <div
-                                class="bg-white rounded-xl shadow-lg border-t-4 border-violet-600 p-6 flex flex-col items-center text-center justify-center relative transform scale-105 z-10">
-                                <div
-                                    class="absolute top-3 right-3 bg-yellow-100 text-yellow-800 text-[10px] uppercase px-2 py-1 rounded-full font-bold">
-                                    Unique Value</div>
-                                <div
-                                    class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mb-4">
-                                    <i data-lucide="users" class="w-8 h-8"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-3">2. The Talent (CueTA)</h3>
-                                <p class="text-sm text-gray-600 leading-relaxed">CueTA (Cuesoft Talent Academy) recruits
-                                    and trains specialists before they embed with your delivery squads.</p>
-                            </div>
-                            <div
-                                class="bg-white rounded-xl shadow-lg border border-gray-100 p-6 flex flex-col items-center text-center justify-center">
-                                <div
-                                    class="w-16 h-16 bg-violet-100 text-violet-600 rounded-full flex items-center justify-center mb-4">
-                                    <i data-lucide="cpu" class="w-8 h-8"></i>
-                                </div>
-                                <h3 class="text-xl font-bold text-gray-800 mb-3">3. The Labs (CueLABS)</h3>
-                                <p class="text-sm text-gray-600 leading-relaxed">20+ CueLABS engineers run continuous
-                                    R&D—AI demand forecasting, offline-first features, and rapid escalations.</p>
-                            </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="premium-card space-y-3">
+                            <div class="type-label text-sky-500">Control</div>
+                            <h3 class="type-heading">Private Azure tenant</h3>
+                            <p class="type-body">We provision App Service + SQL inside the tenancy you
+                                already pay for.</p>
+                        </div>
+                        <div class="bg-white border border-sky-100 rounded-2xl p-6 space-y-3 shadow-sm">
+                            <div class="type-label text-sky-500">Currency</div>
+                            <h3 class="text-xl font-bold text-slate-900">Naira cost certainty</h3>
+                            <p class="text-sm text-slate-700">Competitors quote USD or EUR. Your budget stays hedge-free
+                                and board-friendly.</p>
+                        </div>
+                        <div class="bg-white border border-sky-100 rounded-2xl p-6 space-y-3 shadow-sm">
+                            <div class="type-label text-sky-500">Context</div>
+                            <h3 class="text-xl font-bold text-slate-900">Gas logistics DNA</h3>
+                            <p class="text-sm text-slate-700">Cylinder custody, depot workflows, driver
+                                accountability—already modeled.</p>
                         </div>
                     </div>
+                    <div class="text-sm text-slate-500">View full comparative analysis in <a
+                            href="index.html#comparison"
+                            class="text-sky-600 font-semibold hover:text-sky-800 underline underline-offset-4">Why
+                            Cueprise? </a> on the interactive page.</div>
                 </div>
             </div>
 
-            <!-- SLIDE 5: Architecture -->
+            <!-- SLIDE 5: Solution -->
             <div class="slide" id="slide-4">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Technical Architecture</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">Sovereign, Secure, and Offline-First</h2>
+                        <h1 class="type-title">The Solution: Cuesoft Trinity</h1>
+                        <p class="type-subheading">A unified approach combining software, specialized talent, and
+                            continuous innovation.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-8 flex flex-col justify-center gap-8">
-                    <!-- Diagram -->
-                    <div class="flex justify-between items-center bg-gray-50 p-6 rounded-xl border border-gray-200">
-                        <div class="text-center w-1/3">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="premium-card text-center space-y-3">
                             <div
-                                class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm">
-                                <i data-lucide="server" class="w-8 h-8"></i>
+                                class="w-20 h-20 mx-auto rounded-full bg-sky-100 text-sky-700 flex items-center justify-center">
+                                <i class="ph-duotone ph-database text-5xl"></i>
                             </div>
-                            <h3 class="font-bold text-gray-800">Azure Native</h3>
-                            <p class="text-xs text-gray-500 mt-1">Deployed in <span
-                                    class="text-blue-600 font-bold">YOUR</span> Tenant.</p>
+                            <h3 class="type-heading">Cueprise ERP</h3>
+                            <p class="type-body">Sovereign ERP kernel, microservices, Azure-native
+                                deployments.</p>
                         </div>
-                        <div class="flex-1 h-px bg-gray-300 relative mx-4"><i data-lucide="lock"
-                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-gray-400 w-4 h-4"></i>
-                        </div>
-                        <div class="text-center w-1/3">
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center space-y-3">
                             <div
-                                class="w-16 h-16 bg-violet-100 text-violet-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm">
-                                <i data-lucide="shield-check" class="w-8 h-8"></i>
+                                class="w-20 h-20 mx-auto rounded-full bg-sky-100 text-sky-700 flex items-center justify-center">
+                                <i class="ph-duotone ph-users text-5xl"></i>
                             </div>
-                            <h3 class="font-bold text-gray-800">Identity Federation</h3>
-                            <p class="text-xs text-gray-500 mt-1">Log in with <strong>Microsoft 365</strong>.</p>
+                            <h3 class="text-xl font-bold text-slate-900">CueTA Talent</h3>
+                            <p class="text-sm text-slate-700">Embedded specialists trained on gas logistics before they
+                                touch your systems.</p>
                         </div>
-                        <div class="flex-1 h-px bg-gray-300 relative mx-4"><i data-lucide="wifi-off"
-                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-gray-400 w-4 h-4"></i>
-                        </div>
-                        <div class="text-center w-1/3">
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 text-center space-y-3">
                             <div
-                                class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-sm">
-                                <i data-lucide="truck" class="w-8 h-8"></i>
+                                class="w-20 h-20 mx-auto rounded-full bg-sky-100 text-sky-700 flex items-center justify-center">
+                                <i class="ph-duotone ph-cpu text-5xl"></i>
                             </div>
-                            <h3 class="font-bold text-gray-800">Offline-First PWA</h3>
-                            <p class="text-xs text-gray-500 mt-1">Syncs when online.</p>
+                            <h3 class="text-xl font-bold text-slate-900">CueLABS</h3>
+                            <p class="text-sm text-slate-700">20+ engineers on standby for AI features, offline-first
+                                R&D, and escalations.</p>
                         </div>
                     </div>
-                    <!-- Benefits -->
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
-                            <h4 class="font-bold text-violet-700 mb-2 text-sm uppercase">Key Benefits</h4>
-                            <ul class="space-y-2 text-sm text-gray-700">
-                                <li class="flex gap-2 items-center"><i data-lucide="check-circle"
-                                        class="w-4 h-4 text-green-500"></i> No new passwords to forget.</li>
-                                <li class="flex gap-2 items-center"><i data-lucide="check-circle"
-                                        class="w-4 h-4 text-green-500"></i> Data Sovereignty: You own the DB.</li>
-                            </ul>
-                        </div>
-                        <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
-                            <h4 class="font-bold text-blue-700 mb-2 text-sm uppercase">Tech Stack</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-2 py-1 bg-white border border-blue-200 rounded text-xs font-mono">Azure
-                                    App Service</span>
-                                <span class="px-2 py-1 bg-white border border-blue-200 rounded text-xs font-mono">Azure
-                                    SQL DB</span>
-                                <span class="px-2 py-1 bg-white border border-blue-200 rounded text-xs font-mono">React
-                                    PWA</span>
-                            </div>
-                        </div>
+                    <div class="bg-slate-900 text-white rounded-2xl p-6 text-sm leading-relaxed">
+                        Trinity means one contract, one roadmap, one accountable partner. View detailed delivery model
+                        and capability breakdown in the Interactive Overview under <a href="index.html#overview"
+                            class="font-semibold text-sky-300 hover:text-white underline underline-offset-4">Cuesoft
+                            Trinity</a>.
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 6: Modules -->
+            <!-- SLIDE 6: Architecture -->
             <div class="slide" id="slide-5">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Functional Modules</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">Tailored for Gas Operations</h2>
+                        <h1 class="type-title">Technical Architecture</h1>
+                        <p class="type-subheading">Enterprise-grade security, sovereignty, and offline resilience.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-6 overflow-hidden">
-                    <div class="flex h-full gap-6">
-                        <!-- Navigation -->
-                        <div class="w-1/4 flex flex-col gap-2 no-print">
-                            <button onclick="switchTab('asset')" id="tab-btn-asset"
-                                class="p-4 text-left rounded-lg bg-violet-600 text-white shadow-lg transition-all">
-                                <div class="flex items-center gap-2 font-bold mb-1 text-sm"><i data-lucide="database"
-                                        class="w-4 h-4"></i> Asset Lifecycle</div>
-                                <div class="text-[10px] opacity-80">Cylinder tracking</div>
-                            </button>
-                            <button onclick="switchTab('supply')" id="tab-btn-supply"
-                                class="p-4 text-left rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all">
-                                <div class="flex items-center gap-2 font-bold mb-1 text-sm"><i
-                                        data-lucide="shield-check" class="w-4 h-4"></i> Supply Chain</div>
-                                <div class="text-[10px] opacity-80">Fraud prevention</div>
-                            </button>
-                            <button onclick="switchTab('hr')" id="tab-btn-hr"
-                                class="p-4 text-left rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-all">
-                                <div class="flex items-center gap-2 font-bold mb-1 text-sm"><i data-lucide="hard-hat"
-                                        class="w-4 h-4"></i> HR & Compliance</div>
-                                <div class="text-[10px] opacity-80">Permit tracking</div>
-                            </button>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="premium-card space-y-3">
+                            <div class="type-label text-blue-600">Sovereign</div>
+                            <h3 class="type-heading">Deployed in your Azure tenant</h3>
+                            <p class="type-body">We provision App Service + SQL inside the tenancy you
+                                already pay for.</p>
                         </div>
-
-                        <!-- Mockup Window -->
-                        <div
-                            class="w-3/4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col shadow-inner overflow-hidden">
-                            <div class="h-8 bg-gray-200 flex items-center px-4 gap-2 border-b border-gray-300 shrink-0">
-                                <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                                <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-                                <span class="text-[10px] text-gray-500 ml-2 font-mono">cueprise/dashboard</span>
-                            </div>
-                            <div class="p-6 flex-grow overflow-hidden relative">
-                                <!-- Asset Tab -->
-                                <div id="tab-content-asset" class="tab-content active h-full flex flex-col">
-                                    <div class="flex justify-between items-center mb-4">
-                                        <h3 class="font-bold text-gray-800">Cylinder #88392</h3>
-                                        <span
-                                            class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold">Status:
-                                            In Transit</span>
-                                    </div>
-                                    <div class="pl-6 border-l-2 border-gray-200 space-y-6 text-sm">
-                                        <div class="relative">
-                                            <div
-                                                class="absolute -left-[31px] bg-green-500 w-4 h-4 rounded-full border-2 border-white">
-                                            </div>
-                                            <div class="font-bold">Filled at Depot</div>
-                                            <div class="text-xs text-gray-500">08:30 AM • Mike</div>
-                                        </div>
-                                        <div class="relative">
-                                            <div
-                                                class="absolute -left-[31px] bg-blue-500 w-4 h-4 rounded-full border-2 border-white">
-                                            </div>
-                                            <div class="font-bold">Loaded on Truck</div>
-                                            <div class="text-xs text-gray-500">09:15 AM • John</div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="mt-auto bg-yellow-50 p-3 rounded border border-yellow-200 flex gap-2 items-start">
-                                        <i data-lucide="alert-triangle"
-                                            class="text-yellow-600 w-4 h-4 shrink-0 mt-0.5"></i>
-                                        <div>
-                                            <div class="text-xs font-bold text-yellow-800">Safety Interlock</div>
-                                            <div class="text-[10px] text-yellow-700">Hydrostatic Test due in 25 days.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Supply Tab -->
-                                <div id="tab-content-supply" class="tab-content h-full">
-                                    <h3 class="font-bold text-gray-800 mb-4">Supplier Risk</h3>
-                                    <div class="bg-white rounded border border-gray-200 text-sm">
-                                        <div class="p-3 border-b flex justify-between bg-red-50"><span
-                                                class="font-bold text-red-900">GasRun Logistics</span><span
-                                                class="bg-red-600 text-white px-2 rounded text-xs flex items-center gap-1"><i
-                                                    data-lucide="lock" class="w-3 h-3"></i> Blacklisted</span></div>
-                                        <div class="p-3 flex justify-between"><span
-                                                class="font-bold text-gray-700">Total Energies</span><span
-                                                class="bg-green-100 text-green-800 px-2 rounded text-xs">Active</span>
-                                        </div>
-                                    </div>
-                                    <p class="mt-4 text-xs text-gray-500 italic">* Blacklisted suppliers are blocked
-                                        from new POs.</p>
-                                </div>
-                                <!-- HR Tab -->
-                                <div id="tab-content-hr" class="tab-content h-full">
-                                    <h3 class="font-bold text-gray-800 mb-4">Permit Tracker</h3>
-                                    <div class="grid grid-cols-2 gap-3 mb-4">
-                                        <div
-                                            class="bg-white p-3 rounded border border-gray-200 flex items-center justify-between">
-                                            <div class="text-xs">
-                                                <div class="text-gray-500">OGISP</div>
-                                                <div class="font-bold">Valid</div>
-                                            </div><i data-lucide="check-circle" class="text-green-500 w-4 h-4"></i>
-                                        </div>
-                                        <div
-                                            class="bg-white p-3 rounded border border-red-200 flex items-center justify-between">
-                                            <div class="text-xs">
-                                                <div class="text-gray-500">HSE L3</div>
-                                                <div class="font-bold text-red-600">2 Expiring</div>
-                                            </div><i data-lucide="alert-triangle"
-                                                class="text-red-500 w-4 h-4 animate-pulse"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-3">
+                            <div class="type-label text-sky-600">Secure</div>
+                            <h3 class="text-xl font-bold text-slate-900">Entra identity federation</h3>
+                            <p class="text-sm text-slate-700">SSO, MFA, and conditional access policies carry over
+                                automatically.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 space-y-3">
+                            <div class="type-label text-green-600">Resilient</div>
+                            <h3 class="text-xl font-bold text-slate-900">Offline-first field apps</h3>
+                            <p class="text-sm text-slate-700">Drivers capture data offline; sync and alerts resume once
+                                online.</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white border border-sky-100 rounded-2xl p-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-700">
+                        <div>
+                            <p class="type-label text-slate-500">Core Stack</p>
+                            <p>Azure App Service · Azure SQL · Blob Storage · React PWA · Event Grid</p>
+                        </div>
+                        <div>
+                            <p class="type-label text-slate-500">Compliance</p>
+                            <p>TLS 1.2, TDE, geo-redundant backups, weekly resilience tests.</p>
+                        </div>
+                        <div>
+                            <p class="type-label text-slate-500">More detail?</p>
+                            <p>See <a href="index.html#architecture"
+                                    class="text-sky-600 font-semibold hover:text-sky-800 underline underline-offset-4">Architecture
+                                    tab</a> for detailed diagrams.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 7: Financials -->
+            <!-- SLIDE 7: Modules -->
             <div class="slide" id="slide-6">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Financial Strategy</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">The 'Naira Hedge' Advantage</h2>
+                        <h1 class="type-title">Functional Modules</h1>
+                        <p class="type-subheading">Comprehensive modules designed for Gas Logistics and Asset
+                            Management.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-6 overflow-hidden flex flex-col gap-6">
-                    <!-- Chart Container -->
-                    <div
-                        class="bg-white rounded-xl p-6 border border-gray-200 shadow-sm flex-grow flex flex-col justify-center">
-                        <h3 class="text-base font-bold text-gray-700 mb-4">Cumulative Cost Projection (3 Years)</h3>
-                        <div class="w-full h-48 relative">
-                            <!-- SVG Chart -->
-                            <svg viewBox="0 0 400 150" class="w-full h-full overflow-visible">
-                                <!-- Grid Lines -->
-                                <line x1="0" y1="150" x2="400" y2="150" stroke="#e5e7eb" stroke-width="2" />
-                                <line x1="0" y1="0" x2="0" y2="150" stroke="#e5e7eb" stroke-width="2" />
-
-                                <!-- Competitor Line (Rising Red) -->
-                                <path d="M0 130 Q 200 100 400 20" fill="none" stroke="#ef4444" stroke-width="3"
-                                    stroke-dasharray="5,5" />
-                                <circle cx="0" cy="130" r="4" fill="#ef4444" />
-                                <circle cx="400" cy="20" r="4" fill="#ef4444" />
-                                <text x="405" y="25" fill="#ef4444" font-size="10" font-weight="bold">Competitors
-                                    (USD)</text>
-
-                                <!-- Cueprise Line (Flat Purple) -->
-                                <line x1="0" y1="130" x2="400" y2="130" stroke="#7c3aed" stroke-width="3" />
-                                <circle cx="0" cy="130" r="4" fill="#7c3aed" />
-                                <circle cx="400" cy="130" r="4" fill="#7c3aed" />
-                                <text x="405" y="135" fill="#7c3aed" font-size="10" font-weight="bold">Cueprise
-                                    (Naira)</text>
-
-                                <!-- X Axis Labels -->
-                                <text x="0" y="170" fill="#6b7280" font-size="10" text-anchor="middle">Year 1</text>
-                                <text x="200" y="170" fill="#6b7280" font-size="10" text-anchor="middle">Year 2</text>
-                                <text x="400" y="170" fill="#6b7280" font-size="10" text-anchor="middle">Year 3</text>
-                            </svg>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="premium-card space-y-3">
+                            <h3 class="type-heading flex items-center gap-3"><i
+                                    class="ph-duotone ph-database text-4xl text-sky-600"></i> Asset lifecycle</h3>
+                            </h3>
+                            <p class="type-body">Every cylinder is serialized, geo-tagged, and tied to
+                                maintenance status.</p>
+                            <ul class="type-body text-xs space-y-1 list-disc pl-4 text-slate-500">
+                                <li>Depot &gt; Truck &gt; Customer trail</li>
+                                <li>Automatic safety interlocks</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
+                            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3"><i
+                                    class="ph-duotone ph-shield-check text-4xl text-sky-600"></i> Supply chain
+                                guardrails</h3>
+                            <p class="text-sm text-slate-700">Vendor reputation scores and PO approvals live in one
+                                screen.</p>
+                            <ul class="text-xs text-slate-500 space-y-1 list-disc pl-4">
+                                <li>Blacklist enforcement</li>
+                                <li>Exception routing to the CFO</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white border border-slate-200 rounded-2xl p-6 space-y-3">
+                            <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3"><i
+                                    class="ph-duotone ph-hard-hat text-4xl text-sky-600"></i> People & compliance</h3>
+                            </h3>
+                            <p class="text-sm text-slate-700">Permit expiries, HSE evidence, and trainings stay
+                                audit-ready.</p>
+                            <ul class="text-xs text-slate-500 space-y-1 list-disc pl-4">
+                                <li>Microsoft 365 identity</li>
+                                <li>Field-ready progressive web app</li>
+                            </ul>
                         </div>
                     </div>
-                    <!-- Cards -->
-                    <div class="grid grid-cols-2 gap-6 h-24">
-                        <div
-                            class="bg-violet-50 px-5 py-3 rounded-lg border-l-4 border-violet-600 flex flex-col justify-center">
-                            <h4 class="font-bold text-violet-800 text-sm">Enterprise Licensing</h4>
-                            <p class="text-xs text-gray-700 mt-1">One annual Naira fee. No hidden per-module costs.</p>
-                        </div>
-                        <div
-                            class="bg-green-50 px-5 py-3 rounded-lg border-l-4 border-green-600 flex flex-col justify-center">
-                            <h4 class="font-bold text-green-800 text-sm">Budget Certainty</h4>
-                            <p class="text-xs text-gray-700 mt-1">Eliminate forex volatility risks completely.</p>
-                        </div>
-                    </div>
+                    <div class="text-sm text-slate-500">Explore detailed functional descriptions in the <a
+                            href="index.html#modules"
+                            class="text-sky-600 font-semibold hover:text-sky-800 underline underline-offset-4">Modules</a>
+                        tab online.</div>
                 </div>
             </div>
 
-            <!-- SLIDE 8: Roadmap -->
+            <!-- SLIDE 8: Financials -->
             <div class="slide" id="slide-7">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Implementation Roadmap</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">3-6 Month Transition Plan</h2>
+                        <h1 class="type-title">Financial Strategy</h1>
+                        <p class="type-subheading">Predictable, localized pricing model designed for long-term
+                            stability.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
-                    </div>
-                </div>
-                <div class="flex-grow px-10 py-8 flex items-center justify-center">
-                    <div class="grid grid-cols-4 gap-4 w-full">
-                        <div
-                            class="bg-white p-5 rounded-lg shadow border-l-8 border-gray-400 opacity-80 h-64 flex flex-col">
-                            <div class="text-[10px] font-bold text-gray-500 uppercase">Weeks 1-4</div>
-                            <h3 class="font-bold text-base text-gray-800 mb-2">Discovery</h3>
-                            <ul class="text-xs text-gray-600 space-y-2 list-disc pl-3">
-                                <li>Azure Provisioning</li>
-                                <li>Map Workflows</li>
-                                <li>Config SSO</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white p-5 rounded-lg shadow border-l-8 border-blue-500 h-64 flex flex-col">
-                            <div class="text-[10px] font-bold text-blue-500 uppercase">Weeks 5-12</div>
-                            <h3 class="font-bold text-base text-gray-800 mb-2">Core ERP</h3>
-                            <ul class="text-xs text-gray-600 space-y-2 list-disc pl-3">
-                                <li>Finance Go-Live</li>
-                                <li>Data Migration</li>
-                                <li>UAT Testing</li>
-                            </ul>
-                        </div>
-                        <div
-                            class="bg-white p-5 rounded-lg shadow-xl border-l-8 border-violet-600 transform scale-105 z-10 h-64 flex flex-col">
-                            <div class="flex justify-between items-center mb-1">
-                                <div class="text-[10px] font-bold text-violet-600 uppercase">Weeks 13-20</div>
-                                <span class="bg-violet-100 text-violet-800 text-[9px] px-1 rounded font-bold">KEY</span>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="premium-card md:col-span-2 flex flex-col">
+                            <h3 class="type-heading mb-4">Cumulative Cost Projection (3 Years)</h3>
+                            <div class="relative w-full flex-grow min-h-[250px]">
+                                <canvas id="financialChart"></canvas>
                             </div>
-                            <h3 class="font-bold text-base text-violet-800 mb-2">Operations</h3>
-                            <ul class="text-xs text-gray-600 space-y-2 list-disc pl-3">
-                                <li>Asset Module</li>
-                                <li>Driver App Rollout</li>
-                                <li>Barcoding Setup</li>
-                            </ul>
                         </div>
-                        <div class="bg-white p-5 rounded-lg shadow border-l-8 border-green-500 h-64 flex flex-col">
-                            <div class="text-[10px] font-bold text-green-500 uppercase">Weeks 21-24</div>
-                            <h3 class="font-bold text-base text-gray-800 mb-2">Launch</h3>
-                            <ul class="text-xs text-gray-600 space-y-2 list-disc pl-3">
-                                <li>Staff Training</li>
-                                <li>Full Go-Live</li>
-                                <li>SLA Support</li>
-                            </ul>
+                        <div class="bg-sky-50 border border-sky-100 rounded-2xl p-6 space-y-4">
+                            <div>
+                                <p class="type-label text-sky-500">Licensing</p>
+                                <p class="text-sm text-sky-900">One predictable annual Naira fee. No per-module
+                                    surprises.</p>
+                            </div>
+                            <div>
+                                <p class="type-label text-sky-500">Budget Certainty</p>
+                                <p class="text-sm text-sky-900">FX volatility stays on the competitors' books, not
+                                    yours.</p>
+                            </div>
                         </div>
                     </div>
+                    <p class="text-sm text-slate-500 text-center mt-2">Detailed pricing structure and efficiency
+                        projections
+                        are available in the <a href="index.html#investment"
+                            class="text-sky-600 font-semibold hover:text-sky-800 underline underline-offset-4">Investment
+                            Value</a> section online.</p>
                 </div>
             </div>
 
-            <!-- SLIDE 9: Closing -->
+            <!-- SLIDE 9: Roadmap -->
             <div class="slide" id="slide-8">
-                <div class="flex justify-between items-end border-b-4 border-violet-600 px-10 pt-10 pb-4">
+                <div class="slide-content flex flex-col h-full">
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Why Cueprise?</h1>
-                        <h2 class="text-lg text-violet-600 font-medium">The Strategic Fit</h2>
+                        <h1 class="type-title">Implementation Roadmap</h1>
+                        <p class="type-subheading">A structured, phased approach to ensure rapid value delivery.</p>
                     </div>
-                    <div class="hidden md:flex items-center gap-2 text-violet-800 font-bold text-xl">
-                        <i data-lucide="database" class="w-6 h-6"></i> Cueprise
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full flex-grow content-center">
+                        <!-- Phase 1 -->
+                        <div class="space-y-3 relative group">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-slate-200"></div>
+                            <div
+                                class="absolute top-0 left-0 w-full h-1 bg-slate-400 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500">
+                            </div>
+                            <div class="pt-4">
+                                <div
+                                    class="bg-slate-100 text-slate-600 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mb-2">
+                                    1</div>
+                                <p class="type-label text-slate-500 mb-1">Weeks 1-4</p>
+                                <h3 class="type-heading text-lg">Discovery</h3>
+                                <p class="type-body text-sm leading-snug">Azure provisioning, workflow mapping, Entra
+                                    setup.</p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="space-y-3 relative group">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-blue-100"></div>
+                            <div
+                                class="absolute top-0 left-0 w-full h-1 bg-blue-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500">
+                            </div>
+                            <div class="pt-4">
+                                <div
+                                    class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mb-2">
+                                    2</div>
+                                <p class="type-label text-blue-500 mb-1">Weeks 5-12</p>
+                                <h3 class="type-heading text-lg">Finance + Data</h3>
+                                <p class="type-body text-sm leading-snug">Core ERP, migration factory, and UAT sign-off.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="space-y-3 relative group">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-sky-100"></div>
+                            <div
+                                class="absolute top-0 left-0 w-full h-1 bg-sky-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500">
+                            </div>
+                            <div class="pt-4">
+                                <div
+                                    class="bg-sky-100 text-sky-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mb-2">
+                                    3</div>
+                                <p class="type-label text-sky-600 mb-1">Weeks 13-20</p>
+                                <h3 class="type-heading text-lg">Operations</h3>
+                                <p class="type-body text-sm leading-snug">Asset module, driver app, barcoding hardware.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div class="space-y-3 relative group">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-emerald-100"></div>
+                            <div
+                                class="absolute top-0 left-0 w-full h-1 bg-emerald-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500">
+                            </div>
+                            <div class="pt-4">
+                                <div
+                                    class="bg-emerald-100 text-emerald-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mb-2">
+                                    4</div>
+                                <p class="type-label text-emerald-600 mb-1">Weeks 21-24</p>
+                                <h3 class="type-heading text-lg">Launch</h3>
+                                <p class="type-body text-sm leading-snug">Training, full go-live, SLA-backed CueLABS
+                                    support.</p>
+                            </div>
+                        </div>
                     </div>
+                    <div class="text-sm text-slate-500">Monitor specific milestones and timelines in the <a
+                            href="index.html#roadmap"
+                            class="text-sky-600 font-semibold hover:text-sky-800 underline underline-offset-4">Implementation
+                            Roadmap</a> section online.</div>
                 </div>
-                <div class="flex-grow px-10 py-8 flex flex-col items-center justify-center gap-8">
-                    <div class="grid grid-cols-3 gap-6 w-full max-w-4xl">
-                        <div class="p-6 bg-gray-50 rounded-xl text-center shadow-sm">
-                            <div class="text-3xl mb-3">🇳🇬</div>
+            </div>
+
+            <!-- SLIDE 10: Closing -->
+            <div class="slide" id="slide-9">
+                <div class="slide-content flex flex-col h-full">
+                    <div>
+                        <h1 class="type-title">Why Cueprise?</h1>
+                        <p class="type-subheading">Committed to local content, long-term partnership, and cost
+                            efficiency.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow content-center">
+                        <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                            <div class="text-sky-600 flex justify-center mb-4"><i
+                                    class="ph-duotone ph-flag text-5xl"></i></div>
                             <h3 class="font-bold text-lg mb-1">Local Content</h3>
-                            <p class="text-xs text-gray-600">Boost NOGICD score for government bids.</p>
+                            <p class="text-sm text-slate-600">Boost NOGICD score for regulated bids.</p>
                         </div>
-                        <div class="p-6 bg-violet-50 rounded-xl border border-violet-100 text-center shadow-sm">
-                            <div class="text-violet-600 flex justify-center mb-3"><i data-lucide="graduation-cap"
-                                    class="w-8 h-8"></i></div>
-                            <h3 class="font-bold text-lg mb-1 text-violet-800">Partner, Not Vendor</h3>
-                            <p class="text-xs text-gray-600">Dedicated engineering team, not just a license.</p>
+                        <div class="p-6 bg-sky-50 border border-sky-100 rounded-2xl text-center">
+                            <div class="text-sky-600 flex justify-center mb-4"><i
+                                    class="ph-duotone ph-graduation-cap text-5xl"></i></div>
+                            <h3 class="font-bold text-lg mb-1 text-sky-800">Partner, Not Vendor</h3>
+                            <p class="text-sm text-slate-600">CueTA + CueLABS stay embedded beyond go-live.</p>
                         </div>
-                        <div class="p-6 bg-gray-50 rounded-xl text-center shadow-sm">
-                            <div class="text-green-600 flex justify-center mb-3"><i data-lucide="trending-up"
-                                    class="w-8 h-8"></i></div>
+                        <div class="p-6 bg-slate-50 border border-slate-100 rounded-2xl text-center">
+                            <div class="text-green-600 flex justify-center mb-4"><i
+                                    class="ph-duotone ph-chart-line-up text-5xl"></i></div>
                             <h3 class="font-bold text-lg mb-1">Cost Control</h3>
-                            <p class="text-xs text-gray-600">Absolute budgetary predictability in Naira.</p>
+                            <p class="text-sm text-slate-600">Naira pricing plus shared KPIs keep budgets predictable.
+                            </p>
                         </div>
                     </div>
                     <div
-                        class="bg-gradient-to-r from-violet-600 to-indigo-700 text-white p-8 rounded-2xl w-full max-w-4xl shadow-xl flex flex-col items-center">
-                        <h2 class="text-2xl font-bold mb-4">Recommended Next Steps</h2>
-                        <div class="flex gap-8 w-full justify-center">
-                            <div
-                                class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex gap-3 items-center flex-1 max-w-xs">
+                        class="bg-gradient-to-r from-sky-600 to-blue-900 text-white p-8 rounded-2xl shadow-xl space-y-4">
+                        <h2 class="text-2xl font-bold">Recommended Next Steps</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white/10 p-4 rounded-lg flex gap-3 items-center">
                                 <div
-                                    class="w-8 h-8 bg-white text-violet-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
+                                    class="w-8 h-8 bg-white text-sky-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
                                     1</div>
-                                <div class="text-left">
+                                <div>
                                     <div class="font-bold text-sm">Immediate Discovery</div>
-                                    <div class="text-xs text-violet-100">Phase 1 Workshop</div>
+                                    <div class="text-xs text-sky-100">Phase 1 workshop</div>
                                 </div>
                             </div>
-                            <div
-                                class="bg-white/10 p-4 rounded-lg backdrop-blur-sm flex gap-3 items-center flex-1 max-w-xs">
+                            <div class="bg-white/10 p-4 rounded-lg flex gap-3 items-center">
                                 <div
-                                    class="w-8 h-8 bg-white text-violet-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
+                                    class="w-8 h-8 bg-white text-sky-700 rounded-full flex items-center justify-center font-bold text-sm shrink-0">
                                     2</div>
-                                <div class="text-left">
+                                <div>
                                     <div class="font-bold text-sm">Azure Setup</div>
-                                    <div class="text-xs text-violet-100">Provision Tenant</div>
+                                    <div class="text-xs text-sky-100">Provision tenant + security baseline</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-wrap gap-3 mt-6 justify-center w-full">
+                        <div>
                             <a href="index.html"
-                                class="bg-white text-violet-700 px-5 py-2 rounded-lg font-semibold shadow hover:shadow-md transition flex items-center gap-2">
-                                <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i> Open Interactive Overview
+                                class="inline-flex items-center gap-2 bg-white text-sky-700 px-5 py-2 rounded-lg font-semibold shadow hover:shadow-md transition">
+                                <i class="ph-duotone ph-cursor-click w-4 h-4"></i> Open Interactive Overview
                             </a>
                         </div>
                     </div>
@@ -731,38 +533,149 @@
 
         </div>
 
-        <!-- Footer -->
-        <div
-            class="bg-gray-50 border-t border-gray-200 px-6 py-3 flex justify-between items-center h-14 shrink-0 no-print">
-            <div class="text-xs text-gray-500 font-medium">Strategic Proposal • <span
-                    class="text-violet-600">Confidential</span></div>
-            <div class="flex items-center gap-4">
-                <button onclick="prevSlide()" id="prevBtn"
-                    class="p-2 rounded-full hover:bg-violet-100 text-violet-700 disabled:opacity-30"><i
-                        data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                <span class="text-gray-700 font-bold text-sm w-12 text-center" id="slide-indicator">1 / 9</span>
-                <button onclick="nextSlide()" id="nextBtn"
-                    class="p-2 rounded-full hover:bg-violet-100 text-violet-700 disabled:opacity-30"><i
-                        data-lucide="chevron-right" class="w-5 h-5"></i></button>
-            </div>
+        <!-- Progress Bar (In Flow) -->
+        <div class="h-1 bg-slate-200 w-full shrink-0 no-print">
+            <div id="progress-bar" class="h-full bg-sky-600 transition-all duration-300" style="width: 10%"></div>
         </div>
 
-        <!-- Progress Bar -->
-        <div class="h-1 bg-gray-200 w-full absolute bottom-14 left-0 z-30 no-print">
-            <div id="progress-bar" class="h-full bg-violet-600 transition-all duration-300" style="width: 11%"></div>
+        <!-- Footer -->
+        <div class="bg-white px-6 py-3 flex justify-between items-center h-14 shrink-0 no-print slide-footer">
+            <div class="text-xs text-slate-600 font-medium">Strategic Proposal • <span
+                    class="text-sky-600">Confidential</span></div>
+            <div class="flex items-center gap-4">
+                <button onclick="prevSlide()" id="prevBtn"
+                    class="p-2 rounded-full hover:bg-sky-50 text-sky-700 disabled:opacity-30"><i
+                        class="ph-duotone ph-caret-left w-5 h-5"></i></button>
+                <span class="text-slate-700 font-bold text-sm w-12 text-center" id="slide-indicator">1 / 10</span>
+                <button onclick="nextSlide()" id="nextBtn"
+                    class="p-2 rounded-full hover:bg-sky-50 text-sky-700 disabled:opacity-30"><i
+                        class="ph-duotone ph-caret-right w-5 h-5"></i></button>
+            </div>
         </div>
 
     </div>
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 9;
+        const totalSlides = 10;
         let isPrintMode = false;
 
         document.addEventListener('DOMContentLoaded', () => {
-            lucide.createIcons();
+            // lucide.createIcons(); // Removed as Phosphor Icons are used directly
+            // Phosphor Icons are loaded via script tag and applied via class names, no explicit JS call needed for rendering.
+
+            // Check for deep link on load
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#slide-')) {
+                const slideIndex = parseInt(hash.replace('#slide-', ''), 10);
+                if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < totalSlides) {
+                    currentSlide = slideIndex;
+                }
+            }
+
             updateSlides();
+            initFinancialChart();
         });
+
+        function initFinancialChart() {
+            const ctx = document.getElementById('financialChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Year 1', 'Year 2', 'Year 3'],
+                    datasets: [
+                        {
+                            label: 'Competitors (USD Risk)',
+                            data: [100, 160, 240], // Steep curve representing FX volatility
+                            borderColor: '#ef4444', // Red-500
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 3,
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#ef4444',
+                            pointBorderWidth: 2
+                        },
+                        {
+                            label: 'Cueprise (Naira Stable)',
+                            data: [90, 95, 100], // Flat/Stable curve
+                            borderColor: '#0284c7', // Sky-600
+                            backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#0284c7',
+                            pointBorderWidth: 2,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 12,
+                                    weight: 600
+                                },
+                                color: '#475569'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            titleFont: { family: "'Inter', sans-serif", size: 13 },
+                            bodyFont: { family: "'Inter', sans-serif", size: 13 },
+                            padding: 10,
+                            cornerRadius: 8,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9',
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: false // Abstract scale for strategy slide
+                            },
+                            border: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    weight: 600,
+                                    size: 12
+                                },
+                                color: '#64748b'
+                            },
+                            border: {
+                                display: false
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        }
 
         function updateSlides() {
             for (let i = 0; i < totalSlides; i++) {
@@ -773,6 +686,9 @@
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
             document.getElementById('slide-indicator').innerText = `${currentSlide + 1} / ${totalSlides}`;
             document.getElementById('progress-bar').style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+
+            // Update URL hash for sharing/bookmarking without jumping
+            history.replaceState(null, null, `#slide-${currentSlide}`);
         }
 
         function nextSlide() { if (currentSlide < totalSlides - 1) { currentSlide++; updateSlides(); } }
@@ -785,15 +701,6 @@
             }
         });
 
-        function switchTab(tabName) {
-            ['asset', 'supply', 'hr'].forEach(t => {
-                document.getElementById(`tab-content-${t}`).classList.remove('active');
-                document.getElementById(`tab-btn-${t}`).className = "p-4 text-left rounded-lg transition-all bg-gray-100 text-gray-600 hover:bg-gray-200";
-            });
-            document.getElementById(`tab-content-${tabName}`).classList.add('active');
-            document.getElementById(`tab-btn-${tabName}`).className = "p-4 text-left rounded-lg transition-all bg-violet-600 text-white shadow-lg";
-        }
-
         function toggleViewMode() {
             isPrintMode = !isPrintMode;
             const container = document.getElementById('app-container');
@@ -801,18 +708,18 @@
             const slides = document.querySelectorAll('.slide');
 
             if (isPrintMode) {
-                btn.innerHTML = `<i data-lucide="monitor" class="w-4 h-4"></i> Presentation Mode`;
+                btn.innerHTML = `<i class="ph-duotone ph-monitor w-4 h-4"></i> Presentation Mode`;
                 container.classList.add('print-mode-container');
                 slides.forEach(slide => slide.classList.add('active', 'print-mode-slide'));
                 document.getElementById('slides-wrapper').style.overflow = 'visible';
             } else {
-                btn.innerHTML = `<i data-lucide="printer" class="w-4 h-4"></i> Print / PDF View`;
+                btn.innerHTML = `<i class="ph-duotone ph-printer w-4 h-4"></i> Print / PDF View`;
                 container.classList.remove('print-mode-container');
                 slides.forEach(slide => slide.classList.remove('print-mode-slide'));
                 document.getElementById('slides-wrapper').style.overflow = '';
                 updateSlides();
             }
-            lucide.createIcons();
+            // lucide.createIcons();
         }
     </script>
 </body>
