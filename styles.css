@@ -319,12 +319,19 @@ body {
 
 /* Mobile Responsive Override */
 @media (max-width: 768px) {
-    .aspect-video {
+
+    /* Only the main app container/slides need to fill screen on mobile */
+    #app-container.aspect-video {
         aspect-ratio: auto !important;
         min-height: 100dvh;
-        /* Fill at least the screen */
         height: auto !important;
-        /* Grow if content needs it */
+    }
+
+    /* Restore normal aspect ratio for other elements like video wrappers */
+    .aspect-video:not(#app-container) {
+        aspect-ratio: 16 / 9 !important;
+        min-height: auto !important;
+        height: auto !important;
     }
 
     #app-container {
