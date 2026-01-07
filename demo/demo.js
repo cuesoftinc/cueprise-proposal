@@ -19,6 +19,54 @@ function closeSidebar() {
     overlay.classList.remove('active');
 }
 
+// ==========================================
+// Dropdown Toggles (Notifications & User Menu)
+// ==========================================
+function toggleNotifications() {
+    const dropdown = document.getElementById('notification-dropdown');
+    const userDropdown = document.getElementById('user-dropdown');
+    
+    // Close user menu if open
+    userDropdown?.classList.remove('active');
+    
+    dropdown.classList.toggle('active');
+}
+
+function toggleUserMenu() {
+    const dropdown = document.getElementById('user-dropdown');
+    const notifDropdown = document.getElementById('notification-dropdown');
+    
+    // Close notifications if open
+    notifDropdown?.classList.remove('active');
+    
+    dropdown.classList.toggle('active');
+}
+
+function closeAllDropdowns() {
+    document.getElementById('notification-dropdown')?.classList.remove('active');
+    document.getElementById('user-dropdown')?.classList.remove('active');
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.notification-wrapper') && !e.target.closest('.user-wrapper')) {
+        closeAllDropdowns();
+    }
+});
+
+// ==========================================
+// Keyboard Shortcuts
+// ==========================================
+document.addEventListener('keydown', (e) => {
+    // Ctrl+K or Cmd+K to focus search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.querySelector('.search-box input');
+        searchInput?.focus();
+        showToast('Search', 'Type to search across all modules...', 'info');
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // ==========================================

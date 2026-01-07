@@ -113,14 +113,70 @@
                 </div>
             </div>
             <div class="topbar-right">
-                <button class="icon-btn">
-                    <i class="ph-duotone ph-bell"></i>
-                    <span class="badge">3</span>
-                </button>
-                <div class="user-profile">
-                    <img src="https://ui-avatars.com/api/?name=MSN+Admin&background=6366f1&color=fff" alt="User">
-                    <span>Admin User</span>
-                    <i class="ph ph-caret-down"></i>
+                <div class="notification-wrapper">
+                    <button class="icon-btn" onclick="toggleNotifications()">
+                        <i class="ph-duotone ph-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <div id="notification-dropdown" class="dropdown-panel">
+                        <div class="dropdown-header">
+                            <h4>Notifications</h4>
+                            <button class="btn-link" onclick="showToast('Notifications', 'All notifications marked as read', 'success')">Mark all read</button>
+                        </div>
+                        <div class="dropdown-content">
+                            <div class="notification-item urgent">
+                                <i class="ph-duotone ph-warning-octagon"></i>
+                                <div class="notification-text">
+                                    <strong>License Expiring</strong>
+                                    <p>DPR Gas Processing License expires in 15 days</p>
+                                    <span class="notification-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="ph-duotone ph-check-circle"></i>
+                                <div class="notification-text">
+                                    <strong>Requisition Approved</strong>
+                                    <p>REQ-2026-0140 has been approved by L3</p>
+                                    <span class="notification-time">4 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <i class="ph-duotone ph-file-text"></i>
+                                <div class="notification-text">
+                                    <strong>Invoice Generated</strong>
+                                    <p>INV-2026-0089 for PowerGen Nigeria created</p>
+                                    <span class="notification-time">Yesterday</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-footer">
+                            <button class="btn-link" onclick="showToast('Notifications', 'Opening all notifications...', 'info')">View All Notifications</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-wrapper">
+                    <div class="user-profile" onclick="toggleUserMenu()">
+                        <img src="https://ui-avatars.com/api/?name=MSN+Admin&background=6366f1&color=fff" alt="User">
+                        <span>Admin User</span>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                    <div id="user-dropdown" class="dropdown-panel user-menu">
+                        <div class="dropdown-content">
+                            <button class="dropdown-item" onclick="showToast('Profile', 'Opening profile settings...', 'info')">
+                                <i class="ph ph-user"></i> My Profile
+                            </button>
+                            <button class="dropdown-item" onclick="showToast('Preferences', 'Opening preferences...', 'info')">
+                                <i class="ph ph-gear"></i> Preferences
+                            </button>
+                            <button class="dropdown-item" onclick="showToast('Help', 'Opening help center...', 'info')">
+                                <i class="ph ph-question"></i> Help Center
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item danger" onclick="showToast('Logout', 'Logging out...', 'info')">
+                                <i class="ph ph-sign-out"></i> Logout
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
