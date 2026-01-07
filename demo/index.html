@@ -314,7 +314,7 @@
                                 <i class="ph ph-magnifying-glass"></i>
                                 <input type="text" placeholder="Search off-taker...">
                             </div>
-                            <button class="btn-primary">
+                            <button class="btn-primary" onclick="openModal('nomination-modal')">
                                 <i class="ph ph-plus"></i> New Nomination
                             </button>
                         </div>
@@ -461,7 +461,7 @@
                             <button class="btn-secondary">
                                 <i class="ph ph-funnel"></i> Filter
                             </button>
-                            <button class="btn-primary">
+                            <button class="btn-primary" onclick="openModal('license-modal')">
                                 <i class="ph ph-plus"></i> Add License
                             </button>
                         </div>
@@ -754,10 +754,202 @@
                     <h1>Logistics & FGC</h1>
                     <p class="subtitle">Distribution tracking and flare gas commercialization</p>
                 </div>
-                <div class="placeholder-content">
-                    <i class="ph-duotone ph-truck"></i>
-                    <h3>Logistics Module</h3>
-                    <p>Real-time tracking of gas distribution, waybill management, and delivery confirmation.</p>
+
+                <!-- Logistics KPIs -->
+                <div class="kpi-grid four-col">
+                    <div class="kpi-card compact">
+                        <div class="kpi-icon blue">
+                            <i class="ph-duotone ph-truck"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">Active Deliveries</span>
+                            <span class="kpi-value">18</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card compact">
+                        <div class="kpi-icon green">
+                            <i class="ph-duotone ph-check-circle"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">Completed Today</span>
+                            <span class="kpi-value">42</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card compact">
+                        <div class="kpi-icon purple">
+                            <i class="ph-duotone ph-flame"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">FGC Recovery Rate</span>
+                            <span class="kpi-value">87%</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card compact">
+                        <div class="kpi-icon orange">
+                            <i class="ph-duotone ph-gas-pump"></i>
+                        </div>
+                        <div class="kpi-content">
+                            <span class="kpi-label">FGC Sites Active</span>
+                            <span class="kpi-value">6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-Navigation Tabs -->
+                <div class="module-tabs">
+                    <button class="module-tab active" data-tab="logistics-waybills">Waybill Tracking</button>
+                    <button class="module-tab" data-tab="logistics-fgc">FGC Operations</button>
+                </div>
+
+                <!-- Waybill Tracking Tab -->
+                <div id="logistics-waybills" class="tab-content active">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Active Waybills</h3>
+                            <div class="table-actions">
+                                <div class="search-inline">
+                                    <i class="ph ph-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search waybills...">
+                                </div>
+                                <button class="btn-primary" onclick="showToast('Waybill Created', 'New waybill WB-2026-0234 created', 'success')">
+                                    <i class="ph ph-plus"></i> New Waybill
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Waybill #</th>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Volume (MMscf)</th>
+                                    <th>Departure</th>
+                                    <th>ETA</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>WB-2026-0233</strong></td>
+                                    <td>SPDC Bonny</td>
+                                    <td>Dangote Cement - Obajana</td>
+                                    <td>850</td>
+                                    <td>Jan 07, 06:00</td>
+                                    <td>Jan 07, 14:00</td>
+                                    <td><span class="status-badge reconciled">In Transit</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WB-2026-0232</strong></td>
+                                    <td>NAOC Brass</td>
+                                    <td>Lafarge Africa - Sagamu</td>
+                                    <td>620</td>
+                                    <td>Jan 07, 05:30</td>
+                                    <td>Jan 07, 12:30</td>
+                                    <td><span class="status-badge reconciled">In Transit</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WB-2026-0231</strong></td>
+                                    <td>SPDC Forcados</td>
+                                    <td>PowerGen Nigeria - Olorunsogo</td>
+                                    <td>1,200</td>
+                                    <td>Jan 07, 04:00</td>
+                                    <td>Jan 07, 10:00</td>
+                                    <td><span class="status-badge pending">Pending Confirm</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WB-2026-0230</strong></td>
+                                    <td>Seplat Oben</td>
+                                    <td>BUA Cement - Okpella</td>
+                                    <td>480</td>
+                                    <td>Jan 06, 18:00</td>
+                                    <td>Jan 07, 02:00</td>
+                                    <td><span class="status-badge reconciled">Delivered</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-footer">
+                            <span>Showing 1-4 of 18 waybills</span>
+                            <div class="pagination">
+                                <button class="page-btn" onclick="showToast('Navigation', 'Previous page loaded', 'info')">←</button>
+                                <button class="page-btn active">1</button>
+                                <button class="page-btn" onclick="showToast('Navigation', 'Page 2 loaded', 'info')">2</button>
+                                <button class="page-btn" onclick="showToast('Navigation', 'Page 3 loaded', 'info')">3</button>
+                                <button class="page-btn" onclick="showToast('Navigation', 'Next page loaded', 'info')">→</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FGC Operations Tab -->
+                <div id="logistics-fgc" class="tab-content">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Flare Gas Commercialization Sites</h3>
+                            <button class="btn-secondary" onclick="exportReport('FGC Report')">
+                                <i class="ph ph-download"></i> Export Report
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Site</th>
+                                    <th>Location</th>
+                                    <th>Daily Capacity</th>
+                                    <th>Recovered (MTD)</th>
+                                    <th>Flared (MTD)</th>
+                                    <th>Recovery %</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>FGC-Bonny-01</strong></td>
+                                    <td>Bonny Island</td>
+                                    <td>150 MMscf</td>
+                                    <td>3,420 MMscf</td>
+                                    <td>480 MMscf</td>
+                                    <td class="positive">87.7%</td>
+                                    <td><span class="status-badge reconciled">Operational</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FGC-Brass-02</strong></td>
+                                    <td>Brass Terminal</td>
+                                    <td>120 MMscf</td>
+                                    <td>2,850 MMscf</td>
+                                    <td>350 MMscf</td>
+                                    <td class="positive">89.1%</td>
+                                    <td><span class="status-badge reconciled">Operational</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FGC-Forcados-03</strong></td>
+                                    <td>Forcados Terminal</td>
+                                    <td>180 MMscf</td>
+                                    <td>4,100 MMscf</td>
+                                    <td>720 MMscf</td>
+                                    <td class="positive">85.1%</td>
+                                    <td><span class="status-badge reconciled">Operational</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FGC-Oben-04</strong></td>
+                                    <td>Oben Gas Plant</td>
+                                    <td>100 MMscf</td>
+                                    <td>2,180 MMscf</td>
+                                    <td>220 MMscf</td>
+                                    <td class="positive">90.8%</td>
+                                    <td><span class="status-badge reconciled">Operational</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FGC-Kwale-05</strong></td>
+                                    <td>Kwale Junction</td>
+                                    <td>80 MMscf</td>
+                                    <td>0 MMscf</td>
+                                    <td>0 MMscf</td>
+                                    <td class="neutral">-</td>
+                                    <td><span class="status-badge pending">Maintenance</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -765,94 +957,332 @@
             <section id="module-finance" class="module">
                 <div class="module-header">
                     <h1>Financials</h1>
-                    <p class="subtitle">Naira-centric accounting and automated billing</p>
+                    <p class="subtitle">Naira-centric accounting, journals, and automated billing</p>
                 </div>
 
-                <!-- Financial KPIs -->
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-icon green">
-                            <i class="ph-duotone ph-trend-up"></i>
+                <!-- Sub-Navigation Tabs -->
+                <div class="module-tabs">
+                    <button class="module-tab active" data-tab="finance-dashboard">Dashboard</button>
+                    <button class="module-tab" data-tab="finance-journals">Journals</button>
+                    <button class="module-tab" data-tab="finance-ledger">General Ledger</button>
+                    <button class="module-tab" data-tab="finance-invoices">Invoices</button>
+                </div>
+
+                <!-- Dashboard Tab -->
+                <div id="finance-dashboard" class="tab-content active">
+                    <!-- Financial KPIs -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon green">
+                                <i class="ph-duotone ph-trend-up"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Revenue (MTD)</span>
+                                <span class="kpi-value">₦2.24B</span>
+                                <span class="kpi-change positive">+18.3% vs last month</span>
+                            </div>
                         </div>
-                        <div class="kpi-content">
-                            <span class="kpi-label">Revenue (MTD)</span>
-                            <span class="kpi-value">₦2.24B</span>
-                            <span class="kpi-change positive">+18.3% vs last month</span>
+                        <div class="kpi-card">
+                            <div class="kpi-icon blue">
+                                <i class="ph-duotone ph-money"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Cash Balance</span>
+                                <span class="kpi-value">₦845M</span>
+                                <span class="kpi-change neutral">Operating Balance</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon purple">
+                                <i class="ph-duotone ph-receipt"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Accounts Receivable</span>
+                                <span class="kpi-value">₦156M</span>
+                                <span class="kpi-change negative">23 pending invoices</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon orange">
+                                <i class="ph-duotone ph-arrow-down"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Accounts Payable</span>
+                                <span class="kpi-value">₦98M</span>
+                                <span class="kpi-change neutral">12 pending bills</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon blue">
-                            <i class="ph-duotone ph-money"></i>
+
+                    <!-- Chart of Accounts -->
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Chart of Accounts</h3>
+                            <button class="btn-primary" onclick="openModal('entry-modal')">
+                                <i class="ph ph-plus"></i> New Entry
+                            </button>
                         </div>
-                        <div class="kpi-content">
-                            <span class="kpi-label">Balance</span>
-                            <span class="kpi-value">₦845M</span>
-                            <span class="kpi-change neutral">Operating Balance</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon purple">
-                            <i class="ph-duotone ph-receipt"></i>
-                        </div>
-                        <div class="kpi-content">
-                            <span class="kpi-label">Pending Invoices</span>
-                            <span class="kpi-value">23</span>
-                            <span class="kpi-change negative">₦156M outstanding</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-icon orange">
-                            <i class="ph-duotone ph-file-text"></i>
-                        </div>
-                        <div class="kpi-content">
-                            <span class="kpi-label">Expense Claims</span>
-                            <span class="kpi-value">8</span>
-                            <span class="kpi-change neutral">Awaiting approval</span>
-                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Account Name</th>
+                                    <th>Type</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1001</td>
+                                    <td><strong>Cash & Bank</strong></td>
+                                    <td><span class="badge badge-info">Asset</span></td>
+                                    <td>₦845,000,000</td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>1100</td>
+                                    <td><strong>Accounts Receivable</strong></td>
+                                    <td><span class="badge badge-info">Asset</span></td>
+                                    <td>₦156,420,000</td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>2001</td>
+                                    <td><strong>Accounts Payable</strong></td>
+                                    <td><span class="badge badge-warning">Liability</span></td>
+                                    <td>₦98,350,000</td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>3001</td>
+                                    <td><strong>Share Capital</strong></td>
+                                    <td><span class="badge badge-success">Equity</span></td>
+                                    <td>₦500,000,000</td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>4001</td>
+                                    <td><strong>Gas Sales Revenue</strong></td>
+                                    <td><span class="badge badge-success">Revenue</span></td>
+                                    <td>₦2,240,000,000</td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
-                <!-- Account Payables -->
-                <div class="table-card">
-                    <div class="table-header">
-                        <h3>Account Payables</h3>
+                <!-- Journals Tab -->
+                <div id="finance-journals" class="tab-content">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Journal Entries</h3>
+                            <div class="table-actions">
+                                <div class="search-inline">
+                                    <i class="ph ph-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search journals...">
+                                </div>
+                                <button class="btn-primary" onclick="openModal('entry-modal')">
+                                    <i class="ph ph-plus"></i> New Journal Entry
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>JE #</th>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>JE-2026-0147</strong></td>
+                                    <td>Jan 07, 2026</td>
+                                    <td>Gas sales to PowerGen Nigeria</td>
+                                    <td>₦45,000,000</td>
+                                    <td>₦45,000,000</td>
+                                    <td><span class="status-badge reconciled">Posted</span></td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JE-2026-0146</strong></td>
+                                    <td>Jan 06, 2026</td>
+                                    <td>Equipment maintenance expense</td>
+                                    <td>₦2,500,000</td>
+                                    <td>₦2,500,000</td>
+                                    <td><span class="status-badge reconciled">Posted</span></td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JE-2026-0145</strong></td>
+                                    <td>Jan 05, 2026</td>
+                                    <td>Payment received - Dangote Cement</td>
+                                    <td>₦78,400,000</td>
+                                    <td>₦78,400,000</td>
+                                    <td><span class="status-badge reconciled">Posted</span></td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>JE-2026-0144</strong></td>
+                                    <td>Jan 05, 2026</td>
+                                    <td>Staff salary accrual - December</td>
+                                    <td>₦18,750,000</td>
+                                    <td>₦18,750,000</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Account Name</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Cash</td>
-                                <td>₦50,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>Account Receivables</td>
-                                <td>₦230,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>03</td>
-                                <td>Supplies</td>
-                                <td>₦80,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>04</td>
-                                <td>Equipment</td>
-                                <td>₦500,000,000</td>
-                            </tr>
-                            <tr>
-                                <td>05</td>
-                                <td>Common Stock</td>
-                                <td>₦120,000,000</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                </div>
+
+                <!-- General Ledger Tab -->
+                <div id="finance-ledger" class="tab-content">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>General Ledger - Cash & Bank (1001)</h3>
+                            <button class="btn-secondary" onclick="exportReport('Ledger')">
+                                <i class="ph ph-download"></i> Export
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Reference</th>
+                                    <th>Description</th>
+                                    <th>Debit</th>
+                                    <th>Credit</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Jan 01, 2026</td>
+                                    <td>OB-2026</td>
+                                    <td>Opening Balance</td>
+                                    <td>₦750,000,000</td>
+                                    <td>-</td>
+                                    <td>₦750,000,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Jan 03, 2026</td>
+                                    <td>RCP-001</td>
+                                    <td>Receipt - Lafarge Africa</td>
+                                    <td>₦32,500,000</td>
+                                    <td>-</td>
+                                    <td>₦782,500,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Jan 04, 2026</td>
+                                    <td>PMT-042</td>
+                                    <td>Payment to SPDC (Gas Purchase)</td>
+                                    <td>-</td>
+                                    <td>₦45,200,000</td>
+                                    <td>₦737,300,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Jan 05, 2026</td>
+                                    <td>RCP-002</td>
+                                    <td>Receipt - Dangote Cement</td>
+                                    <td>₦78,400,000</td>
+                                    <td>-</td>
+                                    <td>₦815,700,000</td>
+                                </tr>
+                                <tr>
+                                    <td>Jan 06, 2026</td>
+                                    <td>RCP-003</td>
+                                    <td>Receipt - BUA Cement</td>
+                                    <td>₦29,300,000</td>
+                                    <td>-</td>
+                                    <td>₦845,000,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Invoices Tab -->
+                <div id="finance-invoices" class="tab-content">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Invoices</h3>
+                            <div class="table-actions">
+                                <div class="search-inline">
+                                    <i class="ph ph-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search invoices...">
+                                </div>
+                                <button class="btn-primary" onclick="generateInvoice('new')">
+                                    <i class="ph ph-plus"></i> Generate Invoice
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>INV-2026-0089</strong></td>
+                                    <td>PowerGen Nigeria Ltd</td>
+                                    <td>Jan 07, 2026</td>
+                                    <td>Feb 06, 2026</td>
+                                    <td>₦45,000,000</td>
+                                    <td><span class="status-badge pending">Pending</span></td>
+                                    <td>
+                                        <button class="btn-secondary small">Send</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>INV-2026-0088</strong></td>
+                                    <td>Dangote Cement Plc</td>
+                                    <td>Jan 05, 2026</td>
+                                    <td>Feb 04, 2026</td>
+                                    <td>₦78,400,000</td>
+                                    <td><span class="status-badge reconciled">Paid</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>INV-2026-0087</strong></td>
+                                    <td>Lafarge Africa Plc</td>
+                                    <td>Jan 03, 2026</td>
+                                    <td>Feb 02, 2026</td>
+                                    <td>₦32,500,000</td>
+                                    <td><span class="status-badge reconciled">Paid</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>INV-2026-0086</strong></td>
+                                    <td>BUA Cement Plc</td>
+                                    <td>Jan 02, 2026</td>
+                                    <td>Feb 01, 2026</td>
+                                    <td>₦29,300,000</td>
+                                    <td><span class="status-badge reconciled">Paid</span></td>
+                                    <td>
+                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
@@ -1005,7 +1435,7 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h3>Requisition Queue</h3>
-                        <button class="btn-primary">
+                        <button class="btn-primary" onclick="openModal('requisition-modal')">
                             <i class="ph ph-plus"></i> New Requisition
                         </button>
                     </div>
@@ -1103,7 +1533,7 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h3>Organizational Hierarchy</h3>
-                        <button class="btn-primary">
+                        <button class="btn-primary" onclick="openModal('employee-modal')">
                             <i class="ph ph-user-plus"></i> Add Employee
                         </button>
                     </div>
@@ -1288,6 +1718,355 @@
             </section>
         </div>
     </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- MODALS -->
+    
+    <!-- New Nomination Modal -->
+    <div id="nomination-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>New Nomination</h2>
+                <button class="modal-close" onclick="closeModal('nomination-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleNominationSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Off-taker</label>
+                            <select class="form-select" name="offtaker" required>
+                                <option value="">Select off-taker...</option>
+                                <option value="PowerGen Nigeria">PowerGen Nigeria Ltd</option>
+                                <option value="Dangote Cement">Dangote Cement Plc</option>
+                                <option value="Lafarge Africa">Lafarge Africa Plc</option>
+                                <option value="BUA Cement">BUA Cement Plc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Contract</label>
+                            <select class="form-select" name="contract" required>
+                                <option value="">Select contract...</option>
+                                <option value="GSA-2024-001">GSA-2024-001</option>
+                                <option value="GSA-2024-002">GSA-2024-002</option>
+                                <option value="GSA-2024-003">GSA-2024-003</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Nominated Volume (MMscf)</label>
+                            <input type="number" class="form-input" name="volume" placeholder="e.g. 1250" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Nomination Date</label>
+                            <input type="date" class="form-input" name="date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-textarea" name="notes" placeholder="Additional notes..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('nomination-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Nomination</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Journal Entry Modal -->
+    <div id="entry-modal" class="modal-overlay">
+        <div class="modal large">
+            <div class="modal-header">
+                <h2>New Journal Entry</h2>
+                <button class="modal-close" onclick="closeModal('entry-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleEntrySubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Entry Date</label>
+                            <input type="date" class="form-input" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Reference</label>
+                            <input type="text" class="form-input" name="reference" placeholder="Auto-generated if blank">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Description</label>
+                        <input type="text" class="form-input" name="description" placeholder="Entry description" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Debit Account</label>
+                            <select class="form-select" name="debitAccount" required>
+                                <option value="">Select account...</option>
+                                <option value="1001">1001 - Cash & Bank</option>
+                                <option value="1100">1100 - Accounts Receivable</option>
+                                <option value="2001">2001 - Accounts Payable</option>
+                                <option value="4001">4001 - Gas Sales Revenue</option>
+                                <option value="5001">5001 - Operating Expenses</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Credit Account</label>
+                            <select class="form-select" name="creditAccount" required>
+                                <option value="">Select account...</option>
+                                <option value="1001">1001 - Cash & Bank</option>
+                                <option value="1100">1100 - Accounts Receivable</option>
+                                <option value="2001">2001 - Accounts Payable</option>
+                                <option value="4001">4001 - Gas Sales Revenue</option>
+                                <option value="5001">5001 - Operating Expenses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Amount (₦)</label>
+                        <input type="number" class="form-input" name="amount" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('entry-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Post Entry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add License Modal -->
+    <div id="license-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add License / Permit</h2>
+                <button class="modal-close" onclick="closeModal('license-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleLicenseSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label required">License Name</label>
+                        <input type="text" class="form-input" name="licenseName" placeholder="e.g. NMDPRA Operating Permit" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Issuing Authority</label>
+                            <select class="form-select" name="authority" required>
+                                <option value="">Select authority...</option>
+                                <option value="NMDPRA">NMDPRA</option>
+                                <option value="OGISP">OGISP</option>
+                                <option value="NESREA">NESREA</option>
+                                <option value="DPR">DPR</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">License Type</label>
+                            <select class="form-select" name="type" required>
+                                <option value="">Select type...</option>
+                                <option value="Operating">Operating License</option>
+                                <option value="Environmental">Environmental Permit</option>
+                                <option value="Safety">Safety Certificate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Issue Date</label>
+                            <input type="date" class="form-input" name="issueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Expiry Date</label>
+                            <input type="date" class="form-input" name="expiryDate" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('license-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add License</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Employee Modal -->
+    <div id="employee-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add Employee</h2>
+                <button class="modal-close" onclick="closeModal('employee-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleEmployeeSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">First Name</label>
+                            <input type="text" class="form-input" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Last Name</label>
+                            <input type="text" class="form-input" name="lastName" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Email</label>
+                            <input type="email" class="form-input" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Department</label>
+                            <select class="form-select" name="department" required>
+                                <option value="">Select department...</option>
+                                <option value="Operations">Operations</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Trading">Trading</option>
+                                <option value="Projects">Projects</option>
+                                <option value="HR">Human Resources</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Rank Level</label>
+                            <select class="form-select" name="rank" required>
+                                <option value="">Select rank...</option>
+                                <option value="L1">L1 - Junior Staff</option>
+                                <option value="L2">L2 - Senior Staff</option>
+                                <option value="L3">L3 - Supervisor</option>
+                                <option value="L4">L4 - Manager</option>
+                                <option value="L5">L5 - Executive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Approval Limit (₦)</label>
+                            <input type="number" class="form-input" name="approvalLimit" placeholder="Based on rank">
+                            <span class="form-hint">Leave blank to use rank default</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('employee-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Requisition Modal -->
+    <div id="requisition-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Create Requisition</h2>
+                <button class="modal-close" onclick="closeModal('requisition-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleRequisitionSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Category</label>
+                            <select class="form-select" name="category" required>
+                                <option value="">Select category...</option>
+                                <option value="Travel">Travel & Transport</option>
+                                <option value="Equipment">Equipment & Supplies</option>
+                                <option value="Services">Professional Services</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Priority</label>
+                            <select class="form-select" name="priority" required>
+                                <option value="">Select priority...</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Description</label>
+                        <textarea class="form-textarea" name="description" placeholder="Describe the requisition..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Amount (₦)</label>
+                        <input type="number" class="form-input" name="amount" placeholder="0.00" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('requisition-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Requisition</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Document Upload Modal -->
+    <div id="document-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Upload Document</h2>
+                <button class="modal-close" onclick="closeModal('document-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleDocumentUpload(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label required">Document Title</label>
+                        <input type="text" class="form-input" name="title" placeholder="Enter document title" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Category</label>
+                            <select class="form-select" name="category" required>
+                                <option value="">Select category...</option>
+                                <option value="Contracts">Contracts</option>
+                                <option value="Compliance">Compliance</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Financial">Financial</option>
+                                <option value="HR">Human Resources</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Sensitivity Level</label>
+                            <select class="form-select" name="sensitivity" required>
+                                <option value="">Select level...</option>
+                                <option value="Public">Public</option>
+                                <option value="Internal">Internal</option>
+                                <option value="Confidential">Confidential</option>
+                                <option value="Restricted">Restricted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">File</label>
+                        <div class="file-upload">
+                            <i class="ph-duotone ph-cloud-arrow-up"></i>
+                            <p>Drag and drop files here, or <span>browse</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('document-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Upload Document</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="demo.js"></script>
 </body>

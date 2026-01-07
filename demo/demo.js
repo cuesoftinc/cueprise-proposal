@@ -287,11 +287,14 @@ document.addEventListener('DOMContentLoaded', function() {
         tab.addEventListener('click', () => {
             chartTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            // In a real app, this would update the chart data
         });
     });
 
-    // Table row hover effects are handled via CSS
+    // Module sub-tabs
+    initModuleTabs();
+
+    // Search functionality
+    initSearchFunctionality();
 
     // Demo notification
     console.log('🚀 MSN Energy Demo loaded successfully');
@@ -299,14 +302,242 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==========================================
-// Demo Helper Functions
+// Modal System
 // ==========================================
-
-function showNotification(message, type = 'info') {
-    // Placeholder for notification system
-    console.log(`[${type.toUpperCase()}] ${message}`);
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function closeAllModals() {
+    document.querySelectorAll('.modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+    });
+    document.body.style.overflow = '';
+}
+
+// Close modal on overlay click
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-overlay')) {
+        closeAllModals();
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAllModals();
+    }
+});
+
+// ==========================================
+// Toast Notification System
+// ==========================================
+function showToast(title, message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const iconMap = {
+        success: 'ph-duotone ph-check-circle',
+        error: 'ph-duotone ph-x-circle',
+        warning: 'ph-duotone ph-warning',
+        info: 'ph-duotone ph-info'
+    };
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <i class="toast-icon ${iconMap[type]}"></i>
+        <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" onclick="this.parentElement.remove()">
+            <i class="ph ph-x"></i>
+        </button>
+    `;
+
+    container.appendChild(toast);
+
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Auto remove
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
+// ==========================================
+// Module Sub-Tabs
+// ==========================================
+function initModuleTabs() {
+    document.querySelectorAll('.module-tabs').forEach(tabContainer => {
+        const tabs = tabContainer.querySelectorAll('.module-tab');
+        const moduleSection = tabContainer.closest('.module');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+                
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show target content
+                if (moduleSection) {
+                    moduleSection.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    const target = moduleSection.querySelector(`#${targetTab}`);
+                    if (target) target.classList.add('active');
+                }
+            });
+        });
+    });
+}
+
+// ==========================================
+// Search Functionality
+// ==========================================
+function initSearchFunctionality() {
+    // Global search
+    const globalSearch = document.querySelector('.search-box input');
+    if (globalSearch) {
+        globalSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query.length >= 2) {
+                console.log(`Searching for: ${query}`);
+                // In production, this would search across modules
+            }
+        });
+    }
+
+    // Table search
+    document.querySelectorAll('.search-inline input').forEach(input => {
+        input.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const tableCard = e.target.closest('.table-card');
+            if (!tableCard) return;
+
+            const table = tableCard.querySelector('.data-table');
+            if (!table) return;
+
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+    });
+}
+
+// ==========================================
+// Form Handlers
+// ==========================================
+function handleNominationSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('Nomination Created', `New nomination for ${formData.get('offtaker')} submitted successfully.`, 'success');
+    closeModal('nomination-modal');
+    form.reset();
+}
+
+function handleLicenseSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('License Added', `${formData.get('licenseName')} has been added to the License Vault.`, 'success');
+    closeModal('license-modal');
+    form.reset();
+}
+
+function handleEntrySubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('Journal Entry Created', `Entry for ${formatCurrency(formData.get('amount'))} posted successfully.`, 'success');
+    closeModal('entry-modal');
+    form.reset();
+}
+
+function handleEmployeeSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('Employee Added', `${formData.get('firstName')} ${formData.get('lastName')} has been added.`, 'success');
+    closeModal('employee-modal');
+    form.reset();
+}
+
+function handleRequisitionSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('Requisition Submitted', `Requisition for ${formatCurrency(formData.get('amount'))} submitted for approval.`, 'success');
+    closeModal('requisition-modal');
+    form.reset();
+}
+
+function handleDocumentUpload(e) {
+    e.preventDefault();
+    
+    showToast('Document Uploaded', 'Your document has been uploaded and is pending review.', 'success');
+    closeModal('document-modal');
+}
+
+// ==========================================
+// Action Handlers
+// ==========================================
+function reconcileNomination(id) {
+    showToast('Reconciliation Complete', `Nomination ${id} has been reconciled successfully.`, 'success');
+}
+
+function renewLicense(name) {
+    showToast('Renewal Initiated', `Renewal process for ${name} has been started.`, 'info');
+}
+
+function viewDetails(type, id) {
+    openModal(`${type}-detail-modal`);
+}
+
+function downloadContract(id) {
+    showToast('Download Started', `Contract ${id} is being downloaded.`, 'info');
+}
+
+function exportReport(type) {
+    showToast('Export Started', `${type} report is being generated and will download shortly.`, 'info');
+}
+
+function approveRequisition(id) {
+    showToast('Approved', `Requisition ${id} has been approved.`, 'success');
+}
+
+function rejectRequisition(id) {
+    showToast('Rejected', `Requisition ${id} has been rejected.`, 'error');
+}
+
+// ==========================================
+// Demo Helper Functions
+// ==========================================
 function formatCurrency(amount) {
     return new Intl.NumberFormat('en-NG', {
         style: 'currency',
@@ -317,4 +548,27 @@ function formatCurrency(amount) {
 
 function formatNumber(num) {
     return new Intl.NumberFormat('en-NG').format(num);
+}
+
+function formatDate(date) {
+    return new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    }).format(new Date(date));
+}
+
+// ==========================================
+// Simulated Data Actions
+// ==========================================
+function refreshData(module) {
+    showToast('Data Refreshed', `${module} data has been refreshed.`, 'info');
+}
+
+function generateInvoice(id) {
+    showToast('Invoice Generated', `Invoice for nomination ${id} has been created.`, 'success');
+}
+
+function markAsReviewed(id) {
+    showToast('Marked as Reviewed', `Item ${id} has been marked as reviewed.`, 'success');
 }
