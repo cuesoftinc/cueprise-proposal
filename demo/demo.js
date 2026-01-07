@@ -536,6 +536,105 @@ function rejectRequisition(id) {
 }
 
 // ==========================================
+// Invoice Multi-Item Functions
+// ==========================================
+let invoiceItemCount = 1;
+
+function addInvoiceItem() {
+    invoiceItemCount++;
+    const container = document.getElementById('invoice-items-container');
+    const newItem = document.createElement('div');
+    newItem.className = 'invoice-item';
+    newItem.dataset.item = invoiceItemCount;
+    newItem.innerHTML = `
+        <div class="form-group" style="flex: 2;">
+            <input type="text" class="form-input" name="item_desc_${invoiceItemCount}" placeholder="Description" required>
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-input item-volume" name="item_volume_${invoiceItemCount}" placeholder="Volume" oninput="updateInvoiceTotal()" required>
+        </div>
+        <div class="form-group">
+            <input type="number" class="form-input item-rate" name="item_rate_${invoiceItemCount}" placeholder="Rate" oninput="updateInvoiceTotal()" required>
+        </div>
+        <div class="form-group item-subtotal">
+            <span class="subtotal-label">₦0</span>
+        </div>
+        <button type="button" class="remove-item" onclick="removeInvoiceItem(this)">
+            <i class="ph ph-x"></i>
+        </button>
+    `;
+    container.appendChild(newItem);
+    showToast('Item Added', `Line item ${invoiceItemCount} added to invoice.`, 'info');
+}
+
+function removeInvoiceItem(button) {
+    const item = button.closest('.invoice-item');
+    item.remove();
+    updateInvoiceTotal();
+    showToast('Item Removed', 'Line item removed from invoice.', 'info');
+}
+
+function updateInvoiceTotal() {
+    let grandTotal = 0;
+    const items = document.querySelectorAll('.invoice-item');
+    
+    items.forEach(item => {
+        const volume = parseFloat(item.querySelector('.item-volume')?.value) || 0;
+        const rate = parseFloat(item.querySelector('.item-rate')?.value) || 0;
+        const subtotal = volume * rate;
+        
+        const subtotalLabel = item.querySelector('.subtotal-label');
+        if (subtotalLabel) {
+            subtotalLabel.textContent = formatCurrency(subtotal);
+        }
+        grandTotal += subtotal;
+    });
+    
+    document.getElementById('invoice-grand-total').textContent = formatCurrency(grandTotal);
+}
+
+function handleInvoiceSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    // Calculate total from all items
+    let total = 0;
+    let itemCount = 0;
+    const items = document.querySelectorAll('.invoice-item');
+    items.forEach(item => {
+        const volume = parseFloat(item.querySelector('.item-volume')?.value) || 0;
+        const rate = parseFloat(item.querySelector('.item-rate')?.value) || 0;
+        total += volume * rate;
+        itemCount++;
+    });
+    
+    showToast('Invoice Generated', `Invoice for ${formData.get('customer')} with ${itemCount} item(s) - ${formatCurrency(total)} created successfully.`, 'success');
+    closeModal('invoice-modal');
+    form.reset();
+    
+    // Reset to single item
+    document.getElementById('invoice-items-container').innerHTML = `
+        <div class="invoice-item" data-item="1">
+            <div class="form-group" style="flex: 2;">
+                <input type="text" class="form-input" name="item_desc_1" placeholder="Description (e.g. Gas supply - January)" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-input item-volume" name="item_volume_1" placeholder="Volume (MMscf)" oninput="updateInvoiceTotal()" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-input item-rate" name="item_rate_1" placeholder="Rate (₦/MMscf)" oninput="updateInvoiceTotal()" required>
+            </div>
+            <div class="form-group item-subtotal">
+                <span class="subtotal-label">₦0</span>
+            </div>
+        </div>
+    `;
+    document.getElementById('invoice-grand-total').textContent = '₦0';
+    invoiceItemCount = 1;
+}
+
+// ==========================================
 // Demo Helper Functions
 // ==========================================
 function formatCurrency(amount) {
@@ -571,4 +670,71 @@ function generateInvoice(id) {
 
 function markAsReviewed(id) {
     showToast('Marked as Reviewed', `Item ${id} has been marked as reviewed.`, 'success');
+}
+
+// ==========================================
+// Chart Period Switching
+// ==========================================
+function switchChartPeriod(button, period) {
+    // Update active state
+    const chartTabs = button.parentElement;
+    chartTabs.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    
+    // Show toast with period info
+    const periodLabels = {
+        'day': 'Daily',
+        'week': 'Weekly', 
+        'month': 'Monthly'
+    };
+    showToast('Chart Updated', `Showing ${periodLabels[period]} volume reconciliation data.`, 'info');
+    
+    // In a real app, this would update the chart data
+    // For demo, we simulate a brief loading state
+}
+
+// ==========================================
+// View More / Navigation
+// ==========================================
+function viewMore(module) {
+    // Navigate to the full module
+    const navItem = document.querySelector(`[data-module="${module}"]`);
+    if (navItem) {
+        navItem.click();
+        showToast('Navigation', `Viewing all ${module} data.`, 'info');
+    }
+}
+
+// ==========================================
+// Additional Form Handlers
+// ==========================================
+function handleWaybillSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const waybillId = 'WB-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
+    
+    showToast('Waybill Created', `${waybillId} from ${formData.get('origin')} to ${formData.get('destination')} created successfully.`, 'success');
+    closeModal('waybill-modal');
+    form.reset();
+}
+
+function handleFilterSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const status = formData.get('status') || 'all';
+    
+    showToast('Filters Applied', `Showing ${status} licenses.`, 'info');
+    closeModal('filter-modal');
+}
+
+function handleAccountSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    showToast('Account Created', `Account ${formData.get('code')} - ${formData.get('name')} added successfully.`, 'success');
+    closeModal('account-modal');
+    form.reset();
 }

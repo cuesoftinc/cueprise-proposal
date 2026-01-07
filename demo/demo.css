@@ -1923,3 +1923,196 @@ html, body {
     max-width: calc(100vw - 2rem);
   }
 }
+
+/* ===========================================
+   Table Footer & Pagination
+   =========================================== */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.page-btn {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.page-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Detail Grid */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* View More Link */
+.view-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: gap 0.2s ease;
+}
+
+.view-more:hover {
+  gap: 0.5rem;
+}
+
+/* Positive/Negative Colors in Tables */
+td.positive {
+  color: var(--success);
+  font-weight: 600;
+}
+
+td.negative {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+td.neutral {
+  color: var(--text-secondary);
+}
+
+/* ===========================================
+   Invoice Items Section
+   =========================================== */
+.modal-wide {
+  max-width: 700px;
+}
+
+.invoice-items-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.invoice-items-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.invoice-items-header h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.invoice-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.invoice-item:last-child {
+  border-bottom: none;
+}
+
+.invoice-item .form-group {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.invoice-item .item-subtotal {
+  flex: 0 0 100px;
+  text-align: right;
+}
+
+.invoice-item .subtotal-label {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.invoice-item .remove-item {
+  background: none;
+  border: none;
+  color: var(--danger);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.invoice-item .remove-item:hover {
+  opacity: 1;
+}
+
+.invoice-total {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid var(--border);
+}
+
+.invoice-total .total-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.invoice-total .total-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}

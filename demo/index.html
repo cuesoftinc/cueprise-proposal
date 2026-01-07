@@ -184,9 +184,9 @@
                         <div class="chart-header">
                             <h3>Volume Reconciliation Trend</h3>
                             <div class="chart-tabs">
-                                <button class="active">Day</button>
-                                <button>Week</button>
-                                <button>Month</button>
+                                <button class="active" onclick="switchChartPeriod(this, 'day')">Day</button>
+                                <button onclick="switchChartPeriod(this, 'week')">Week</button>
+                                <button onclick="switchChartPeriod(this, 'month')">Month</button>
                             </div>
                         </div>
                         <div class="chart-container">
@@ -207,7 +207,7 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h3>Recent Nominations</h3>
-                        <button class="btn-secondary">View All</button>
+                        <button class="btn-secondary" onclick="viewMore('trading')">View All</button>
                     </div>
                     <table class="data-table">
                         <thead>
@@ -345,7 +345,7 @@
                                 <td class="negative">-2 MMscf</td>
                                 <td>NGC Pipeline</td>
                                 <td><span class="status-badge reconciled">Reconciled</span></td>
-                                <td><button class="btn-icon"><i class="ph ph-dots-three"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete nomination', 'info')"><i class="ph ph-dots-three"></i></button></td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox"></td>
@@ -357,7 +357,7 @@
                                 <td class="negative">-113 MMscf</td>
                                 <td>NGIC Pipeline</td>
                                 <td><span class="status-badge pending">Under Review</span></td>
-                                <td><button class="btn-icon"><i class="ph ph-dots-three"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete nomination', 'info')"><i class="ph ph-dots-three"></i></button></td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox"></td>
@@ -369,7 +369,7 @@
                                 <td class="positive">0 MMscf</td>
                                 <td>NGC Pipeline</td>
                                 <td><span class="status-badge reconciled">Reconciled</span></td>
-                                <td><button class="btn-icon"><i class="ph ph-dots-three"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete nomination', 'info')"><i class="ph ph-dots-three"></i></button></td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox"></td>
@@ -381,7 +381,7 @@
                                 <td class="positive">+2 MMscf</td>
                                 <td>NGC Pipeline</td>
                                 <td><span class="status-badge reconciled">Reconciled</span></td>
-                                <td><button class="btn-icon"><i class="ph ph-dots-three"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete nomination', 'info')"><i class="ph ph-dots-three"></i></button></td>
                             </tr>
                             <tr class="variance-row">
                                 <td><input type="checkbox"></td>
@@ -393,20 +393,20 @@
                                 <td class="negative">-79 MMscf</td>
                                 <td>NGIC Pipeline</td>
                                 <td><span class="status-badge alert">Variance Alert</span></td>
-                                <td><button class="btn-icon"><i class="ph ph-dots-three"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete nomination', 'info')"><i class="ph ph-dots-three"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="table-footer">
                         <span>Showing 5 of 142 nominations</span>
                         <div class="pagination">
-                            <button class="btn-icon"><i class="ph ph-caret-left"></i></button>
+                            <button class="page-btn" onclick="showToast('Navigation', 'Previous page loaded', 'info')">←</button>
                             <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
+                            <button class="page-btn" onclick="showToast('Navigation', 'Page 2 loaded', 'info')">2</button>
+                            <button class="page-btn" onclick="showToast('Navigation', 'Page 3 loaded', 'info')">3</button>
                             <span>...</span>
-                            <button class="page-btn">15</button>
-                            <button class="btn-icon"><i class="ph ph-caret-right"></i></button>
+                            <button class="page-btn" onclick="showToast('Navigation', 'Page 15 loaded', 'info')">15</button>
+                            <button class="page-btn" onclick="showToast('Navigation', 'Next page loaded', 'info')">→</button>
                         </div>
                     </div>
                 </div>
@@ -429,7 +429,7 @@
                             <span class="alert-label">Expiring in 15 Days</span>
                             <span class="alert-value">2 Licenses</span>
                         </div>
-                        <button class="alert-action">View</button>
+                        <button class="alert-action" onclick="openModal('filter-modal')">View</button>
                     </div>
                     <div class="alert-card warning">
                         <div class="alert-icon">
@@ -439,7 +439,7 @@
                             <span class="alert-label">Expiring in 30 Days</span>
                             <span class="alert-value">4 Licenses</span>
                         </div>
-                        <button class="alert-action">View</button>
+                        <button class="alert-action" onclick="openModal('filter-modal')">View</button>
                     </div>
                     <div class="alert-card info">
                         <div class="alert-icon">
@@ -449,7 +449,7 @@
                             <span class="alert-label">Expiring in 60 Days</span>
                             <span class="alert-value">7 Licenses</span>
                         </div>
-                        <button class="alert-action">View</button>
+                        <button class="alert-action" onclick="openModal('filter-modal')">View</button>
                     </div>
                 </div>
 
@@ -458,7 +458,7 @@
                     <div class="table-header">
                         <h3>License Vault</h3>
                         <div class="table-actions">
-                            <button class="btn-secondary">
+                            <button class="btn-secondary" onclick="openModal('filter-modal')">
                                 <i class="ph ph-funnel"></i> Filter
                             </button>
                             <button class="btn-primary" onclick="openModal('license-modal')">
@@ -486,7 +486,7 @@
                                 <td>Jan 22, 2026</td>
                                 <td class="negative"><strong>15 days</strong></td>
                                 <td><span class="status-badge alert">Critical</span></td>
-                                <td><button class="btn-secondary small">Renew</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('Renewal Started', 'DPR Gas Processing License renewal initiated', 'success')">Renew</button></td>
                             </tr>
                             <tr class="critical-row">
                                 <td><strong>OGISP Operating License</strong></td>
@@ -495,7 +495,7 @@
                                 <td>Jan 20, 2026</td>
                                 <td class="negative"><strong>13 days</strong></td>
                                 <td><span class="status-badge alert">Critical</span></td>
-                                <td><button class="btn-secondary small">Renew</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('Renewal Started', 'OGISP Operating License renewal initiated', 'success')">Renew</button></td>
                             </tr>
                             <tr>
                                 <td><strong>Environmental Impact Assessment</strong></td>
@@ -504,7 +504,7 @@
                                 <td>Feb 15, 2026</td>
                                 <td class="warning">39 days</td>
                                 <td><span class="status-badge pending">Warning</span></td>
-                                <td><button class="btn-secondary small">View</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('License Details', 'Viewing Environmental Impact Assessment details', 'info')">View</button></td>
                             </tr>
                             <tr>
                                 <td><strong>Pipeline Right of Way</strong></td>
@@ -513,7 +513,7 @@
                                 <td>Aug 22, 2027</td>
                                 <td class="positive">593 days</td>
                                 <td><span class="status-badge reconciled">Active</span></td>
-                                <td><button class="btn-secondary small">View</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('License Details', 'Viewing Pipeline Right of Way details', 'info')">View</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -544,7 +544,7 @@
                                 <td>Jan 01, 2024</td>
                                 <td>Dec 31, 2028</td>
                                 <td>v2.1</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>GSA-PWG-2024-001</strong></td>
@@ -553,7 +553,7 @@
                                 <td>Mar 15, 2024</td>
                                 <td>Mar 14, 2029</td>
                                 <td>v1.0</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>GSA-DGT-2024-003</strong></td>
@@ -562,7 +562,7 @@
                                 <td>Apr 01, 2024</td>
                                 <td>Mar 31, 2027</td>
                                 <td>v1.2</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -705,7 +705,7 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h3>FGC Recovery Log</h3>
-                        <button class="btn-secondary">Export to NMDPRA</button>
+                        <button class="btn-secondary" onclick="exportReport('NMDPRA Compliance Report')">Export to NMDPRA</button>
                     </div>
                     <table class="data-table">
                         <thead>
@@ -811,7 +811,7 @@
                                     <i class="ph ph-magnifying-glass"></i>
                                     <input type="text" placeholder="Search waybills...">
                                 </div>
-                                <button class="btn-primary" onclick="showToast('Waybill Created', 'New waybill WB-2026-0234 created', 'success')">
+                                <button class="btn-primary" onclick="openModal('waybill-modal')">
                                     <i class="ph ph-plus"></i> New Waybill
                                 </button>
                             </div>
@@ -1018,8 +1018,8 @@
                     <div class="table-card">
                         <div class="table-header">
                             <h3>Chart of Accounts</h3>
-                            <button class="btn-primary" onclick="openModal('entry-modal')">
-                                <i class="ph ph-plus"></i> New Entry
+                            <button class="btn-primary" onclick="openModal('account-modal')">
+                                <i class="ph ph-plus"></i> Add Account
                             </button>
                         </div>
                         <table class="data-table">
@@ -1038,35 +1038,35 @@
                                     <td><strong>Cash & Bank</strong></td>
                                     <td><span class="badge badge-info">Asset</span></td>
                                     <td>₦845,000,000</td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td>1100</td>
                                     <td><strong>Accounts Receivable</strong></td>
                                     <td><span class="badge badge-info">Asset</span></td>
                                     <td>₦156,420,000</td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td>2001</td>
                                     <td><strong>Accounts Payable</strong></td>
                                     <td><span class="badge badge-warning">Liability</span></td>
                                     <td>₦98,350,000</td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td>3001</td>
                                     <td><strong>Share Capital</strong></td>
                                     <td><span class="badge badge-success">Equity</span></td>
                                     <td>₦500,000,000</td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td>4001</td>
                                     <td><strong>Gas Sales Revenue</strong></td>
                                     <td><span class="badge badge-success">Revenue</span></td>
                                     <td>₦2,240,000,000</td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1108,7 +1108,7 @@
                                     <td>₦45,000,000</td>
                                     <td>₦45,000,000</td>
                                     <td><span class="status-badge reconciled">Posted</span></td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td><strong>JE-2026-0146</strong></td>
@@ -1117,7 +1117,7 @@
                                     <td>₦2,500,000</td>
                                     <td>₦2,500,000</td>
                                     <td><span class="status-badge reconciled">Posted</span></td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td><strong>JE-2026-0145</strong></td>
@@ -1126,7 +1126,7 @@
                                     <td>₦78,400,000</td>
                                     <td>₦78,400,000</td>
                                     <td><span class="status-badge reconciled">Posted</span></td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                                 <tr>
                                     <td><strong>JE-2026-0144</strong></td>
@@ -1135,7 +1135,7 @@
                                     <td>₦18,750,000</td>
                                     <td>₦18,750,000</td>
                                     <td><span class="status-badge pending">Pending</span></td>
-                                    <td><button class="btn-icon"><i class="ph ph-eye"></i></button></td>
+                                    <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i class="ph ph-eye"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1218,7 +1218,7 @@
                                     <i class="ph ph-magnifying-glass"></i>
                                     <input type="text" placeholder="Search invoices...">
                                 </div>
-                                <button class="btn-primary" onclick="generateInvoice('new')">
+                                <button class="btn-primary" onclick="openModal('invoice-modal')">
                                     <i class="ph ph-plus"></i> Generate Invoice
                                 </button>
                             </div>
@@ -1244,7 +1244,7 @@
                                     <td>₦45,000,000</td>
                                     <td><span class="status-badge pending">Pending</span></td>
                                     <td>
-                                        <button class="btn-secondary small">Send</button>
+                                        <button class="btn-secondary small" onclick="showToast('Invoice Sent', 'Invoice emailed to PowerGen Nigeria', 'success')">Send</button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1255,7 +1255,7 @@
                                     <td>₦78,400,000</td>
                                     <td><span class="status-badge reconciled">Paid</span></td>
                                     <td>
-                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                        <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i class="ph ph-download"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1266,7 +1266,7 @@
                                     <td>₦32,500,000</td>
                                     <td><span class="status-badge reconciled">Paid</span></td>
                                     <td>
-                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                        <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i class="ph ph-download"></i></button>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1277,7 +1277,7 @@
                                     <td>₦29,300,000</td>
                                     <td><span class="status-badge reconciled">Paid</span></td>
                                     <td>
-                                        <button class="btn-icon"><i class="ph ph-download"></i></button>
+                                        <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i class="ph ph-download"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -1340,7 +1340,7 @@
                                 <i class="ph ph-magnifying-glass"></i>
                                 <input type="text" placeholder="Search documents...">
                             </div>
-                            <button class="btn-primary">
+                            <button class="btn-primary" onclick="openModal('document-modal')">
                                 <i class="ph ph-upload"></i> Upload
                             </button>
                         </div>
@@ -1363,7 +1363,7 @@
                                 <td><span class="status-badge alert">Executive</span></td>
                                 <td>v2.1</td>
                                 <td>Jan 03, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>Pipeline ROW Survey Report</strong></td>
@@ -1371,7 +1371,7 @@
                                 <td><span class="status-badge pending">Manager</span></td>
                                 <td>v1.3</td>
                                 <td>Jan 05, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>FGC Compliance Checklist</strong></td>
@@ -1379,7 +1379,7 @@
                                 <td><span class="status-badge reconciled">Standard</span></td>
                                 <td>v3.0</td>
                                 <td>Jan 06, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1459,7 +1459,7 @@
                                 <td>Field vehicle maintenance</td>
                                 <td>₦850,000</td>
                                 <td><span class="status-badge pending">Pending L2</span></td>
-                                <td><button class="btn-secondary small">Review</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('Requisition', 'Viewing REQ-2026-001 details', 'info')">Review</button></td>
                             </tr>
                             <tr>
                                 <td><strong>REQ-2026-0141</strong></td>
@@ -1468,7 +1468,7 @@
                                 <td>Audit software license</td>
                                 <td>₦2,400,000</td>
                                 <td><span class="status-badge pending">Pending L3</span></td>
-                                <td><button class="btn-secondary small">Review</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('Requisition', 'Viewing REQ-2026-002 details', 'info')">Review</button></td>
                             </tr>
                             <tr>
                                 <td><strong>REQ-2026-0140</strong></td>
@@ -1477,7 +1477,7 @@
                                 <td>Safety equipment</td>
                                 <td>₦1,200,000</td>
                                 <td><span class="status-badge reconciled">Approved</span></td>
-                                <td><button class="btn-secondary small">View</button></td>
+                                <td><button class="btn-secondary small" onclick="showToast('Requisition', 'Viewing REQ-2026-003 details', 'info')">View</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1663,7 +1663,7 @@
                 <div class="table-card">
                     <div class="table-header">
                         <h3>Report Library</h3>
-                        <button class="btn-primary">
+                        <button class="btn-primary" onclick="showToast('Report Generator', 'Select report type from the table below', 'info')">
                             <i class="ph ph-file-arrow-down"></i> Generate Report
                         </button>
                     </div>
@@ -1683,21 +1683,21 @@
                                 <td>Quarterly</td>
                                 <td>Oct - Dec 2025</td>
                                 <td>Jan 05, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>Monthly Operations Report</strong></td>
                                 <td>Monthly</td>
                                 <td>December 2025</td>
                                 <td>Jan 03, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                             <tr>
                                 <td><strong>FGC Regulatory Compliance</strong></td>
                                 <td>Regulatory</td>
                                 <td>Q4 2025</td>
                                 <td>Jan 02, 2026</td>
-                                <td><button class="btn-icon"><i class="ph ph-download"></i></button></td>
+                                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i class="ph ph-download"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1707,13 +1707,226 @@
             <!-- Settings Module -->
             <section id="module-settings" class="module">
                 <div class="module-header">
-                    <h1>Settings</h1>
-                    <p class="subtitle">System configuration and SCADA access control</p>
+                    <h1>Settings & Administration</h1>
+                    <p class="subtitle">SCADA-style access control, user management, and system configuration</p>
                 </div>
-                <div class="placeholder-content">
-                    <i class="ph-duotone ph-gear"></i>
-                    <h3>Settings & Administration</h3>
-                    <p>SCADA-style rank-based access control, user management, and system configuration.</p>
+
+                <!-- Sub-Navigation Tabs -->
+                <div class="module-tabs">
+                    <button class="module-tab active" data-tab="settings-access">Access Control</button>
+                    <button class="module-tab" data-tab="settings-users">User Management</button>
+                    <button class="module-tab" data-tab="settings-system">System Config</button>
+                </div>
+
+                <!-- Access Control Tab -->
+                <div id="settings-access" class="tab-content active">
+                    <div class="kpi-grid four-col">
+                        <div class="kpi-card compact">
+                            <div class="kpi-icon blue">
+                                <i class="ph-duotone ph-shield-check"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Active Users</span>
+                                <span class="kpi-value">142</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card compact">
+                            <div class="kpi-icon green">
+                                <i class="ph-duotone ph-key"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Security Roles</span>
+                                <span class="kpi-value">12</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card compact">
+                            <div class="kpi-icon purple">
+                                <i class="ph-duotone ph-ranking"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Rank Levels</span>
+                                <span class="kpi-value">5</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card compact">
+                            <div class="kpi-icon orange">
+                                <i class="ph-duotone ph-lock-key"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">MFA Enabled</span>
+                                <span class="kpi-value">100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Rank-Based Access Matrix (SCADA Model)</h3>
+                            <button class="btn-secondary" onclick="showToast('Access Matrix', 'Matrix exported successfully', 'success')">
+                                <i class="ph ph-download"></i> Export
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank Level</th>
+                                    <th>Title</th>
+                                    <th>Approval Limit</th>
+                                    <th>File Access</th>
+                                    <th>Module Access</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-danger">L5</span></td>
+                                    <td><strong>Executive / MD</strong></td>
+                                    <td>Unlimited</td>
+                                    <td>All Files</td>
+                                    <td>Full System</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-warning">L4</span></td>
+                                    <td><strong>Manager / HOD</strong></td>
+                                    <td>₦50,000,000</td>
+                                    <td>Dept + Confidential</td>
+                                    <td>Dept + Reports</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-info">L3</span></td>
+                                    <td><strong>Supervisor</strong></td>
+                                    <td>₦10,000,000</td>
+                                    <td>Dept + Internal</td>
+                                    <td>Assigned Modules</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-primary">L2</span></td>
+                                    <td><strong>Senior Staff</strong></td>
+                                    <td>₦2,000,000</td>
+                                    <td>Team Files</td>
+                                    <td>Limited Modules</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="badge badge-success">L1</span></td>
+                                    <td><strong>Junior Staff</strong></td>
+                                    <td>₦500,000</td>
+                                    <td>Own Files Only</td>
+                                    <td>Basic Access</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- User Management Tab -->
+                <div id="settings-users" class="tab-content">
+                    <div class="table-card">
+                        <div class="table-header">
+                            <h3>Active Sessions</h3>
+                            <div class="table-actions">
+                                <div class="search-inline">
+                                    <i class="ph ph-magnifying-glass"></i>
+                                    <input type="text" placeholder="Search users...">
+                                </div>
+                                <button class="btn-primary" onclick="openModal('employee-modal')">
+                                    <i class="ph ph-user-plus"></i> Add User
+                                </button>
+                            </div>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Rank</th>
+                                    <th>Last Active</th>
+                                    <th>MFA</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Adeola Johnson</strong></td>
+                                    <td>Trading Manager</td>
+                                    <td><span class="badge badge-warning">L4</span></td>
+                                    <td>Now</td>
+                                    <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                                    <td><span class="status-badge reconciled">Online</span></td>
+                                    <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i class="ph ph-sign-out"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Chidi Okonkwo</strong></td>
+                                    <td>Finance Lead</td>
+                                    <td><span class="badge badge-warning">L4</span></td>
+                                    <td>5 min ago</td>
+                                    <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                                    <td><span class="status-badge reconciled">Online</span></td>
+                                    <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i class="ph ph-sign-out"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Funke Adeyemi</strong></td>
+                                    <td>HR Coordinator</td>
+                                    <td><span class="badge badge-info">L3</span></td>
+                                    <td>12 min ago</td>
+                                    <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                                    <td><span class="status-badge pending">Away</span></td>
+                                    <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i class="ph ph-sign-out"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- System Config Tab -->
+                <div id="settings-system" class="tab-content">
+                    <div class="kpi-grid">
+                        <div class="table-card" style="padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">System Information</h3>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <span class="detail-label">Environment</span>
+                                    <span class="detail-value">Production</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Version</span>
+                                    <span class="detail-value">Cueprise v2.4.1</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Azure Region</span>
+                                    <span class="detail-value">West Europe</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Last Backup</span>
+                                    <span class="detail-value">Today, 03:00 AM</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">SSL Certificate</span>
+                                    <span class="detail-value" style="color: var(--success);">Valid (256 days)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Database Status</span>
+                                    <span class="detail-value" style="color: var(--success);">Healthy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-card" style="padding: 1.5rem;">
+                            <h3 style="margin-bottom: 1rem;">Quick Actions</h3>
+                            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                                <button class="btn-secondary" onclick="showToast('Audit Log', 'Downloading audit log...', 'info')">
+                                    <i class="ph ph-file-text"></i> Download Audit Log
+                                </button>
+                                <button class="btn-secondary" onclick="showToast('Cache', 'System cache cleared', 'success')">
+                                    <i class="ph ph-trash"></i> Clear Cache
+                                </button>
+                                <button class="btn-secondary" onclick="showToast('Backup', 'Manual backup initiated', 'info')">
+                                    <i class="ph ph-cloud-arrow-up"></i> Manual Backup
+                                </button>
+                                <button class="btn-secondary" onclick="showToast('Test', 'All systems operational', 'success')">
+                                    <i class="ph ph-heartbeat"></i> Health Check
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -2063,6 +2276,245 @@
                 <div class="modal-footer">
                     <button type="button" class="btn-secondary" onclick="closeModal('document-modal')">Cancel</button>
                     <button type="submit" class="btn-primary">Upload Document</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Generate Invoice Modal -->
+    <div id="invoice-modal" class="modal-overlay">
+        <div class="modal modal-wide">
+            <div class="modal-header">
+                <h2>Generate Invoice</h2>
+                <button class="modal-close" onclick="closeModal('invoice-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form id="invoice-form" onsubmit="handleInvoiceSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 2;">
+                            <label class="form-label required">Customer</label>
+                            <select class="form-select" name="customer" required>
+                                <option value="">Select customer...</option>
+                                <option value="PowerGen Nigeria">PowerGen Nigeria Ltd</option>
+                                <option value="Dangote Cement">Dangote Cement Plc</option>
+                                <option value="Lafarge Africa">Lafarge Africa Plc</option>
+                                <option value="BUA Cement">BUA Cement Plc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Invoice Date</label>
+                            <input type="date" class="form-input" name="invoiceDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Due Date</label>
+                            <input type="date" class="form-input" name="dueDate" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Invoice Line Items -->
+                    <div class="invoice-items-section">
+                        <div class="invoice-items-header">
+                            <h4>Line Items</h4>
+                            <button type="button" class="btn-secondary small" onclick="addInvoiceItem()">
+                                <i class="ph ph-plus"></i> Add Item
+                            </button>
+                        </div>
+                        <div id="invoice-items-container">
+                            <div class="invoice-item" data-item="1">
+                                <div class="form-group" style="flex: 2;">
+                                    <input type="text" class="form-input" name="item_desc_1" placeholder="Description (e.g. Gas supply - January)" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-input item-volume" name="item_volume_1" placeholder="Volume (MMscf)" oninput="updateInvoiceTotal()" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-input item-rate" name="item_rate_1" placeholder="Rate (₦/MMscf)" oninput="updateInvoiceTotal()" required>
+                                </div>
+                                <div class="form-group item-subtotal">
+                                    <span class="subtotal-label">₦0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="invoice-total">
+                            <span class="total-label">Total:</span>
+                            <span id="invoice-grand-total" class="total-value">₦0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-textarea" name="notes" placeholder="Additional notes..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('invoice-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Generate Invoice</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- New Waybill Modal -->
+    <div id="waybill-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>New Waybill</h2>
+                <button class="modal-close" onclick="closeModal('waybill-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleWaybillSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Origin</label>
+                            <select class="form-select" name="origin" required>
+                                <option value="">Select origin...</option>
+                                <option value="SPDC Bonny">SPDC Bonny</option>
+                                <option value="NAOC Brass">NAOC Brass</option>
+                                <option value="SPDC Forcados">SPDC Forcados</option>
+                                <option value="Seplat Oben">Seplat Oben</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Destination</label>
+                            <select class="form-select" name="destination" required>
+                                <option value="">Select destination...</option>
+                                <option value="Dangote Cement - Obajana">Dangote Cement - Obajana</option>
+                                <option value="Lafarge Africa - Sagamu">Lafarge Africa - Sagamu</option>
+                                <option value="PowerGen Nigeria - Olorunsogo">PowerGen Nigeria - Olorunsogo</option>
+                                <option value="BUA Cement - Okpella">BUA Cement - Okpella</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Volume (MMscf)</label>
+                            <input type="number" class="form-input" name="volume" placeholder="e.g. 850" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Departure Date/Time</label>
+                            <input type="datetime-local" class="form-input" name="departure" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-textarea" name="notes" placeholder="Additional delivery notes..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('waybill-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Waybill</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filter-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Filter Licenses</h2>
+                <button class="modal-close" onclick="closeModal('filter-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleFilterSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="">All Statuses</option>
+                            <option value="critical">Critical (≤15 days)</option>
+                            <option value="warning">Warning (≤30 days)</option>
+                            <option value="active">Active</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Issuing Authority</label>
+                        <select class="form-select" name="authority">
+                            <option value="">All Authorities</option>
+                            <option value="DPR">DPR</option>
+                            <option value="OGISP">OGISP</option>
+                            <option value="NESREA">NESREA</option>
+                            <option value="Federal Min. of Works">Federal Min. of Works</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Expiry From</label>
+                            <input type="date" class="form-input" name="expiryFrom">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Expiry To</label>
+                            <input type="date" class="form-input" name="expiryTo">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('filter-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Apply Filters</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Account Modal -->
+    <div id="account-modal" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Add Account</h2>
+                <button class="modal-close" onclick="closeModal('account-modal')">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+            <form onsubmit="handleAccountSubmit(event)">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Account Code</label>
+                            <input type="text" class="form-input" name="code" placeholder="e.g. 1001" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label required">Account Name</label>
+                            <input type="text" class="form-input" name="name" placeholder="e.g. Cash in Bank" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Account Type</label>
+                            <select class="form-select" name="type" required>
+                                <option value="">Select type...</option>
+                                <option value="Asset">Asset</option>
+                                <option value="Liability">Liability</option>
+                                <option value="Equity">Equity</option>
+                                <option value="Revenue">Revenue</option>
+                                <option value="Expense">Expense</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Parent Account</label>
+                            <select class="form-select" name="parent">
+                                <option value="">None (Top Level)</option>
+                                <option value="1000">1000 - Assets</option>
+                                <option value="2000">2000 - Liabilities</option>
+                                <option value="3000">3000 - Equity</option>
+                                <option value="4000">4000 - Revenue</option>
+                                <option value="5000">5000 - Expenses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" name="description" placeholder="Account description..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeModal('account-modal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Account</button>
                 </div>
             </form>
         </div>
