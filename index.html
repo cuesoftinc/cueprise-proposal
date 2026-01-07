@@ -328,18 +328,18 @@
                                 Application Server
                             </div>
                             <div class="grid grid-cols-2 gap-2">
+                                <div onclick="showArchDetail('trading')"
+                                    class="diagram-node cursor-pointer bg-amber-600 text-white p-2 rounded text-xs text-center hover:bg-amber-500 border border-amber-500">
+                                    Trading Engine</div>
                                 <div onclick="showArchDetail('logistics')"
                                     class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
                                     Gas Logistics</div>
-                                <div onclick="showArchDetail('crm')"
-                                    class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
-                                    CRM Module</div>
                                 <div onclick="showArchDetail('erp')"
                                     class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
-                                    ERP Engine</div>
-                                <div onclick="showArchDetail('hr')"
-                                    class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
-                                    HRIS</div>
+                                    ERP + HRIS</div>
+                                <div onclick="showArchDetail('scada')"
+                                    class="diagram-node cursor-pointer bg-red-700 text-white p-2 rounded text-xs text-center hover:bg-red-600 border border-red-600">
+                                    SCADA Access</div>
                             </div>
                         </div>
                     </div>
@@ -374,6 +374,29 @@
                     </div>
                 </div>
             </div>
+
+            <!-- SCADA Security Framework Card -->
+            <div class="premium-card mt-6 border-l-4 border-red-500">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="bg-red-100 p-2 rounded text-red-600 text-xl"><i class="ph-duotone ph-lock-key w-6 h-6"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800">SCADA-Style Security Framework (Rank-Based Access)</h3>
+                </div>
+                <p class="text-slate-600 mb-4">Unlike standard ERP permissions, MSN Energy's deployment implements a "Rank & Role" hierarchy with document-level invisibility.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 border rounded-lg bg-slate-50">
+                        <h4 class="font-bold text-slate-700 mb-2">File Invisibility</h4>
+                        <p class="text-sm text-slate-600">If a user's rank is lower than a document's "Sensitivity Level," the file is not just locked—it is invisible in the UI.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg bg-slate-50">
+                        <h4 class="font-bold text-slate-700 mb-2">Approval Authority</h4>
+                        <p class="text-sm text-slate-600">Financial approval limits are tied directly to the user's rank in the HR module.</p>
+                    </div>
+                    <div class="p-4 border rounded-lg bg-slate-50">
+                        <h4 class="font-bold text-slate-700 mb-2">Admin Lockdown</h4>
+                        <p class="text-sm text-slate-600">Centralized administration portal for instant revocation of access across all modules.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Section: Modules -->
@@ -386,20 +409,23 @@
             <div class="flex flex-col md:flex-row gap-6">
                 <!-- Module Tabs -->
                 <div class="w-full md:w-1/4 flex flex-col gap-2">
-                    <button onclick="setModuleTab('gas')"
+                    <button onclick="setModuleTab('trading')"
                         class="module-tab active-module-tab p-4 text-left rounded-lg font-medium transition-all bg-sky-100 text-sky-800 border-l-4 border-sky-600">Gas
-                        Logistics</button>
+                        Trading & Reconciliation</button>
+                    <button onclick="setModuleTab('gas')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Logistics
+                        & FGC Tracking</button>
                     <button onclick="setModuleTab('asset')"
-                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Asset
-                        Management</button>
-                    <button onclick="setModuleTab('hr')"
-                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">HR
-                        & Payroll</button>
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Pipeline
+                        & Asset Management</button>
+                    <button onclick="setModuleTab('grc')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">GRC
+                        & Compliance</button>
                     <button onclick="setModuleTab('erp')"
-                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Core
-                        ERP</button>
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Financials
+                        & HR</button>
 
-                    <!-- NEW: AI Tab -->
+                    <!-- AI Tab -->
                     <button onclick="setModuleTab('ai')"
                         class="module-tab p-4 text-left rounded-lg font-bold transition-all text-sky-600 bg-sky-50 border-l-4 border-sky-400 hover:bg-sky-100 items-center flex gap-2">
                         <i class="ph-duotone ph-sparkle w-5 h-5"></i> AI Module Architect
@@ -409,104 +435,157 @@
                 <!-- Module Content -->
                 <div class="w-full md:w-3/4 bg-white p-6 rounded-xl shadow-sm border border-slate-200 min-h-[400px]">
 
-                    <!-- Gas Logistics Content -->
-                    <div id="module-gas" class="module-content block">
+                    <!-- Gas Trading & Reconciliation Content (NEW - Default Active) -->
+                    <div id="module-trading" class="module-content block">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="bg-sky-100 p-2 rounded text-sky-600 text-xl"><i
-                                    class="ph-duotone ph-truck w-6 h-6"></i></div>
-                            <h3 class="text-2xl font-bold text-slate-800">Natural Gas Logistics</h3>
+                            <div class="bg-amber-100 p-2 rounded text-amber-600 text-xl"><i
+                                    class="ph-duotone ph-chart-line-up w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">Gas Trading & Portfolio Engine</h3>
                         </div>
-                        <p class="text-slate-600 mb-6">A specialized module to handle the unique movement and tracking
-                            requirements of natural gas distribution.</p>
+                        <p class="text-slate-600 mb-6">The "Brain" of MSN Energy's operations — handling multi-producer
+                            and multi-off-taker dynamics with automated reconciliation.</p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="p-4 border rounded-lg bg-slate-50">
                                 <h4 class="font-bold text-slate-700 mb-2">Key Features</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>Route Optimization for delivery trucks.</li>
+                                    <li><strong>Nomination Hub:</strong> Centralized dashboard for off-taker nominations.</li>
+                                    <li><strong>Reconciliation Logic:</strong> Automated Nominated vs. Allocated vs. Delivered comparison.</li>
+                                    <li><strong>Variance Reporting:</strong> Real-time "Network Operator Attribution" flagging.</li>
+                                    <li><strong>Margin Optimizer:</strong> Dynamic pricing based on sourcing costs.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Business Value</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Zero reconciliation leakage — eliminate uncaptured volume variances.</li>
+                                    <li>Automated billing upon attributed volume confirmation.</li>
+                                    <li>Real-time visibility into trading margins and portfolio performance.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logistics & FGC Tracking Content -->
+                    <div id="module-gas" class="module-content hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-sky-100 p-2 rounded text-sky-600 text-xl"><i
+                                    class="ph-duotone ph-truck w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">Logistics & FGC Tracking</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6">Specialized module for gas distribution and Flare Gas
+                            Commercialization (FGC) recovery tracking for NMDPRA reporting.</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Logistics Features</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Offline-first PWA for depot & site staff.</li>
                                     <li>Real-time volume tracking vs. manifest.</li>
                                     <li>Waybill generation & digital signing.</li>
                                     <li>Safety compliance checklists per trip.</li>
                                 </ul>
                             </div>
                             <div class="p-4 border rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-slate-700 mb-2">Business Value</h4>
+                                <h4 class="font-bold text-slate-700 mb-2">FGC Recovery Tracking</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>Reduce leakage/theft via digital tracking.</li>
-                                    <li>Automate invoicing upon delivery confirmation.</li>
-                                    <li>Historical data for demand forecasting.</li>
+                                    <li>Flared vs. Recovered gas volume logging.</li>
+                                    <li>NMDPRA regulatory reporting automation.</li>
+                                    <li>Environmental compliance dashboards.</li>
+                                    <li>Historical flare data for audits.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Asset Content -->
+                    <!-- Pipeline & Asset Management Content -->
                     <div id="module-asset" class="module-content hidden">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="bg-blue-100 p-2 rounded text-blue-600 text-xl"><i
                                     class="ph-duotone ph-wrench w-6 h-6"></i></div>
-                            <h3 class="text-2xl font-bold text-slate-800">Gas Asset Management</h3>
+                            <h3 class="text-2xl font-bold text-slate-800">Pipeline & Infrastructure Tracker</h3>
                         </div>
-                        <p class="text-slate-600 mb-6">Lifecycle management for cylinders, storage tanks, and pumping
-                            equipment.</p>
+                        <p class="text-slate-600 mb-6">Lifecycle management for pipeline construction projects,
+                            storage tanks, and rotating equipment.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="p-4 border rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-slate-700 mb-2">Functionality</h4>
+                                <h4 class="font-bold text-slate-700 mb-2">Project Management</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>QR/Barcode tagging for all cylinders.</li>
+                                    <li>Gantt-style pipeline construction milestones.</li>
+                                    <li>Contractor Portal for progress & compliance uploads.</li>
+                                    <li>Budget tracking & variance reporting.</li>
+                                    <li>Integrated document management.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Asset Lifecycle</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>QR/Barcode tagging for all equipment.</li>
                                     <li>Maintenance scheduling & alerts.</li>
                                     <li>Depreciation calculation (Straight line/Reducing).</li>
-                                    <li>Location tracking (Warehouse vs Customer site).</li>
+                                    <li>Location tracking (Site vs. Warehouse).</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- HR Content -->
-                    <div id="module-hr" class="module-content hidden">
+                    <!-- GRC & Compliance Content (NEW) -->
+                    <div id="module-grc" class="module-content hidden">
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="bg-blue-100 p-2 rounded text-blue-600 text-xl"><i
-                                    class="ph-duotone ph-users-three w-6 h-6"></i></div>
-                            <h3 class="text-2xl font-bold text-slate-800">HR & Payroll (Nigerian Context)</h3>
+                            <div class="bg-emerald-100 p-2 rounded text-emerald-600 text-xl"><i
+                                    class="ph-duotone ph-shield-check w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">GRC (Governance, Risk & Compliance)</h3>
                         </div>
-                        <p class="text-slate-600 mb-6">Manage your growing team of 15+ staff with local compliance
-                            built-in.</p>
+                        <p class="text-slate-600 mb-6">Automated license tracking and contract lifecycle management
+                            to ensure regulatory peace of mind.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="p-4 border rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-slate-700 mb-2">Payroll Features</h4>
+                                <h4 class="font-bold text-slate-700 mb-2">License Vault</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>Automated PAYE, Pension, & NHF calculations.</li>
-                                    <li>One-click payslip generation & email.</li>
-                                    <li>Loan & Advance management.</li>
+                                    <li>OGISP, NMDPRA permit tracking.</li>
+                                    <li>Corporate certification management.</li>
+                                    <li><strong>Auto-alerts:</strong> 60/30/15-day expiry warnings.</li>
+                                    <li>Renewal workflow automation.</li>
                                 </ul>
                             </div>
                             <div class="p-4 border rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-slate-700 mb-2">Talent Management</h4>
+                                <h4 class="font-bold text-slate-700 mb-2">Contract Lifecycle</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>Leave management workflows.</li>
-                                    <li>Performance appraisal cycles.</li>
-                                    <li>Employee self-service portal.</li>
+                                    <li>Gas Purchase Agreement (GPA) repository.</li>
+                                    <li>Gas Sale Agreement (GSA) version control.</li>
+                                    <li>Obligation tracking & compliance audit trails.</li>
+                                    <li>Third-party contractor compliance docs.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ERP Content -->
+                    <!-- Financials & HR Content -->
                     <div id="module-erp" class="module-content hidden">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="bg-slate-100 p-2 rounded text-slate-600 text-xl"><i
                                     class="ph-duotone ph-chart-line-up w-6 h-6"></i></div>
-                            <h3 class="text-2xl font-bold text-slate-800">Core ERP & Accounting</h3>
+                            <h3 class="text-2xl font-bold text-slate-800">Financials & HR</h3>
                         </div>
-                        <p class="text-slate-600 mb-6">The financial backbone integrating all operations into a single
-                            ledger.</p>
+                        <p class="text-slate-600 mb-6">Naira-centric accounting with Nigerian tax compliance and
+                            integrated human resource management.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="p-4 border rounded-lg bg-slate-50">
-                                <h4 class="font-bold text-slate-700 mb-2">Financials</h4>
+                                <h4 class="font-bold text-slate-700 mb-2">Automated ERP</h4>
                                 <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
-                                    <li>General Ledger, AP/AR.</li>
+                                    <li>Automated billing from reconciliation engine.</li>
+                                    <li>Expense retirement with mobile receipt uploads.</li>
+                                    <li>VAT, CIT compliance & IFRS standards.</li>
                                     <li>Multi-currency support (NGN/USD).</li>
-                                    <li>Automated bank reconciliation.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">HR & Payroll</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Automated PAYE, Pension, & NHF.</li>
+                                    <li>One-click payslip generation.</li>
+                                    <li>Leave & performance management.</li>
+                                    <li>Employee self-service portal.</li>
                                 </ul>
                             </div>
                         </div>
@@ -639,51 +718,62 @@
         <section id="roadmap" class="view-section hidden fade-in space-y-6">
             <div class="mb-6">
                 <h2 class="type-title">Implementation Roadmap</h2>
-                <p class="type-subheading">A clear 6-month path to digital transformation.</p>
+                <p class="type-subheading">A structured 30-week path to MSN Energy's digital transformation.</p>
             </div>
 
-            <div class="relative border-l-4 border-slate-200 ml-6 space-y-12 my-10">
-                <!-- Month 1 -->
+            <div class="relative border-l-4 border-slate-200 ml-6 space-y-10 my-10">
+                <!-- Phase 1: Discovery -->
                 <div class="relative pl-8">
                     <div class="absolute -left-3 top-0 w-6 h-6 bg-slate-400 rounded-full border-4 border-white"></div>
                     <div class="premium-card">
-                        <span class="type-label text-slate-600">Month 1</span>
-                        <h4 class="type-heading">Discovery & Architecture</h4>
-                        <p class="type-body mt-1">Mapping gas logistics workflows, Azure environment setup,
-                            and detailed requirements gathering.</p>
+                        <span class="type-label text-slate-600">P1: Weeks 1-4</span>
+                        <h4 class="type-heading">Discovery</h4>
+                        <p class="type-body mt-1">Workflow mapping for gas nominations and FGC reporting.
+                            Detailed requirements gathering with MSN Energy stakeholders.</p>
                     </div>
                 </div>
 
-                <!-- Month 2-3 -->
+                <!-- Phase 2: Foundation -->
+                <div class="relative pl-8">
+                    <div class="absolute -left-3 top-0 w-6 h-6 bg-blue-500 rounded-full border-4 border-white"></div>
+                    <div class="premium-card">
+                        <span class="type-label text-blue-600">P2: Weeks 5-10</span>
+                        <h4 class="type-heading">Foundation</h4>
+                        <p class="type-body mt-1">Azure provisioning & Entra ID integration.
+                            Security baseline and data sovereignty setup.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 3: Core ERP -->
                 <div class="relative pl-8">
                     <div class="absolute -left-3 top-0 w-6 h-6 bg-sky-500 rounded-full border-4 border-white"></div>
                     <div class="premium-card">
-                        <span class="type-label text-sky-600">Month 2-3</span>
-                        <h4 class="type-heading">Custom Development</h4>
-                        <p class="type-body mt-1">Building the Asset Management & Logistics modules.
-                            Integration with Microsoft 365 Identity.</p>
+                        <span class="type-label text-sky-600">P3: Weeks 11-18</span>
+                        <h4 class="type-heading">Core ERP</h4>
+                        <p class="type-body mt-1">Finance, HR, and Administrative Requisition Go-Live.
+                            Staff expense retirement and payroll automation.</p>
                     </div>
                 </div>
 
-                <!-- Month 4-5 -->
+                <!-- Phase 4: Trading Engine -->
                 <div class="relative pl-8">
-                    <div class="absolute -left-3 top-0 w-6 h-6 bg-sky-500 rounded-full border-4 border-white"></div>
+                    <div class="absolute -left-3 top-0 w-6 h-6 bg-amber-500 rounded-full border-4 border-white"></div>
                     <div class="premium-card">
-                        <span class="type-label text-sky-600">Month 4-5</span>
-                        <h4 class="type-heading">Testing & Migration</h4>
-                        <p class="type-body mt-1">UAT with department heads. Migrating existing Excel/Paper
-                            data to the cloud. Security Audits.</p>
+                        <span class="type-label text-amber-600">P4: Weeks 19-26</span>
+                        <h4 class="type-heading">Trading Engine</h4>
+                        <p class="type-body mt-1">Deployment of Reconciliation and Portfolio Management modules.
+                            Nomination Hub and automated billing integration.</p>
                     </div>
                 </div>
 
-                <!-- Month 6 -->
+                <!-- Phase 5: Optimization -->
                 <div class="relative pl-8">
                     <div class="absolute -left-3 top-0 w-6 h-6 bg-emerald-500 rounded-full border-4 border-white"></div>
                     <div class="premium-card">
-                        <span class="type-label text-emerald-600">Month 6</span>
-                        <h4 class="type-heading">Go Live & Training</h4>
-                        <p class="type-body mt-1">Full staff onboarding. Handover of documentation.
-                            Activation of 24/7 Support SLA.</p>
+                        <span class="type-label text-emerald-600">P5: Weeks 27-30</span>
+                        <h4 class="type-heading">Optimization & Go-Live</h4>
+                        <p class="type-body mt-1">Stress testing SCADA-style access controls.
+                            Full staff training and 24/7 Support SLA activation.</p>
                     </div>
                 </div>
             </div>
@@ -912,7 +1002,7 @@
             const details = {
                 'users': {
                     t: 'User Access Layer',
-                    d: 'Supports 10-15 concurrent users initially, auto-scaling to 20+. Accessible via Web Browser and dedicated Mobile App for field logistics.'
+                    d: 'Supports MSN Energy staff with auto-scaling capacity. Accessible via Web Browser and Offline-first PWA for depot and field operations.'
                 },
                 'ms365': {
                     t: 'Microsoft 365 Integration',
@@ -920,23 +1010,32 @@
                 },
                 'app': {
                     t: 'Cueprise Application Server',
-                    d: 'Hosted on Azure App Service. Autoscaling enabled. Runs the core business logic, API gateway, and process automation engine.'
+                    d: 'Hosted on Azure App Service within MSN Energy\'s sovereign tenant. Runs core business logic, API gateway, and process automation engine.'
+                },
+                'trading': {
+                    t: 'Gas Trading & Portfolio Engine',
+                    d: 'The "Brain" of the system: Nomination Hub, automated Reconciliation (Nominated vs Allocated vs Delivered), Variance Reporting, and Margin Optimizer.'
                 },
                 'logistics': {
-                    t: 'Gas Logistics Module',
-                    d: 'Custom-built engine for route planning, delivery verification, and digital waybills tailored to Natural Gas distribution workflows.'
+                    t: 'Gas Logistics & FGC Module',
+                    d: 'Flare Gas Commercialization tracking, route planning, delivery verification, and digital waybills for NMDPRA regulatory reporting.'
+                },
+                'erp': {
+                    t: 'ERP + HRIS',
+                    d: 'Naira-centric accounting (VAT, CIT, IFRS), automated billing from reconciliation, expense retirement, and Nigerian-compliant HR/Payroll.'
+                },
+                'scada': {
+                    t: 'SCADA-Style Access Control',
+                    d: 'Rank-based permissions with File Invisibility. Low-rank users cannot see sensitive documents. Financial approval limits tied to HR rank. Instant revocation across modules.'
                 },
                 'db': {
                     t: 'Azure SQL Database',
-                    d: 'Enterprise-grade relational storage. Encrypted at rest (TDE) and in transit. Automated daily backups with point-in-time recovery.'
+                    d: 'Enterprise-grade relational storage. Encrypted at rest (TDE) and in transit. Automated daily backups with point-in-time recovery. Data resides in MSN Energy\'s Azure subscription.'
                 },
                 'files': {
                     t: 'Azure Blob Storage',
-                    d: 'Secure repository for documents, waybills, and receipts. Granular permissions ensure departments only see their own files.'
-                },
-                'crm': { t: 'CRM Module', d: 'Manages customer relationships, order history, and integrated communication tools.' },
-                'erp': { t: 'ERP Core', d: 'Central financial engine handling General Ledger, AP/AR, and reporting.' },
-                'hr': { t: 'HRIS', d: 'Payroll and employee management tailored for Nigerian tax and labor laws.' }
+                    d: 'Secure repository for GPAs, GSAs, waybills, and receipts. Integrated with License Vault for permit tracking with 60/30/15-day expiry alerts.'
+                }
             };
 
             if (details[nodeId]) {
