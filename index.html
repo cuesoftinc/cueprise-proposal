@@ -95,6 +95,10 @@
                     <button type="button" onclick="navigateTo('modules')"
                         class="bg-sky-600 hover:bg-sky-500 text-white px-5 py-2 rounded-lg font-semibold shadow-sm transition">Explore
                         Interactive Overview</button>
+                    <a href="demo/demo.html"
+                        class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-lg font-semibold shadow-sm transition inline-flex items-center gap-2">
+                        <i class="ph-duotone ph-play-circle"></i> Launch Demo
+                    </a>
                     <button type="button" onclick="openSlideDeck()"
                         class="px-5 py-2 rounded-lg font-semibold border border-slate-300 text-slate-700 hover:bg-white shadow-sm transition">Launch
                         Slide Deck</button>
@@ -421,9 +425,21 @@
                     <button onclick="setModuleTab('grc')"
                         class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">GRC
                         & Compliance</button>
+                    <button onclick="setModuleTab('documents')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Document
+                        Control</button>
                     <button onclick="setModuleTab('erp')"
                         class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Financials
-                        & HR</button>
+                        & Invoicing</button>
+                    <button onclick="setModuleTab('hr')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">HR
+                        Management</button>
+                    <button onclick="setModuleTab('requisitions')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Requisitions
+                        & Expenses</button>
+                    <button onclick="setModuleTab('analytics')"
+                        class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Analytics
+                        & Reporting</button>
 
                     <!-- AI Tab -->
                     <button onclick="setModuleTab('ai')"
@@ -586,6 +602,130 @@
                                     <li>One-click payslip generation.</li>
                                     <li>Leave & performance management.</li>
                                     <li>Employee self-service portal.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Document Control Content (NEW) -->
+                    <div id="module-documents" class="module-content hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-indigo-100 p-2 rounded text-indigo-600 text-xl"><i
+                                    class="ph-duotone ph-folder-open w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">Digital Workplace & Document Control</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6">Centralized document management with version control,
+                            sensitivity levels, and offline synchronization.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Core Features</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Centralized document control center.</li>
+                                    <li>Version control with change history.</li>
+                                    <li>Sensitivity levels linked to rank-based access.</li>
+                                    <li>Offline synchronization for field staff.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Security Features</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Document-level audit trails.</li>
+                                    <li>File invisibility for unauthorized ranks.</li>
+                                    <li>Secure internal collaboration.</li>
+                                    <li>Encrypted Azure Blob Storage.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HR Management Content (NEW) -->
+                    <div id="module-hr" class="module-content hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-rose-100 p-2 rounded text-rose-600 text-xl"><i
+                                    class="ph-duotone ph-users w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">HR Management</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6">The authority backbone for access control — managing
+                            organizational hierarchy, rank mapping, and approval limits.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Personnel Management</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Employee records and profiles.</li>
+                                    <li>Organizational hierarchy definition.</li>
+                                    <li>Leave and attendance management.</li>
+                                    <li>Employee self-service portal.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Rank-Based Access</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>5-tier rank hierarchy (L1-L5).</li>
+                                    <li>Role mapping per department.</li>
+                                    <li>Approval limits tied to rank.</li>
+                                    <li>Cross-module access inheritance.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Requisitions & Expenses Content (NEW) -->
+                    <div id="module-requisitions" class="module-content hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-orange-100 p-2 rounded text-orange-600 text-xl"><i
+                                    class="ph-duotone ph-file-plus w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">Administrative Requisitions & Expense Management</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6">Digital workflow for requisitions, disbursements, and
+                            expense retirement with multi-level approval.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Requisition Workflow</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Digital requisition creation.</li>
+                                    <li>Multi-level approval workflows (L2/L3/L4).</li>
+                                    <li>Disbursement tracking.</li>
+                                    <li>Full audit trail for review.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Expense Retirement</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Mobile receipt uploads.</li>
+                                    <li>Expense retirement submissions.</li>
+                                    <li>Manager approval workflows.</li>
+                                    <li>Integration with Finance module.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics & Reporting Content (NEW) -->
+                    <div id="module-analytics" class="module-content hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="bg-cyan-100 p-2 rounded text-cyan-600 text-xl"><i
+                                    class="ph-duotone ph-chart-bar w-6 h-6"></i></div>
+                            <h3 class="text-2xl font-bold text-slate-800">Analytics & Reporting</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6">Executive KPIs, margin dashboards, and historical trend
+                            analysis — all driven from single-source-of-truth data.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Standard Reports</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Monthly operational reports.</li>
+                                    <li>Quarterly financial summaries.</li>
+                                    <li>FGC regulatory compliance reports.</li>
+                                    <li>Historical trend analysis.</li>
+                                </ul>
+                            </div>
+                            <div class="p-4 border rounded-lg bg-slate-50">
+                                <h4 class="font-bold text-slate-700 mb-2">Executive Dashboards</h4>
+                                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                                    <li>Real-time margin tracking.</li>
+                                    <li>Volume and revenue dashboards.</li>
+                                    <li>Portfolio performance KPIs.</li>
+                                    <li>Variance and exception alerts.</li>
                                 </ul>
                             </div>
                         </div>
@@ -1158,44 +1298,54 @@
             btn.classList.add('opacity-75');
             spinner.classList.remove('hidden');
 
-            const systemPrompt = `You are the Lead Solutions Architect for Cueprise, the premier ERP for Nigerian Gas Logistics.
-            Your role is to draft technical specifications for custom modules requested by the client.
+            const systemPrompt = `You are the Lead Solutions Architect for Cueprise, deployed for MSN Energy Resource Limited.
+            MSN Energy operates as a natural gas trading and portfolio management company, sourcing gas from multiple producers and selling to multiple off-takers.
             
-            **DEEP SYSTEM CONTEXT (Advisory Report Findings):**
+            **CLIENT CONTEXT (MSN Energy Resource Limited):**
             
-            1.  **Core Domain:** Downstream Gas Logistics & Asset Management.
-                *   **Crucial Distinction:** We manage BOTH "Fixed Infrastructure" (Tanks, Compressors) AND "Returnable Transport Items" (RTIs - Cylinders).
-                *   **RTI Logic:** Must handle Serialization, Chain-of-Custody, Aging analysis, Demurrage tracking, and Loss Detection.
+            1.  **Core Business:** Downstream Gas Trading, Portfolio Management, Pipeline Construction, and Flare Gas Commercialization (FGC).
             
-            2.  **Regulatory & Compliance (Non-Negotiable):**
-                *   **Authority:** NMDPRA (Nigerian Midstream and Downstream Petroleum Regulatory Authority) / DPR.
-                *   **Requirements:** Automated Permit/License tracking, CASHES / HSE Reporting, and strict Audit-Readiness.
+            2.  **Implemented Modules (10 Total):**
+                *   **Gas Trading & Portfolio Engine:** Nomination Hub, Reconciliation Logic (Nominated vs Allocated vs Delivered), Margin Optimizer, Network Operator Attribution.
+                *   **Logistics & FGC Tracking:** Offline-first PWA, Flared vs Recovered volume logging, NMDPRA compliance reports.
+                *   **Pipeline & Infrastructure Tracker:** Gantt-style milestone management, Contractor Portal, Budget tracking.
+                *   **GRC & Compliance:** License Vault (OGISP, NMDPRA permits) with 60/30/15-day expiry alerts, Contract Lifecycle (GPAs/GSAs).
+                *   **Document Control Center:** Version control, sensitivity levels linked to rank-based access, offline sync.
+                *   **Financials & Invoicing:** Automated billing from attributed volumes, Naira-centric accounting (VAT/CIT), IFRS-aligned.
+                *   **HR Management:** 5-tier rank hierarchy (L1-L5), approval limits, organizational hierarchy definition.
+                *   **Requisitions & Expenses:** Multi-level approval workflows, expense retirement, mobile receipt uploads.
+                *   **Analytics & Reporting:** Executive KPIs, quarterly reports, historical trend analysis, margin dashboards.
             
-            3.  **Technical Architecture (Azure Native):**
-                *   **Hosting:** Client's own Azure Tenant (Data Sovereignty).
-                *   **Identity:** Microsoft Entra ID (SSO) integration.
-                *   **Field Ops:** Offline-first PWA for drivers in low-connectivity zones.
+            3.  **Security Framework (SCADA-Style):**
+                *   **RBAC+:** Dual-layer (Role + Rank) access control.
+                *   **File Invisibility:** Documents invisible (not just locked) to unauthorized ranks.
+                *   **Approval Authority:** Financial limits tied to rank in HR module.
+                *   **Admin Lockdown:** Centralized instant access revocation.
             
-            4.  **The "Trinity" Delivery Model:**
-                *   **Product:** The ERP Kernel.
-                *   **CueTA:** The Talent Academy (providing 20+ local engineers).
-                *   **CueLABS:** Continuous R&D (AI, IoT).
+            4.  **Technical Architecture (Azure Native):**
+                *   **Hosting:** Sovereign Single-Tenant in MSN Energy's Azure subscription.
+                *   **Services:** Azure App Services, Azure SQL Managed Instance, Azure Key Vault.
+                *   **Identity:** Microsoft Entra ID (Azure AD) with MFA, Conditional Access.
+            
+            5.  **Regulatory Context:**
+                *   **NMDPRA:** Gas processing permits, FGC compliance.
+                *   **OGISP:** Operating licenses.
             
             **INSTRUCTIONS:**
-            The user will describe a requirement (e.g., "Driver Fatigue Monitoring"). You must output a detailed technical spec structured EXACTLY as follows (Raw HTML, no markdown):
+            The user will describe a requirement (e.g., "Producer Performance Dashboard"). You must output a detailed technical spec structured EXACTLY as follows (Raw HTML, no markdown):
             
             Structure:
             1.  First Div (Class "p-4 border rounded-lg bg-slate-50"):
                 *   H4 "Key Technical Features" (class "font-bold text-slate-700 mb-2").
                 *   UL (class "list-disc list-inside text-sm text-slate-600 space-y-2").
-                *   *Content:* List 4-5 specific technical features. Mention Azure services (e.g., "Azure IoT Hub", "Cognitive Services") or specific regulatory forms (e.g., "DPR Permit checking") where relevant.
+                *   *Content:* List 4-5 specific technical features. Reference existing MSN modules (Trading Engine, GRC, HR). Mention Azure services and regulatory requirements where relevant.
             
             2.  Second Div (Class "p-4 border rounded-lg bg-slate-50"):
                 *   H4 "Business & Regulatory Value" (class "font-bold text-slate-700 mb-2").
                 *   UL (class "list-disc list-inside text-sm text-slate-600 space-y-2").
-                *   *Content:* List 3-4 value points. Focus on Compliance (NMDPRA), Revenue Assurance (stopping leakage), and Operational Efficiency.
+                *   *Content:* List 3-4 value points. Focus on Revenue Assurance, NMDPRA Compliance, Trading Margin Optimization, and Operational Transparency.
             
-            Tone: Highly technical, authoritative, specific to the Nigerian Oil & Gas context.`;
+            Tone: Highly technical, authoritative, specific to MSN Energy's gas trading and pipeline operations.`;
 
             const aiResponse = await callGeminiAPI(input, systemPrompt);
 
@@ -1248,36 +1398,48 @@
             msgList.scrollTop = msgList.scrollHeight;
 
             // 3. Prepare Context & Call API
-            const systemPrompt = `You are the specific 'Cueprise AI Sales Assistant', an expert consultant for the Nigerian Oil & Gas sector.
-            You are speaking to a prospective client who is currently in the "Missing Middle" - too big for Excel, but underserved by rigid global giants like SAP.
+            const systemPrompt = `You are the 'MSN Energy Cueprise AI Assistant', deployed specifically for MSN Energy Resource Limited's ERP proposal.
+            You are speaking to stakeholders evaluating this strategic partnership.
             
-            **YOUR KNOWLEDGE BASE (Strategic Advisory Report):**
+            **CLIENT CONTEXT (MSN Energy Resource Limited):**
             
-            **1. The Problem: "The Missing Middle"**
-            *   **Current State:** Client has 10-15 users, relies on Microsoft 365 + Excel.
-            *   **Pain:** Cannot track "Returnable Transport Items" (Cylinders) effectively. Losing money on lost cylinders and demurrage.
-            *   **Risk:** Regulatory non-compliance with NMDPRA/DPR (missing permits, poor safety records).
+            **1. Business Profile:**
+            *   **Industry:** Natural gas trading and portfolio management company.
+            *   **Operations:** Source gas from multiple producers, sell to multiple off-takers.
+            *   **Projects:** Pipeline construction and Flare Gas Commercialization (FGC).
             
-            **2. The Solution: Cueprise (by Cuesoft Inc.)**
-            *   **Identity:** We are NOT just software. We are a "Build-Partner".
-            *   **The Trinity:** 
-                1. **Product:** Tailored ERP Kernel.
-                2. **CueTA:** 20+ Local Engineers for 24/7 Support (Ibadan/Lagos based).
-                3. **CueLABS:** R&D Pod.
+            **2. Implemented Modules (10 Total):**
+            *   Gas Trading & Portfolio Engine (Nomination Hub, Reconciliation, Margin Optimizer)
+            *   Logistics & FGC Tracking (Offline PWA, NMDPRA reports)
+            *   Pipeline & Infrastructure Tracker (Gantt milestones, Contractor Portal)
+            *   GRC & Compliance (License Vault, GPAs/GSAs, 60/30/15-day alerts)
+            *   Document Control (Version control, sensitivity levels)
+            *   Financials & Invoicing (Naira accounting, automated billing)
+            *   HR Management (5-tier rank hierarchy L1-L5, approval limits)
+            *   Requisitions & Expenses (Multi-level approval workflows)
+            *   Analytics & Reporting (Executive KPIs, quarterly reports)
+            *   AI Module Architect (Custom module spec generation)
             
-            **3. Why We Win (Competitive Killers):**
-            *   **VS SAP/Dynamics:** They charge in USD (Forex Risk). We charge in **Naira (Fixed Annual License)**. They have generic asset modules; We have native **Gas Cylinder Logic**.
-            *   **VS Zoho/Odoo:** They are Public Cloud. We deploy into **YOUR Azure Tenant** (Data Sovereignty).
-            *   **VS Custom Dev:** We are faster (3-6 Months) because we start with a proven Kernel.
+            **3. Security (SCADA-Style):**
+            *   RBAC+ with File Invisibility for unauthorized ranks
+            *   Approval limits tied to HR rank
+            *   Centralized admin lockdown capability
             
-            **4. Company Info:**
-            *   Built by **Cuesoft Inc.** (https://cuesoft.io).
+            **4. Implementation:**
+            *   5-Phase / 30-Week Roadmap
+            *   Sovereign Single-Tenant Azure deployment
+            *   Microsoft Entra ID with MFA
+            
+            **5. Key Differentiators:**
+            *   **Naira Pricing:** Stable annual license, no FX volatility
+            *   **Local Support:** 20+ engineers in Nigeria, 24/7 support
+            *   **Data Sovereignty:** Deployed in MSN Energy's own Azure tenant
+            *   **Offline-First:** PWA for field staff in low-connectivity areas
             
             **BEHAVIOR:**
-            *   Answer questions directly and confidentially.
-            *   Use the "Trinity" concept (Product, Talent, Labs) to explain why we are different.
-            *   Always mention "Naira Pricing" and "Local Support" as key advantages.
-            *   If asked about technical details, mention "Azure Native" and "Offline PWA".
+            *   Answer questions about modules, security, or implementation directly.
+            *   Reference specific MSN Energy requirements when relevant.
+            *   Mention the interactive demo (demo/demo.html) for visual demonstrations.
             *   Keep responses concise (max 3-4 sentences) unless asked to elaborate.
             *   Use Markdown for emphasis.`;
 
