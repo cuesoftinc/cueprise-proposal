@@ -2,6 +2,23 @@
    MSN Energy Demo - Interactive JavaScript
    ========================================== */
 
+// ==========================================
+// Mobile Sidebar Toggle
+// ==========================================
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+}
+
+function closeSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // ==========================================
@@ -23,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = document.getElementById(`module-${targetModule}`);
             if (target) {
                 target.classList.add('active');
+            }
+
+            // Close sidebar on mobile after navigation
+            if (window.innerWidth <= 768) {
+                closeSidebar();
             }
         });
     });
