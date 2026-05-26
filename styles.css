@@ -1,10 +1,6 @@
-/* Base Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import url('design-system.css');
 
+/* Root Home Page Specific Styles */
 :root {
   --bg-color: #050505;
   --text-primary: #ffffff;
@@ -13,9 +9,6 @@
   --accent-msn-glow: rgba(245, 158, 11, 0.5);
   --accent-staco: #3b82f6;
   --accent-staco-glow: rgba(59, 130, 246, 0.5);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 body {

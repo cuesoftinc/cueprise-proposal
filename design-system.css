@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Cueprise Enterprise Design System
+   Unified CSS tokens, typography, and premium utilities for all proposals.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Core Brand Styling (Overrideable by individual client folders) */
+  --accent-primary: #0284c7; /* Sky 600 default */
+  --accent-primary-glow: rgba(2, 132, 199, 0.15);
+  --accent-secondary: #10b981; /* Emerald 500 */
+  
+  /* Shared Semantics */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
+  --status-info: #3b82f6;
+
+  /* Global Theme Neutrals */
+  --bg-white: #ffffff;
+  --bg-neutral-light: #f8fafc; /* Slate 50 */
+  --bg-neutral-border: #e2e8f0; /* Slate 200 */
+  --bg-neutral-dark: #0f172a; /* Slate 900 */
+  
+  /* Strict Typography Hierarchy Colors (Greyness hierarchy) */
+  --color-text-title: #0f172a; /* Slate 900 (Darkest, boldest) */
+  --color-text-heading: #1e293b; /* Slate 800 */
+  --color-text-body: #334155; /* Slate 700 */
+  --color-text-muted: #64748b; /* Slate 500 */
+
+  /* Glassmorphism Styles (Standardized overlay style) */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* ==========================================================================
+   STRICT TYPOGRAPHY SYSTEM 
+   Ensures uniform hierarchy and alignment across proposals.
+   ========================================================================== */
+
+/* 1. Main Section/Slide Titles (Darkest, Boldest, Largest) */
+.type-title {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: var(--color-text-title);
+  margin-bottom: 0.5rem;
+}
+
+/* 2. Subheadings (Context/Subtitle) - Accent Color */
+.type-subheading {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5rem;
+  font-weight: 400;
+  color: var(--accent-primary);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 3. Section/Card Headings (H3) */
+.type-heading {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 0.5rem;
+}
+
+/* 4. Body Content (Lighter grey, readable size) */
+.type-body {
+  font-size: 0.875rem;
+  line-height: 1.4rem;
+  font-weight: 400;
+  color: var(--color-text-body);
+}
+
+/* 5. Small Labels (Eyebrow text) */
+.type-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   SHARED INTERACTIVE COMPONENTS
+   ========================================================================== */
+
+/* Premium Card with standard subtle depth and hover lift */
+.premium-card {
+  background: var(--bg-white);
+  border: 1px solid var(--bg-neutral-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  transition: all 0.3s ease;
+}
+
+.premium-card:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border-color: #cbd5e1;
+}
+
+/* Standardized Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-neutral-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Core System Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
