@@ -1,10 +1,10 @@
 @import url('../design-system.css');
 
 :root {
-  /* Override accent values specifically for MSN Energy */
-  --accent-primary: #0284c7;
-  /* Sky 600 */
-  --accent-primary-glow: rgba(2, 132, 199, 0.15);
+  /* Override accent values specifically for STACO Insurance */
+  --accent-primary: #2563eb;
+  /* Blue 600 */
+  --accent-primary-glow: rgba(37, 99, 235, 0.15);
 }
 
 /* Index specific */
@@ -27,12 +27,12 @@
 }
 
 .active-module-tab {
-  background-color: #e0f2fe;
-  /* sky-100 */
-  color: #0369a1;
-  /* sky-700 */
-  border-left-color: #0284c7;
-  /* sky-600 */
+  background-color: #dbeafe;
+  /* blue-100 */
+  color: #1d4ed8;
+  /* blue-700 */
+  border-left-color: #2563eb;
+  /* blue-600 */
 }
 
 /* Chat Widget */
@@ -49,8 +49,8 @@
 .chat-button {
   width: 60px;
   height: 60px;
-  background: #0284c7;
-  /* sky-600 */
+  background: #2563eb;
+  /* blue-600 */
   border-radius: 50%;
   color: white;
   display: flex;
@@ -115,7 +115,7 @@
 }
 
 .message.user {
-  background: #0284c7;
+  background: #2563eb;
   color: white;
   align-self: flex-end;
   border-bottom-right-radius: 4px;

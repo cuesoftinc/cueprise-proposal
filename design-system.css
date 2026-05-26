@@ -7,10 +7,12 @@
 
 :root {
   /* Core Brand Styling (Overrideable by individual client folders) */
-  --accent-primary: #0284c7; /* Sky 600 default */
+  --accent-primary: #0284c7;
+  /* Sky 600 default */
   --accent-primary-glow: rgba(2, 132, 199, 0.15);
-  --accent-secondary: #10b981; /* Emerald 500 */
-  
+  --accent-secondary: #10b981;
+  /* Emerald 500 */
+
   /* Shared Semantics */
   --status-success: #10b981;
   --status-warning: #f59e0b;
@@ -19,15 +21,22 @@
 
   /* Global Theme Neutrals */
   --bg-white: #ffffff;
-  --bg-neutral-light: #f8fafc; /* Slate 50 */
-  --bg-neutral-border: #e2e8f0; /* Slate 200 */
-  --bg-neutral-dark: #0f172a; /* Slate 900 */
-  
+  --bg-neutral-light: #f8fafc;
+  /* Slate 50 */
+  --bg-neutral-border: #e2e8f0;
+  /* Slate 200 */
+  --bg-neutral-dark: #0f172a;
+  /* Slate 900 */
+
   /* Strict Typography Hierarchy Colors (Greyness hierarchy) */
-  --color-text-title: #0f172a; /* Slate 900 (Darkest, boldest) */
-  --color-text-heading: #1e293b; /* Slate 800 */
-  --color-text-body: #334155; /* Slate 700 */
-  --color-text-muted: #64748b; /* Slate 500 */
+  --color-text-title: #0f172a;
+  /* Slate 900 (Darkest, boldest) */
+  --color-text-heading: #1e293b;
+  /* Slate 800 */
+  --color-text-body: #334155;
+  /* Slate 700 */
+  --color-text-muted: #64748b;
+  /* Slate 500 */
 
   /* Glassmorphism Styles (Standardized overlay style) */
   --glass-bg: rgba(255, 255, 255, 0.03);
@@ -42,7 +51,8 @@
 
 /* 1. Main Section/Slide Titles (Darkest, Boldest, Largest) */
 .type-title {
-  font-size: 1.875rem; /* 30px */
+  font-size: 1.875rem;
+  /* 30px */
   line-height: 2.25rem;
   font-weight: 700;
   color: var(--color-text-title);
@@ -51,7 +61,8 @@
 
 /* 2. Subheadings (Context/Subtitle) - Accent Color */
 .type-subheading {
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem;
+  /* 14px */
   line-height: 1.5rem;
   font-weight: 400;
   color: var(--accent-primary);
@@ -62,7 +73,8 @@
 
 /* 3. Section/Card Headings (H3) */
 .type-heading {
-  font-size: 1.125rem; /* 18px */
+  font-size: 1.125rem;
+  /* 18px */
   line-height: 1.5rem;
   font-weight: 700;
   color: var(--color-text-heading);
@@ -136,8 +148,207 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SHARED SLIDE DECK SYSTEM (Consolidated)
+   ========================================================================== */
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Mobile Responsive Override */
+@media (max-width: 768px) {
+
+  /* Only the main app container/slides need to fill screen on mobile */
+  #app-container.aspect-video {
+    aspect-ratio: auto !important;
+    min-height: 100dvh;
+    height: auto !important;
+  }
+
+  /* Restore normal aspect ratio for other elements like video wrappers */
+  .aspect-video:not(#app-container) {
+    aspect-ratio: 16 / 9 !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  #app-container {
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .slide-content {
+    padding: 2rem 1.5rem !important;
+    /* Increased padding on mobile for breathing room */
+  }
+}
+
+#slides-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  /* Allow internal scrolling if content overflows */
+  position: relative;
+  padding-bottom: 0;
+  /* Remove padding that might push footer */
+}
+
+@media (max-width: 768px) {
+  #slides-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .slide.active {
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+.slide {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+.slide.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem 3rem;
+  /* Reduced vertical padding */
+  gap: 1.25rem;
+  /* Reduced gap from 2rem to 1.25rem (tight fit) */
+}
+
+/* Tighten typography specifically inside slides to ensure fit */
+.slide-content .type-title {
+  margin-bottom: 0.25rem;
+}
+
+.slide-content .type-subheading {
+  margin-bottom: 1rem;
+}
+
+/* Ensure footer stays pinned and clean */
+.slide-footer {
+  margin-top: auto;
+  /* Pushes footer to bottom if using flex column in parent */
+  border-top: 1px solid #f1f5f9;
+  padding: 0.75rem 1.5rem;
+  height: 3.5rem;
+  flex-shrink: 0;
+  z-index: 50;
+  position: relative;
+  background-color: white;
+  /* Ensure solid background, no bleed */
+}
+
+/* Print Mode overrides */
+@media print {
+  @page {
+    size: landscape;
+    margin: 0;
+  }
+
+  body {
+    background: white;
+    color: black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #deck-utility,
+  .no-print {
+    display: none !important;
+  }
+
+  #app-container {
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: auto;
+    height: auto;
+    background: white !important;
+  }
+
+  .slide {
+    display: block !important;
+    /* Show all slides */
+    page-break-after: always;
+    height: 100vh;
+    border-bottom: none;
+    background-color: #f8fafc !important;
+    /* Force slate-50 background */
+  }
+}
+
+.print-mode-container {
+  max-width: 100% !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Hide navigation chrome in print view mode */
+.print-mode-container .no-print,
+.print-mode-container .slide-footer {
+  display: none !important;
+}
+
+.print-mode-slide {
+  display: block !important;
+  position: relative !important;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  overflow: hidden;
+  height: auto;
+  /* Allow auto height */
+  aspect-ratio: 16 / 9;
+  /* Maintain ratio cleanly */
+  background-color: #f8fafc;
+  /* Restore slate-50 background */
+}
+
+@media (max-width: 768px) {
+
+  /* Ensure Slide 0 background fills container in all mobile modes */
+  #slide-0.active {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+  }
+
+  #slide-0.active>div {
+    flex: 1 !important;
+    width: 100%;
+  }
+
+  .print-mode-slide {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    min-height: auto;
   }
 }
