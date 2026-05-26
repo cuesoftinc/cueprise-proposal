@@ -45,6 +45,26 @@
 }
 
 /* ==========================================================================
+   Global box-sizing reset & horizontal-overflow guard
+   Prevents `width: 100% + padding` from blowing past the viewport on mobile.
+   Tailwind's preflight already does box-sizing on its pages — these rules
+   are idempotent there and provide the safety net for non-Tailwind pages.
+
+   `overflow-x: hidden` is applied to <html> only (not <body>) so it doesn't
+   create a new containing block for `position: sticky` descendants on the
+   proposal pages (sticky sidebars rely on the viewport as their scroll root).
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
    STRICT TYPOGRAPHY SYSTEM 
    Ensures uniform hierarchy and alignment across proposals.
    ========================================================================== */
