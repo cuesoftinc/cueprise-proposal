@@ -1026,8 +1026,8 @@
       }
     }
 
-    // API Key Configuration
-    const apiKey = "AIzaSyAV9hzYTWi2YaAFBoyUacTLA02ZPM1XTlo"; // Added at runtime
+    // Google Cloud Run Function Endpoint Configuration
+    const backendEndpoint = "https://cueprise-gemini-proxy-805800737799.us-central1.run.app";
 
     // -- Navigation Logic --
     const sections = document.querySelectorAll('.view-section');
@@ -1253,14 +1253,13 @@
     // --- GEMINI API INTEGRATION ---
 
     async function callGeminiAPI(prompt, systemPrompt) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`;
       const payload = {
-        contents: [{ parts: [{ text: prompt }] }],
-        systemInstruction: { parts: [{ text: systemPrompt }] }
+        prompt: prompt,
+        systemPrompt: systemPrompt
       };
 
       try {
-        const response = await fetch(url, {
+        const response = await fetch(backendEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
@@ -1269,7 +1268,7 @@
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-        return data.candidates[0].content.parts[0].text;
+        return data.text;
       } catch (error) {
         console.error("Gemini API Error:", error);
         return "I apologize, but I'm having trouble connecting to the AI service right now. Please try again.";
