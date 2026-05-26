@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cueprise | Enterprise Solution Proposal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <!-- Phosphor Icons (Duotone) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <!-- Marked for Markdown parsing in chat -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="antialiased min-h-screen flex flex-col md:flex-row">
+
+  <!-- Mobile Header -->
+  <header class="md:hidden bg-white border-b border-slate-200 p-4 flex justify-between items-center sticky top-0 z-50">
+    <div class="font-bold text-xl text-slate-800">Cueprise</div>
+    <button id="mobile-menu-btn" class="text-slate-600 focus:outline-none">
+      <i class="ph-duotone ph-list w-6 h-6"></i>
+    </button>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <nav id="sidebar"
+    class="hidden flex md:flex flex-col w-64 bg-slate-900 text-slate-300 h-screen sticky top-0 transition-transform transform md:translate-x-0 z-40">
+    <div class="p-6 border-b border-slate-800">
+      <h1 class="font-bold text-2xl text-white tracking-tight">Cueprise</h1>
+      <p class="text-xs text-slate-500 mt-1">Enterprise Proposal v1.0</p>
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-4">
+      <ul class="space-y-1">
+        <li><button onclick="navigateTo('overview')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 bg-slate-800 text-white border-l-4 border-sky-500"
+            data-target="overview"><i class="ph-duotone ph-squares-four w-5 h-5"></i> Executive
+            Overview</button></li>
+        <li><button onclick="navigateTo('architecture')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent"
+            data-target="architecture"><i class="ph-duotone ph-cloud w-5 h-5"></i> Azure
+            Architecture</button></li>
+        <li><button onclick="navigateTo('modules')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent"
+            data-target="modules"><i class="ph-duotone ph-gear w-5 h-5"></i> Gas & Asset Modules</button>
+        </li>
+        <li><button onclick="navigateTo('comparison')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent"
+            data-target="comparison"><i class="ph-duotone ph-chart-bar w-5 h-5"></i> Why Cueprise?</button>
+        </li>
+        <li><button onclick="navigateTo('roadmap')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent"
+            data-target="roadmap"><i class="ph-duotone ph-calendar w-5 h-5"></i> 6-Month Roadmap</button>
+        </li>
+        <li><button onclick="navigateTo('investment')"
+            class="nav-item w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent"
+            data-target="investment"><i class="ph-duotone ph-coins w-5 h-5"></i> Investment Value</button>
+        </li>
+        <li><button type="button" onclick="openSlideDeck()"
+            class="w-full text-left px-6 py-3 hover:bg-slate-800 hover:text-white transition-colors flex items-center gap-3 border-l-4 border-transparent text-slate-300"
+            data-target="deck"><i class="ph-duotone ph-presentation-chart w-5 h-5"></i> Slide Deck
+            Mode</button></li>
+      </ul>
+    </div>
+
+    <div class="p-6 border-t border-slate-800 bg-slate-900 mt-auto">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-sky-600 flex items-center justify-center text-white font-bold text-xs">
+          CS</div>
+        <div>
+          <p class="text-sm font-medium text-white">Cuesoft Inc. Team</p>
+          <p class="text-xs text-slate-500">24/7 Support Active</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 overflow-y-auto bg-slate-50 p-4 md:p-8 relative">
+
+    <!-- Section: Dashboard / Executive Summary -->
+    <section id="overview" class="view-section fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Strategic Proposal: Enterprise Resource
+          Transformation</h2>
+        <p class="type-subheading">Tailored ERP Solution for Downstream Gas Logistics & Asset
+          Management, fully aligned with your Microsoft 365 investment.</p>
+        <div class="flex flex-wrap gap-3">
+          <button type="button" onclick="navigateTo('modules')"
+            class="bg-sky-600 hover:bg-sky-500 text-white px-5 py-2 rounded-lg font-semibold shadow-sm transition">Explore
+            Interactive Overview</button>
+          <a href="demo/"
+            class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-lg font-semibold shadow-sm transition inline-flex items-center gap-2">
+            <i class="ph-duotone ph-play-circle"></i> Launch Demo
+          </a>
+          <button type="button" onclick="openSlideDeck()"
+            class="px-5 py-2 rounded-lg font-semibold border border-slate-300 text-slate-700 hover:bg-white shadow-sm transition">Launch
+            Slide Deck</button>
+        </div>
+      </div>
+
+      <!-- Key Metrics Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="premium-card card-hover">
+          <div class="text-sky-600 text-3xl mb-2"><i class="ph-duotone ph-toolbox w-8 h-8"></i></div>
+          <h3 class="type-heading">Custom Built</h3>
+          <p class="type-body mt-1">Specifically for Natural Gas Logistics & Asset Management.
+          </p>
+        </div>
+        <div class="premium-card card-hover">
+          <div class="text-sky-600 text-3xl mb-2"><i class="ph-duotone ph-cloud w-8 h-8"></i></div>
+          <h3 class="type-heading">Azure Native</h3>
+          <p class="type-body mt-1">Deploys directly to your chosen cloud environment.</p>
+        </div>
+        <div class="premium-card card-hover">
+          <div class="text-emerald-600 text-3xl mb-2"><i class="ph-duotone ph-users-three w-8 h-8"></i></div>
+          <h3 class="type-heading">Local Support</h3>
+          <p class="type-body mt-1">20+ Engineers, 24/7 Support, Nigerian Context.</p>
+        </div>
+      </div>
+
+      <!-- The Challenge vs Solution -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+        <div class="premium-card">
+          <h3 class="type-heading">Your Requirements</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-amber-500 font-bold mt-1"><i class="ph-duotone ph-warning-octagon w-5 h-5"></i></span>
+              <div>
+                <strong class="type-body font-bold text-slate-700">Industry Specificity</strong>
+                <p class="type-body">Off-the-shelf ERPs lack "Natural Gas Logistics"
+                  workflows.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-amber-500 font-bold mt-1"><i class="ph-duotone ph-lock-key w-5 h-5"></i></span>
+              <div>
+                <strong class="text-slate-700">Data Sovereignty</strong>
+                <p class="text-sm text-slate-600">Need for granular departmental security & encryption.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-amber-500 font-bold mt-1"><i class="ph-duotone ph-plugs-connected w-5 h-5"></i></span>
+              <div>
+                <strong class="text-slate-700">Infrastructure</strong>
+                <p class="text-sm text-slate-600">Must utilize existing Microsoft 365 investment.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="premium-card">
+          <h3 class="type-heading text-sky-900">The Cueprise Advantage
+          </h3>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+              <span class="text-sky-600 font-bold mt-1"><i class="ph-duotone ph-check-circle w-5 h-5"></i></span>
+              <div>
+                <strong class="type-body font-bold text-sky-900">Tailored Modules</strong>
+                <p class="type-body text-sky-800">We build the "Gas Logistics" module from scratch for
+                  you.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-sky-600 font-bold mt-1"><i class="ph-duotone ph-check-circle w-5 h-5"></i></span>
+              <div>
+                <strong class="text-sky-900">Seamless Integration</strong>
+                <p class="text-sm text-sky-800">Single Sign-On (SSO) with your Microsoft 365 accounts.
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-sky-600 font-bold mt-1"><i class="ph-duotone ph-check-circle w-5 h-5"></i></span>
+              <div>
+                <strong class="text-sky-900">Scalable Core</strong>
+                <p class="text-sm text-sky-800">Ready for your growth from 15 to 20+ users immediately.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cuesoft Trinity Alignment -->
+      <div class="premium-card space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <p class="type-label">Cuesoft Trinity</p>
+            <h3 class="type-heading">Product • Talent • Labs</h3>
+            <p class="type-body mt-1">Cuesoft unifies the Cueprise product, CueTA talent academy,
+              and CueLABS engineering pod into a single cohesive delivery model.</p>
+          </div>
+          <button type="button" onclick="openSlideDeck('slide-4')"
+            class="self-start md:self-auto bg-sky-100 text-sky-700 px-4 py-2 rounded-lg font-semibold border border-sky-200 hover:bg-sky-200 transition">
+            View Slide 4
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="border border-slate-100 rounded-xl p-5 bg-slate-50">
+            <div class="text-sm font-bold text-slate-700">1. The Product</div>
+            <p class="text-sm text-slate-600 mt-2">Enterprise-grade ERP kernel in your Azure tenant with gas
+              logistics
+              logic embedded from day one.</p>
+          </div>
+          <div class="border border-sky-200 rounded-xl p-5 bg-sky-50">
+            <div class="text-sm font-bold text-sky-800">2. The Talent (CueTA)</div>
+            <p class="text-sm text-sky-700 mt-2">CueTA is our Talent Academy—sourcing and training domain
+              specialists before they embed with your team.</p>
+          </div>
+          <div class="border border-slate-100 rounded-xl p-5 bg-slate-50">
+            <div class="text-sm font-bold text-slate-700">3. The Labs (CueLABS)</div>
+            <p class="text-sm text-slate-600 mt-2">20+ CueLABS engineers run continuous R&D, shipping AI
+              demand forecasting and offline-first innovations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cueprise Product Demo Video -->
+      <div class="premium-card">
+        <div class="flex flex-col lg:flex-row gap-6 items-start">
+          <div class="flex-1 space-y-3">
+            <p class="type-label">Live Product Demo</p>
+            <h3 class="type-heading">See Cueprise In Action</h3>
+            <p class="type-body">This recorded walkthrough shows the downstream gas logistics
+              workspace, asset lifecycle controls, and Azure-native administration experience inside
+              Cueprise.</p>
+            <div class="flex flex-wrap gap-3">
+              <a href="https://youtu.be/WiaBlUBXvY8" target="_blank" rel="noopener"
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 text-white font-semibold shadow hover:bg-sky-500 transition">
+                Watch on YouTube
+                <span aria-hidden="true"><i class="ph-duotone ph-arrow-right w-4 h-4"></i></span>
+              </a>
+            </div>
+          </div>
+          <div class="flex-1 w-full">
+            <div class="aspect-video rounded-2xl overflow-hidden shadow-lg border border-slate-100 relative">
+              <img src="https://img.youtube.com/vi/WiaBlUBXvY8/hqdefault.jpg" alt="Cueprise product demo cover"
+                class="w-full h-full object-cover" loading="lazy">
+              <div class="absolute inset-0 bg-slate-900/60 flex flex-col items-center justify-center text-center px-6">
+                <p class="text-sm text-white/80 mb-3">Embedding is disabled for this video—click below
+                  to open the full walkthrough on YouTube.</p>
+                <a href="https://youtu.be/WiaBlUBXvY8" target="_blank" rel="noopener"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-slate-900 font-semibold shadow hover:bg-slate-100 transition">
+                  <span aria-hidden="true"><i class="ph-duotone ph-play-circle w-5 h-5"></i></span>
+                  Watch Demo in New Tab
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unified Experience Bridge -->
+      <div
+        class="bg-gradient-to-r from-sky-600 to-blue-900 text-white rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-start md:items-center">
+        <div class="flex-1">
+          <p class="type-label text-sky-100">Unified Experience</p>
+          <h3 class="text-xl font-bold">Seamlessly transition between interactive data and presentation
+            slides.</h3>
+          <p class="text-sm text-sky-100 mt-2">Leverage the interactive view for deep dives, and the slide
+            deck for executive summaries—both anchored on the same value drivers.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+          <button type="button" onclick="navigateTo('architecture')"
+            class="flex-1 sm:flex-none bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-lg px-4 py-2 font-semibold transition">Continue
+            Interacting</button>
+          <button type="button" onclick="openSlideDeck()"
+            class="flex-1 sm:flex-none bg-white text-sky-700 rounded-lg px-4 py-2 font-semibold shadow-lg hover:shadow-xl transition">Open
+            Slide Deck</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Architecture -->
+    <section id="architecture" class="view-section hidden fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Proposed System Architecture</h2>
+        <p class="type-subheading">Leveraging your Azure Cloud for maximum security and reliability.</p>
+      </div>
+
+      <!-- Interactive Diagram Container -->
+      <div
+        class="bg-slate-900 p-8 rounded-xl shadow-lg relative overflow-hidden min-h-[500px] flex flex-col items-center justify-center">
+        <div class="absolute top-4 left-4 text-slate-400 text-sm">Interactive Stack Diagram &bull; Click nodes
+          for details</div>
+
+        <!-- Diagram Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl relative z-10">
+
+          <!-- Col 1: Client Side -->
+          <div class="flex flex-col gap-4">
+            <div class="text-center text-slate-400 mb-2 font-mono text-xs uppercase tracking-widest">Client
+              Layer</div>
+            <div onclick="showArchDetail('users')"
+              class="diagram-node cursor-pointer bg-white p-4 rounded-lg shadow-lg border-l-4 border-indigo-500 hover:bg-indigo-50 transition-colors">
+              <div class="font-bold text-slate-800">10-15 Users</div>
+              <div class="text-xs text-slate-500">Web & Mobile Access</div>
+            </div>
+            <div onclick="showArchDetail('ms365')"
+              class="diagram-node cursor-pointer bg-[#0078D4] text-white p-4 rounded-lg shadow-lg border-l-4 border-white hover:opacity-90 transition-colors">
+              <div class="font-bold">Microsoft 365</div>
+              <div class="text-xs text-blue-100">Identity & Auth (SSO)</div>
+            </div>
+          </div>
+
+          <!-- Col 2: Cueprise Application (Center) -->
+          <div class="flex flex-col gap-4 justify-center relative">
+            <!-- Connection Lines (Visualized via borders/pseudo-elements in more complex CSS, simplified here) -->
+            <div class="absolute left-[-20px] top-1/2 w-4 h-1 bg-slate-700 hidden md:block"></div>
+
+            <div class="text-center text-slate-400 mb-2 font-mono text-xs uppercase tracking-widest">
+              Cueprise Core (Azure)</div>
+            <div class="bg-slate-800 p-6 rounded-xl border border-slate-700">
+              <div onclick="showArchDetail('app')"
+                class="diagram-node cursor-pointer bg-sky-600 text-white p-3 rounded mb-3 text-center font-bold hover:bg-sky-500">
+                Application Server
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div onclick="showArchDetail('trading')"
+                  class="diagram-node cursor-pointer bg-amber-600 text-white p-2 rounded text-xs text-center hover:bg-amber-500 border border-amber-500">
+                  Trading Engine</div>
+                <div onclick="showArchDetail('logistics')"
+                  class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
+                  Gas Logistics</div>
+                <div onclick="showArchDetail('erp')"
+                  class="diagram-node cursor-pointer bg-slate-700 text-slate-300 p-2 rounded text-xs text-center hover:bg-slate-600 border border-slate-600">
+                  ERP + HRIS</div>
+                <div onclick="showArchDetail('scada')"
+                  class="diagram-node cursor-pointer bg-red-700 text-white p-2 rounded text-xs text-center hover:bg-red-600 border border-red-600">
+                  SCADA Access</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 3: Data & Storage -->
+          <div class="flex flex-col gap-4 justify-center">
+            <div class="text-center text-slate-400 mb-2 font-mono text-xs uppercase tracking-widest">Data
+              Layer</div>
+            <div onclick="showArchDetail('db')"
+              class="diagram-node cursor-pointer bg-emerald-600 text-white p-4 rounded-lg shadow-lg border-l-4 border-emerald-300 hover:bg-emerald-500 transition-colors">
+              <div class="font-bold">Azure SQL</div>
+              <div class="text-xs text-emerald-100">Encrypted Relational DB</div>
+            </div>
+            <div onclick="showArchDetail('files')"
+              class="diagram-node cursor-pointer bg-emerald-700 text-white p-4 rounded-lg shadow-lg border-l-4 border-emerald-300 hover:bg-emerald-600 transition-colors">
+              <div class="font-bold">Azure Blob</div>
+              <div class="text-xs text-emerald-100">Document Repository</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detail Panel -->
+        <div id="arch-detail"
+          class="absolute bottom-0 w-full bg-slate-800/95 border-t border-slate-700 p-4 transform translate-y-full transition-transform duration-300 z-20">
+          <div class="max-w-4xl mx-auto flex justify-between items-start">
+            <div>
+              <h4 id="detail-title" class="text-sky-400 font-bold text-lg">Select a node</h4>
+              <p id="detail-desc" class="text-slate-300 text-sm mt-1">Click any element in the diagram to
+                see technical specifications.</p>
+            </div>
+            <button onclick="closeArchDetail()" class="text-slate-400 hover:text-white">&times;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCADA Security Framework Card -->
+      <div class="premium-card mt-6 border-l-4 border-red-500">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="bg-red-100 p-2 rounded text-red-600 text-xl"><i class="ph-duotone ph-lock-key w-6 h-6"></i></div>
+          <h3 class="text-xl font-bold text-slate-800">SCADA-Style Security Framework (Rank-Based Access)</h3>
+        </div>
+        <p class="text-slate-600 mb-4">Unlike standard ERP permissions, MSN Energy's deployment implements a "Rank &
+          Role" hierarchy with document-level invisibility.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h4 class="font-bold text-slate-700 mb-2">File Invisibility</h4>
+            <p class="text-sm text-slate-600">If a user's rank is lower than a document's "Sensitivity Level," the file
+              is not just locked—it is invisible in the UI.</p>
+          </div>
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h4 class="font-bold text-slate-700 mb-2">Approval Authority</h4>
+            <p class="text-sm text-slate-600">Financial approval limits are tied directly to the user's rank in the HR
+              module.</p>
+          </div>
+          <div class="p-4 border rounded-lg bg-slate-50">
+            <h4 class="font-bold text-slate-700 mb-2">Admin Lockdown</h4>
+            <p class="text-sm text-slate-600">Centralized administration portal for instant revocation of access across
+              all modules.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Modules -->
+    <section id="modules" class="view-section hidden fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Tailored Functional Modules</h2>
+        <p class="type-subheading">Designed specifically for the Nigerian Oil & Gas context.</p>
+      </div>
+
+      <div class="flex flex-col md:flex-row gap-6">
+        <!-- Module Tabs -->
+        <div class="w-full md:w-1/4 flex flex-col gap-2">
+          <button onclick="setModuleTab('trading')"
+            class="module-tab active-module-tab p-4 text-left rounded-lg font-medium transition-all bg-sky-100 text-sky-800 border-l-4 border-sky-600">Gas
+            Trading & Reconciliation</button>
+          <button onclick="setModuleTab('gas')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Logistics
+            & FGC Tracking</button>
+          <button onclick="setModuleTab('asset')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Pipeline
+            & Asset Management</button>
+          <button onclick="setModuleTab('grc')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">GRC
+            & Compliance</button>
+          <button onclick="setModuleTab('documents')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Document
+            Control</button>
+          <button onclick="setModuleTab('erp')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Financials
+            & Invoicing</button>
+          <button onclick="setModuleTab('hr')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">HR
+            Management</button>
+          <button onclick="setModuleTab('requisitions')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Requisitions
+            & Expenses</button>
+          <button onclick="setModuleTab('analytics')"
+            class="module-tab p-4 text-left rounded-lg font-medium text-slate-600 hover:bg-slate-100 border-l-4 border-transparent transition-all">Analytics
+            & Reporting</button>
+
+          <!-- AI Tab -->
+          <button onclick="setModuleTab('ai')"
+            class="module-tab p-4 text-left rounded-lg font-bold transition-all text-sky-600 bg-sky-50 border-l-4 border-sky-400 hover:bg-sky-100 items-center flex gap-2">
+            <i class="ph-duotone ph-sparkle w-5 h-5"></i> AI Module Architect
+          </button>
+        </div>
+
+        <!-- Module Content -->
+        <div class="w-full md:w-3/4 bg-white p-6 rounded-xl shadow-sm border border-slate-200 min-h-[400px]">
+
+          <!-- Gas Trading & Reconciliation Content (NEW - Default Active) -->
+          <div id="module-trading" class="module-content block">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-amber-100 p-2 rounded text-amber-600 text-xl"><i
+                  class="ph-duotone ph-chart-line-up w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">Gas Trading & Portfolio Engine</h3>
+            </div>
+            <p class="text-slate-600 mb-6">The "Brain" of MSN Energy's operations — handling multi-producer
+              and multi-off-taker dynamics with automated reconciliation.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Key Features</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li><strong>Nomination Hub:</strong> Centralized dashboard for off-taker nominations.</li>
+                  <li><strong>Reconciliation Logic:</strong> Automated Nominated vs. Allocated vs. Delivered comparison.
+                  </li>
+                  <li><strong>Variance Reporting:</strong> Real-time "Network Operator Attribution" flagging.</li>
+                  <li><strong>Margin Optimizer:</strong> Dynamic pricing based on sourcing costs.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Business Value</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Zero reconciliation leakage — eliminate uncaptured volume variances.</li>
+                  <li>Automated billing upon attributed volume confirmation.</li>
+                  <li>Real-time visibility into trading margins and portfolio performance.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Logistics & FGC Tracking Content -->
+          <div id="module-gas" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-sky-100 p-2 rounded text-sky-600 text-xl"><i class="ph-duotone ph-truck w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">Logistics & FGC Tracking</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Specialized module for gas distribution and Flare Gas
+              Commercialization (FGC) recovery tracking for NMDPRA reporting.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Logistics Features</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Offline-first PWA for depot & site staff.</li>
+                  <li>Real-time volume tracking vs. manifest.</li>
+                  <li>Waybill generation & digital signing.</li>
+                  <li>Safety compliance checklists per trip.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">FGC Recovery Tracking</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Flared vs. Recovered gas volume logging.</li>
+                  <li>NMDPRA regulatory reporting automation.</li>
+                  <li>Environmental compliance dashboards.</li>
+                  <li>Historical flare data for audits.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pipeline & Asset Management Content -->
+          <div id="module-asset" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-blue-100 p-2 rounded text-blue-600 text-xl"><i class="ph-duotone ph-wrench w-6 h-6"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800">Pipeline & Infrastructure Tracker</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Lifecycle management for pipeline construction projects,
+              storage tanks, and rotating equipment.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Project Management</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Gantt-style pipeline construction milestones.</li>
+                  <li>Contractor Portal for progress & compliance uploads.</li>
+                  <li>Budget tracking & variance reporting.</li>
+                  <li>Integrated document management.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Asset Lifecycle</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>QR/Barcode tagging for all equipment.</li>
+                  <li>Maintenance scheduling & alerts.</li>
+                  <li>Depreciation calculation (Straight line/Reducing).</li>
+                  <li>Location tracking (Site vs. Warehouse).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRC & Compliance Content (NEW) -->
+          <div id="module-grc" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-emerald-100 p-2 rounded text-emerald-600 text-xl"><i
+                  class="ph-duotone ph-shield-check w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">GRC (Governance, Risk & Compliance)</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Automated license tracking and contract lifecycle management
+              to ensure regulatory peace of mind.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">License Vault</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>OGISP, NMDPRA permit tracking.</li>
+                  <li>Corporate certification management.</li>
+                  <li><strong>Auto-alerts:</strong> 60/30/15-day expiry warnings.</li>
+                  <li>Renewal workflow automation.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Contract Lifecycle</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Gas Purchase Agreement (GPA) repository.</li>
+                  <li>Gas Sale Agreement (GSA) version control.</li>
+                  <li>Obligation tracking & compliance audit trails.</li>
+                  <li>Third-party contractor compliance docs.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Financials & HR Content -->
+          <div id="module-erp" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-slate-100 p-2 rounded text-slate-600 text-xl"><i
+                  class="ph-duotone ph-chart-line-up w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">Financials & HR</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Naira-centric accounting with Nigerian tax compliance and
+              integrated human resource management.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Automated ERP</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Automated billing from reconciliation engine.</li>
+                  <li>Expense retirement with mobile receipt uploads.</li>
+                  <li>VAT, CIT compliance & IFRS standards.</li>
+                  <li>Multi-currency support (NGN/USD).</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">HR & Payroll</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Automated PAYE, Pension, & NHF.</li>
+                  <li>One-click payslip generation.</li>
+                  <li>Leave & performance management.</li>
+                  <li>Employee self-service portal.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Document Control Content (NEW) -->
+          <div id="module-documents" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-indigo-100 p-2 rounded text-indigo-600 text-xl"><i
+                  class="ph-duotone ph-folder-open w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">Digital Workplace & Document Control</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Centralized document management with version control,
+              sensitivity levels, and offline synchronization.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Core Features</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Centralized document control center.</li>
+                  <li>Version control with change history.</li>
+                  <li>Sensitivity levels linked to rank-based access.</li>
+                  <li>Offline synchronization for field staff.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Security Features</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Document-level audit trails.</li>
+                  <li>File invisibility for unauthorized ranks.</li>
+                  <li>Secure internal collaboration.</li>
+                  <li>Encrypted Azure Blob Storage.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- HR Management Content (NEW) -->
+          <div id="module-hr" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-rose-100 p-2 rounded text-rose-600 text-xl"><i class="ph-duotone ph-users w-6 h-6"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800">HR Management</h3>
+            </div>
+            <p class="text-slate-600 mb-6">The authority backbone for access control — managing
+              organizational hierarchy, rank mapping, and approval limits.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Personnel Management</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Employee records and profiles.</li>
+                  <li>Organizational hierarchy definition.</li>
+                  <li>Leave and attendance management.</li>
+                  <li>Employee self-service portal.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Rank-Based Access</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>5-tier rank hierarchy (L1-L5).</li>
+                  <li>Role mapping per department.</li>
+                  <li>Approval limits tied to rank.</li>
+                  <li>Cross-module access inheritance.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Requisitions & Expenses Content (NEW) -->
+          <div id="module-requisitions" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-orange-100 p-2 rounded text-orange-600 text-xl"><i
+                  class="ph-duotone ph-file-plus w-6 h-6"></i></div>
+              <h3 class="text-2xl font-bold text-slate-800">Administrative Requisitions & Expense Management</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Digital workflow for requisitions, disbursements, and
+              expense retirement with multi-level approval.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Requisition Workflow</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Digital requisition creation.</li>
+                  <li>Multi-level approval workflows (L2/L3/L4).</li>
+                  <li>Disbursement tracking.</li>
+                  <li>Full audit trail for review.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Expense Retirement</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Mobile receipt uploads.</li>
+                  <li>Expense retirement submissions.</li>
+                  <li>Manager approval workflows.</li>
+                  <li>Integration with Finance module.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Analytics & Reporting Content (NEW) -->
+          <div id="module-analytics" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-cyan-100 p-2 rounded text-cyan-600 text-xl"><i class="ph-duotone ph-chart-bar w-6 h-6"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800">Analytics & Reporting</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Executive KPIs, margin dashboards, and historical trend
+              analysis — all driven from single-source-of-truth data.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Standard Reports</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Monthly operational reports.</li>
+                  <li>Quarterly financial summaries.</li>
+                  <li>FGC regulatory compliance reports.</li>
+                  <li>Historical trend analysis.</li>
+                </ul>
+              </div>
+              <div class="p-4 border rounded-lg bg-slate-50">
+                <h4 class="font-bold text-slate-700 mb-2">Executive Dashboards</h4>
+                <ul class="list-disc list-inside text-sm text-slate-600 space-y-2">
+                  <li>Real-time margin tracking.</li>
+                  <li>Volume and revenue dashboards.</li>
+                  <li>Portfolio performance KPIs.</li>
+                  <li>Variance and exception alerts.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- NEW: AI Module Architect Content -->
+          <div id="module-ai" class="module-content hidden">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="bg-sky-100 p-2 rounded text-sky-600 text-xl"><i class="ph-duotone ph-sparkle w-6 h-6"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-slate-800">AI Custom Module Architect</h3>
+            </div>
+            <p class="text-slate-600 mb-6">Describe a specialized requirement (e.g., "Vendor Portal" or
+              "Driver Fatigue Tracking") and our AI will draft a technical specification for you
+              immediately.</p>
+
+            <div class="space-y-4">
+              <textarea id="ai-module-prompt"
+                class="w-full p-4 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
+                rows="3"
+                placeholder="E.g., I need a module to track vehicle maintenance schedules and spare parts inventory..."></textarea>
+
+              <button onclick="generateModuleSpec()" id="generate-btn"
+                class="bg-sky-600 text-white px-6 py-2 rounded-lg hover:bg-sky-700 transition-colors flex items-center gap-2">
+                <span>Generate Specification</span>
+                <span id="gen-spinner"
+                  class="hidden animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+              </button>
+            </div>
+
+            <div id="ai-result-area" class="mt-8 hidden fade-in">
+              <div class="flex items-center justify-between mb-4">
+                <h4 class="font-bold text-slate-700">Generated Specification</h4>
+                <span class="text-xs text-sky-600 bg-sky-50 px-2 py-1 rounded">Draft V1.0</span>
+              </div>
+              <div id="ai-output-content" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- AI Content will go here -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Comparison -->
+    <section id="comparison" class="view-section hidden fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Competitive Analysis</h2>
+        <p class="type-subheading">Why Cueprise is the strategic choice over foreign alternatives.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Radar Chart -->
+        <div class="premium-card">
+          <h3 class="type-heading text-center">Solution Fit Assessment</h3>
+          <div class="chart-container">
+            <canvas id="comparisonChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Text Analysis -->
+        <div class="space-y-4">
+          <div class="premium-card border-l-4 border-sky-500">
+            <h4 class="type-heading">Local Support & Context</h4>
+            <p class="type-body mt-1">Unlike SAP or Zoho where support is remote/ticket-based,
+              Cueprise offers <strong>24/7 dedicated support</strong> with a local team of 20+ engineers.
+              We understand the Nigerian business environment (Tax laws, network constraints).</p>
+          </div>
+
+          <div class="premium-card border-l-4 border-emerald-500">
+            <h4 class="type-heading">Cost Efficiency (Naira Pricing)</h4>
+            <p class="type-body mt-1">Foreign software licenses fluctuate with FX rates.
+              Cueprise offers <strong>stable Annual Enterprise Licensing in Naira</strong>, protecting
+              your budget from volatility.</p>
+          </div>
+
+          <div class="premium-card border-l-4 border-sky-500">
+            <h4 class="type-heading">Customization Flexibility</h4>
+            <p class="type-body mt-1">Microsoft HR and Zoho are rigid. We build the
+              <strong>Natural Gas Logistics</strong> workflows <em>for you</em> during the 3-6 month setup
+              phase. You get exactly what you need, no bloat.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Comparison -->
+      <div class="mt-8 bg-white rounded-xl shadow-sm overflow-hidden border border-slate-200">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50 text-slate-600 text-sm uppercase tracking-wider">
+              <th class="p-4 font-semibold">Feature</th>
+              <th class="p-4 font-semibold text-sky-700 bg-sky-50 border-b-2 border-sky-500">Cueprise</th>
+              <th class="p-4 font-semibold">SAP / Oracle</th>
+              <th class="p-4 font-semibold">Zoho / Odoo</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm text-slate-700 divide-y divide-slate-100">
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-medium">Logistics Customization</td>
+              <td class="p-4 bg-sky-50/50 font-bold text-sky-700">Full (Included)</td>
+              <td class="p-4">Expensive Add-on</td>
+              <td class="p-4">Limited / Rigid</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-medium">Data Sovereignty</td>
+              <td class="p-4 bg-sky-50/50 font-bold text-sky-700">Your Private Cloud</td>
+              <td class="p-4">Public Cloud</td>
+              <td class="p-4">Public Cloud</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-medium">Currency</td>
+              <td class="p-4 bg-sky-50/50 font-bold text-sky-700">Naira (Fixed)</td>
+              <td class="p-4">USD (Volatile)</td>
+              <td class="p-4">USD (Volatile)</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-4 font-medium">Support Team</td>
+              <td class="p-4 bg-sky-50/50 font-bold text-sky-700">Local (Ibadan/Lagos)</td>
+              <td class="p-4">Global/Remote</td>
+              <td class="p-4">Global/Remote</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section: Roadmap -->
+    <section id="roadmap" class="view-section hidden fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Implementation Roadmap</h2>
+        <p class="type-subheading">A structured 30-week path to MSN Energy's digital transformation.</p>
+      </div>
+
+      <div class="relative border-l-4 border-slate-200 ml-6 space-y-10 my-10">
+        <!-- Phase 1: Discovery -->
+        <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-slate-400 rounded-full border-4 border-white"></div>
+          <div class="premium-card">
+            <span class="type-label text-slate-600">P1: Weeks 1-4</span>
+            <h4 class="type-heading">Discovery</h4>
+            <p class="type-body mt-1">Workflow mapping for gas nominations and FGC reporting.
+              Detailed requirements gathering with MSN Energy stakeholders.</p>
+          </div>
+        </div>
+
+        <!-- Phase 2: Foundation -->
+        <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-blue-500 rounded-full border-4 border-white"></div>
+          <div class="premium-card">
+            <span class="type-label text-blue-600">P2: Weeks 5-10</span>
+            <h4 class="type-heading">Foundation</h4>
+            <p class="type-body mt-1">Azure provisioning & Entra ID integration.
+              Security baseline and data sovereignty setup.</p>
+          </div>
+        </div>
+
+        <!-- Phase 3: Core ERP -->
+        <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-sky-500 rounded-full border-4 border-white"></div>
+          <div class="premium-card">
+            <span class="type-label text-sky-600">P3: Weeks 11-18</span>
+            <h4 class="type-heading">Core ERP</h4>
+            <p class="type-body mt-1">Finance, HR, and Administrative Requisition Go-Live.
+              Staff expense retirement and payroll automation.</p>
+          </div>
+        </div>
+
+        <!-- Phase 4: Trading Engine -->
+        <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-amber-500 rounded-full border-4 border-white"></div>
+          <div class="premium-card">
+            <span class="type-label text-amber-600">P4: Weeks 19-26</span>
+            <h4 class="type-heading">Trading Engine</h4>
+            <p class="type-body mt-1">Deployment of Reconciliation and Portfolio Management modules.
+              Nomination Hub and automated billing integration.</p>
+          </div>
+        </div>
+
+        <!-- Phase 5: Optimization -->
+        <div class="relative pl-8">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-emerald-500 rounded-full border-4 border-white"></div>
+          <div class="premium-card">
+            <span class="type-label text-emerald-600">P5: Weeks 27-30</span>
+            <h4 class="type-heading">Optimization & Go-Live</h4>
+            <p class="type-body mt-1">Stress testing SCADA-style access controls.
+              Full staff training and 24/7 Support SLA activation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Investment -->
+    <section id="investment" class="view-section hidden fade-in space-y-6">
+      <div class="mb-6">
+        <h2 class="type-title">Investment & ROI</h2>
+        <p class="type-subheading">Flexible enterprise licensing tailored to your growth.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-slate-900 text-white p-8 rounded-xl shadow-lg flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold mb-2">Enterprise License</h3>
+            <p class="text-slate-400 text-sm mb-6">Annual recurring license in Naira.</p>
+
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-center gap-2"><span class="text-emerald-400"><i
+                    class="ph-duotone ph-check-circle w-5 h-5"></i></span> Unlimited
+                Users (Scaled 20+)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400"><i
+                    class="ph-duotone ph-check-circle w-5 h-5"></i></span> All
+                Modules (Logistics, HR, ERP)</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400"><i
+                    class="ph-duotone ph-check-circle w-5 h-5"></i></span> Azure
+                Deployment & Management</li>
+              <li class="flex items-center gap-2"><span class="text-emerald-400"><i
+                    class="ph-duotone ph-check-circle w-5 h-5"></i></span> 24/7
+                Priority Support</li>
+            </ul>
+          </div>
+          <a href="mailto:hello@cuesoft.io"
+            class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold p-3 rounded transition-colors">Request
+            Quote</a>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+          <h3 class="text-xl font-bold text-slate-800 mb-4">Projected Efficiency Gains</h3>
+          <p class="text-sm text-slate-500 mb-6">Estimated impact based on 15 users.</p>
+
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Operational Speed</span>
+                <span class="text-emerald-600 font-bold">+40%</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2">
+                <div class="bg-emerald-500 h-2 rounded-full" style="width: 40%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Data Accuracy</span>
+                <span class="text-emerald-600 font-bold">+95%</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2">
+                <div class="bg-emerald-500 h-2 rounded-full" style="width: 95%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="font-medium">Admin Time Reduction</span>
+                <span class="text-emerald-600 font-bold">-60%</span>
+              </div>
+              <div class="w-full bg-slate-100 rounded-full h-2">
+                <div class="bg-emerald-500 h-2 rounded-full" style="width: 60%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+      <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+          <div>
+            <span class="font-bold text-slate-700 block">Cueprise Assistant</span>
+            <span class="text-xs text-slate-500 flex items-center gap-1"><i class="ph-duotone ph-sparkle"></i> Powered
+              by Gemini</span>
+          </div>
+          <button onclick="toggleChat()" class="text-slate-400 hover:text-slate-600">&times;</button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+          <div class="message ai">
+            Hello! I'm your Cueprise Sales Assistant. Ask me anything about this proposal, our Azure
+            architecture, or pricing models.
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" id="chat-input"
+            class="flex-1 border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-sky-500"
+            placeholder="Type your question..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+          <button onclick="sendChatMessage()" class="bg-sky-600 text-white p-2 rounded-lg hover:bg-sky-700">
+            <i class="ph-duotone ph-paper-plane-right w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+      <div class="chat-button" onclick="toggleChat()">
+        <span><i class="ph-duotone ph-sparkle w-8 h-8 text-white"></i></span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Cross-experience bridge
+    function openSlideDeck(targetSlide) {
+      if (targetSlide) {
+        window.location.href = 'slides-1.html#' + targetSlide;
+      } else {
+        window.location.href = 'slides-1.html';
+      }
+    }
+
+    // API Key Configuration
+    const apiKey = "AIzaSyCU3dlOw2_hd1ZMQwpBNyetJzcFApl8iGw"; // Added at runtime
+
+    // -- Navigation Logic --
+    const sections = document.querySelectorAll('.view-section');
+    const navItems = document.querySelectorAll('.nav-item');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    function navigateTo(targetId) {
+      sections.forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(targetId).classList.remove('hidden');
+
+      navItems.forEach(item => {
+        if (item.dataset.target === targetId) {
+          item.classList.remove('border-transparent');
+          item.classList.add('bg-slate-800', 'text-white', 'border-sky-500');
+        } else {
+          item.classList.add('border-transparent');
+          item.classList.remove('bg-slate-800', 'text-white', 'border-sky-500');
+        }
+      });
+
+      if (window.innerWidth < 768) {
+        closeMobileMenu();
+      }
+
+      if (targetId === 'comparison') {
+        initComparisonChart();
+      }
+
+      // Sync hash without scrolling
+      history.replaceState(null, null, '#' + targetId);
+    }
+
+    // Deep Linking Support
+    function handleHashNavigation() {
+      const hash = window.location.hash.substring(1); // remove #
+      if (!hash) return;
+
+      // Handle direct section links (e.g., #architecture)
+      if (['overview', 'architecture', 'modules', 'comparison', 'roadmap', 'investment'].includes(hash)) {
+        navigateTo(hash);
+      }
+      // Handle specific module links (e.g. #module-ai)
+      else if (hash.startsWith('module-')) {
+        navigateTo('modules');
+        const moduleName = hash.replace('module-', '');
+        setModuleTab(moduleName);
+      }
+    }
+
+    window.addEventListener('load', handleHashNavigation);
+    window.addEventListener('hashchange', handleHashNavigation);
+
+    // Centralized Close Function
+    function closeMobileMenu() {
+      sidebar.classList.add('hidden', 'sticky'); // Restore sticky for desktop flow if resized
+      sidebar.classList.remove('fixed', 'inset-y-0', 'left-0', 'z-[60]', 'shadow-2xl', 'flex', 'flex-col');
+      document.body.classList.remove('overflow-hidden'); // Unlock background scroll
+    }
+
+    mobileMenuBtn.addEventListener('click', () => {
+      const isClosed = sidebar.classList.contains('hidden');
+
+      if (isClosed) {
+        // Open Menu - Use FIXED overlay with high Z-index to guaranteed sit on top
+        // Remove sticky to avoid flex interactions
+        sidebar.classList.remove('hidden', 'sticky');
+        sidebar.classList.add('fixed', 'inset-y-0', 'left-0', 'z-[60]', 'shadow-2xl', 'flex', 'flex-col');
+        document.body.classList.add('overflow-hidden'); // Lock background scroll
+      } else {
+        closeMobileMenu();
+      }
+    });
+
+    // -- Module Tab Logic --
+    function setModuleTab(moduleId) {
+      document.querySelectorAll('.module-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.module-content').forEach(el => el.classList.remove('block'));
+
+      const selectedContent = document.getElementById(`module-${moduleId}`);
+      selectedContent.classList.remove('hidden');
+      selectedContent.classList.add('block');
+      selectedContent.classList.add('fade-in');
+
+      document.querySelectorAll('.module-tab').forEach(tab => {
+        // Reset standard tabs
+        if (!tab.innerText.includes('AI')) {
+          tab.classList.remove('bg-sky-100', 'text-sky-800', 'border-sky-600');
+          tab.classList.add('text-slate-600', 'border-transparent');
+        }
+      });
+
+      const activeBtn = document.querySelector(`button[onclick="setModuleTab('${moduleId}')"]`);
+      if (activeBtn && moduleId !== 'ai') {
+        activeBtn.classList.remove('text-slate-600', 'border-transparent');
+        activeBtn.classList.add('bg-sky-100', 'text-sky-800', 'border-sky-600');
+      }
+    }
+
+    // -- Architecture Diagram Interactivity --
+    function showArchDetail(nodeId) {
+      const detailPanel = document.getElementById('arch-detail');
+      const title = document.getElementById('detail-title');
+      const desc = document.getElementById('detail-desc');
+
+      const details = {
+        'users': {
+          t: 'User Access Layer',
+          d: 'Supports MSN Energy staff with auto-scaling capacity. Accessible via Web Browser and Offline-first PWA for depot and field operations.'
+        },
+        'ms365': {
+          t: 'Microsoft 365 Integration',
+          d: 'Utilizes Azure Active Directory (Entra ID) for Single Sign-On (SSO). No new passwords for staff to remember. Inherits existing security policies.'
+        },
+        'app': {
+          t: 'Cueprise Application Server',
+          d: 'Hosted on Azure App Service within MSN Energy\'s sovereign tenant. Runs core business logic, API gateway, and process automation engine.'
+        },
+        'trading': {
+          t: 'Gas Trading & Portfolio Engine',
+          d: 'The "Brain" of the system: Nomination Hub, automated Reconciliation (Nominated vs Allocated vs Delivered), Variance Reporting, and Margin Optimizer.'
+        },
+        'logistics': {
+          t: 'Gas Logistics & FGC Module',
+          d: 'Flare Gas Commercialization tracking, route planning, delivery verification, and digital waybills for NMDPRA regulatory reporting.'
+        },
+        'erp': {
+          t: 'ERP + HRIS',
+          d: 'Naira-centric accounting (VAT, CIT, IFRS), automated billing from reconciliation, expense retirement, and Nigerian-compliant HR/Payroll.'
+        },
+        'scada': {
+          t: 'SCADA-Style Access Control',
+          d: 'Rank-based permissions with File Invisibility. Low-rank users cannot see sensitive documents. Financial approval limits tied to HR rank. Instant revocation across modules.'
+        },
+        'db': {
+          t: 'Azure SQL Database',
+          d: 'Enterprise-grade relational storage. Encrypted at rest (TDE) and in transit. Automated daily backups with point-in-time recovery. Data resides in MSN Energy\'s Azure subscription.'
+        },
+        'files': {
+          t: 'Azure Blob Storage',
+          d: 'Secure repository for GPAs, GSAs, waybills, and receipts. Integrated with License Vault for permit tracking with 60/30/15-day expiry alerts.'
+        }
+      };
+
+      if (details[nodeId]) {
+        title.innerText = details[nodeId].t;
+        desc.innerText = details[nodeId].d;
+        detailPanel.classList.remove('translate-y-full');
+      }
+    }
+
+    function closeArchDetail() {
+      document.getElementById('arch-detail').classList.add('translate-y-full');
+    }
+
+    // -- Chart.js Comparison Chart (Lazy Loaded) --
+    let chartInitialized = false;
+
+    function initComparisonChart() {
+      if (chartInitialized) return;
+
+      const canvas = document.getElementById('comparisonChart');
+      if (!canvas) return;
+
+      if (typeof Chart === 'undefined') {
+        console.warn('Chart.js not loaded yet');
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+      new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['Local Support', 'Price Stability (NGN)', 'Customization', 'Ease of Use', 'MS 365 Integration'],
+          datasets: [{
+            label: 'Cueprise',
+            data: [100, 100, 95, 90, 95],
+            fill: true,
+            backgroundColor: 'rgba(14, 165, 233, 0.2)',
+            borderColor: 'rgb(14, 165, 233)',
+            pointBackgroundColor: 'rgb(14, 165, 233)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(14, 165, 233)'
+          }, {
+            label: 'SAP/Oracle',
+            data: [40, 30, 60, 50, 80],
+            fill: true,
+            backgroundColor: 'rgba(148, 163, 184, 0.2)',
+            borderColor: 'rgb(148, 163, 184)',
+            pointBackgroundColor: 'rgb(148, 163, 184)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(148, 163, 184)'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: { line: { borderWidth: 3 } },
+          scales: {
+            r: {
+              angleLines: { display: true, color: '#e2e8f0' },
+              grid: { color: '#e2e8f0' },
+              pointLabels: {
+                font: { size: 11, family: 'Inter' },
+                color: '#64748b'
+              },
+              ticks: { display: false, backdropColor: 'transparent' },
+              suggestedMin: 0,
+              suggestedMax: 100
+            }
+          },
+          plugins: {
+            legend: { position: 'top', align: 'end' }
+          }
+        }
+      });
+
+      chartInitialized = true;
+    }
+
+    // --- GEMINI API INTEGRATION ---
+
+    async function callGeminiAPI(prompt, systemPrompt) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] }
+      };
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+        return data.candidates[0].content.parts[0].text;
+      } catch (error) {
+        console.error("Gemini API Error:", error);
+        return "I apologize, but I'm having trouble connecting to the AI service right now. Please try again.";
+      }
+    }
+
+    // --- AI MODULE ARCHITECT LOGIC ---
+
+    async function generateModuleSpec() {
+      const input = document.getElementById('ai-module-prompt').value;
+      if (!input.trim()) return alert("Please describe your requirement first.");
+
+      const btn = document.getElementById('generate-btn');
+      const spinner = document.getElementById('gen-spinner');
+      const resultArea = document.getElementById('ai-result-area');
+      const outputContent = document.getElementById('ai-output-content');
+
+      // UI Loading State
+      btn.disabled = true;
+      btn.classList.add('opacity-75');
+      spinner.classList.remove('hidden');
+
+      const systemPrompt = `You are the Lead Solutions Architect for Cueprise, deployed for MSN Energy Resource Limited.
+            MSN Energy operates as a natural gas trading and portfolio management company, sourcing gas from multiple producers and selling to multiple off-takers.
+            
+            **CLIENT CONTEXT (MSN Energy Resource Limited):**
+            
+            1.  **Core Business:** Downstream Gas Trading, Portfolio Management, Pipeline Construction, and Flare Gas Commercialization (FGC).
+            
+            2.  **Implemented Modules (9 Core Business Modules):**
+                *   **Gas Trading & Portfolio Engine:** Nomination Hub, Reconciliation Logic (Nominated vs Allocated vs Delivered), Margin Optimizer, Network Operator Attribution.
+                *   **Logistics & FGC Tracking:** Offline-first PWA, Flared vs Recovered volume logging, NMDPRA compliance reports.
+                *   **Pipeline & Infrastructure Tracker:** Gantt-style milestone management, Contractor Portal, Budget tracking.
+                *   **GRC & Compliance:** License Vault (OGISP, NMDPRA permits) with 60/30/15-day expiry alerts, Contract Lifecycle (GPAs/GSAs).
+                *   **Document Control Center:** Version control, sensitivity levels linked to rank-based access, offline sync.
+                *   **Financials & Invoicing:** Automated billing from attributed volumes, Naira-centric accounting (VAT/CIT), IFRS-aligned.
+                *   **HR Management:** 5-tier rank hierarchy (L1-L5), approval limits, organizational hierarchy definition.
+                *   **Requisitions & Expenses:** Multi-level approval workflows, expense retirement, mobile receipt uploads.
+                *   **Analytics & Reporting:** Executive KPIs, quarterly reports, historical trend analysis, margin dashboards.
+            
+            3.  **Security Framework (SCADA-Style):**
+                *   **RBAC+:** Dual-layer (Role + Rank) access control.
+                *   **File Invisibility:** Documents invisible (not just locked) to unauthorized ranks.
+                *   **Approval Authority:** Financial limits tied to rank in HR module.
+                *   **Admin Lockdown:** Centralized instant access revocation.
+            
+            4.  **Technical Architecture (Azure Native):**
+                *   **Hosting:** Sovereign Single-Tenant in MSN Energy's Azure subscription.
+                *   **Services:** Azure App Services, Azure SQL Managed Instance, Azure Key Vault.
+                *   **Identity:** Microsoft Entra ID (Azure AD) with MFA, Conditional Access.
+            
+            5.  **Regulatory Context:**
+                *   **NMDPRA:** Gas processing permits, FGC compliance.
+                *   **OGISP:** Operating licenses.
+            
+            **INSTRUCTIONS:**
+            The user will describe a requirement (e.g., "Producer Performance Dashboard"). You must output a detailed technical spec structured EXACTLY as follows (Raw HTML, no markdown):
+            
+            Structure:
+            1.  First Div (Class "p-4 border rounded-lg bg-slate-50"):
+                *   H4 "Key Technical Features" (class "font-bold text-slate-700 mb-2").
+                *   UL (class "list-disc list-inside text-sm text-slate-600 space-y-2").
+                *   *Content:* List 4-5 specific technical features. Reference existing MSN modules (Trading Engine, GRC, HR). Mention Azure services and regulatory requirements where relevant.
+            
+            2.  Second Div (Class "p-4 border rounded-lg bg-slate-50"):
+                *   H4 "Business & Regulatory Value" (class "font-bold text-slate-700 mb-2").
+                *   UL (class "list-disc list-inside text-sm text-slate-600 space-y-2").
+                *   *Content:* List 3-4 value points. Focus on Revenue Assurance, NMDPRA Compliance, Trading Margin Optimization, and Operational Transparency.
+            
+            Tone: Highly technical, authoritative, specific to MSN Energy's gas trading and pipeline operations.`;
+
+      const aiResponse = await callGeminiAPI(input, systemPrompt);
+
+      // Clean response in case model adds markdown
+      const cleanHtml = aiResponse.replace(/```html/g, '').replace(/```/g, '');
+
+      outputContent.innerHTML = cleanHtml;
+      resultArea.classList.remove('hidden');
+
+      // Reset UI
+      btn.disabled = false;
+      btn.classList.remove('opacity-75');
+      spinner.classList.add('hidden');
+    }
+
+
+    // --- CHAT WIDGET LOGIC ---
+
+    function toggleChat() {
+      const win = document.getElementById('chat-window');
+      if (win.style.display === 'flex') {
+        win.style.display = 'none';
+      } else {
+        win.style.display = 'flex';
+        // Focus input
+        setTimeout(() => document.getElementById('chat-input').focus(), 100);
+      }
+    }
+
+    async function sendChatMessage() {
+      const inputEl = document.getElementById('chat-input');
+      const msgList = document.getElementById('chat-messages');
+      const userText = inputEl.value.trim();
+
+      if (!userText) return;
+
+      // 1. Add User Message
+      const userMsgDiv = document.createElement('div');
+      userMsgDiv.className = 'message user';
+      userMsgDiv.innerText = userText;
+      msgList.appendChild(userMsgDiv);
+      inputEl.value = '';
+      msgList.scrollTop = msgList.scrollHeight;
+
+      // 2. Add Typing Indicator
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message ai typing-indicator';
+      typingDiv.innerHTML = '<span></span><span></span><span></span>';
+      msgList.appendChild(typingDiv);
+      msgList.scrollTop = msgList.scrollHeight;
+
+      // 3. Prepare Context & Call API
+      const systemPrompt = `You are the 'MSN Energy Cueprise AI Assistant', deployed specifically for MSN Energy Resource Limited's ERP proposal.
+            You are speaking to stakeholders evaluating this strategic partnership.
+            
+            **CLIENT CONTEXT (MSN Energy Resource Limited):**
+            
+            **1. Business Profile:**
+            *   **Industry:** Natural gas trading and portfolio management company.
+            *   **Operations:** Source gas from multiple producers, sell to multiple off-takers.
+            *   **Projects:** Pipeline construction and Flare Gas Commercialization (FGC).
+            
+            **2. Implemented Modules (9 Core Business Modules):**
+            *   Gas Trading & Portfolio Engine (Nomination Hub, Reconciliation, Margin Optimizer)
+            *   Logistics & FGC Tracking (Offline PWA, NMDPRA reports)
+            *   Pipeline & Infrastructure Tracker (Gantt milestones, Contractor Portal)
+            *   GRC & Compliance (License Vault, GPAs/GSAs, 60/30/15-day alerts)
+            *   Document Control (Version control, sensitivity levels)
+            *   Financials & Invoicing (Naira accounting, automated billing)
+            *   HR Management (5-tier rank hierarchy L1-L5, approval limits)
+            *   Requisitions & Expenses (Multi-level approval workflows)
+            *   Analytics & Reporting (Executive KPIs, quarterly reports)
+            *   AI Module Architect (Custom module spec generation)
+            
+            **3. Security (SCADA-Style):**
+            *   RBAC+ with File Invisibility for unauthorized ranks
+            *   Approval limits tied to HR rank
+            *   Centralized admin lockdown capability
+            
+            **4. Implementation:**
+            *   5-Phase / 30-Week Roadmap
+            *   Sovereign Single-Tenant Azure deployment
+            *   Microsoft Entra ID with MFA
+            
+            **5. Key Differentiators:**
+            *   **Naira Pricing:** Stable annual license, no FX volatility
+            *   **Local Support:** 20+ engineers in Nigeria, 24/7 support
+            *   **Data Sovereignty:** Deployed in MSN Energy's own Azure tenant
+            *   **Offline-First:** PWA for field staff in low-connectivity areas
+            
+            **BEHAVIOR:**
+            *   Answer questions about modules, security, or implementation directly.
+            *   Reference specific MSN Energy requirements when relevant.
+            *   Mention the interactive demo (demo/index.html) for visual demonstrations.
+            *   Keep responses concise (max 3-4 sentences) unless asked to elaborate.
+            *   Use Markdown for emphasis.`;
+
+      const aiResponse = await callGeminiAPI(userText, systemPrompt);
+
+      // 4. Remove Typing & Add AI Message
+      msgList.removeChild(typingDiv);
+
+      const aiMsgDiv = document.createElement('div');
+      aiMsgDiv.className = 'message ai prose';
+      // Parse markdown for safety/styling
+      aiMsgDiv.innerHTML = marked.parse(aiResponse);
+      msgList.appendChild(aiMsgDiv);
+      msgList.scrollTop = msgList.scrollHeight;
+    }
+
+  </script>
+</body>
+
+</html>
