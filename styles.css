@@ -20,7 +20,8 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow-x: hidden;
+  /* allow vertical scroll on mobile while clipping orb overflow horizontally */
   position: relative;
 }
 
@@ -326,11 +327,35 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+  body {
+    /* On mobile, content can exceed viewport — start at top so users can scroll */
+    justify-content: flex-start;
+    padding: 2rem 0;
+  }
+
   .title {
-    font-size: 3rem;
+    font-size: 2.75rem;
   }
 
   .container {
     padding: 1.5rem;
+    gap: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer {
+    margin-top: 1rem;
+    padding-bottom: 1rem;
   }
 }

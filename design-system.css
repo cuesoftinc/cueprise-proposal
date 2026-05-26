@@ -114,6 +114,20 @@
   transition: all 0.3s ease;
 }
 
+/* ==========================================================================
+   MOBILE RESPONSIVE: Center section headers on small screens
+   Each major <section> in the proposals starts with <div class="mb-6">
+   containing the type-title + type-subheading. Centering these improves
+   visual balance on mobile portrait viewports.
+   ========================================================================== */
+@media (max-width: 768px) {
+
+  .view-section>.mb-6 .type-title,
+  .view-section>.mb-6 .type-subheading {
+    text-align: center;
+  }
+}
+
 .premium-card:hover {
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   border-color: #cbd5e1;
