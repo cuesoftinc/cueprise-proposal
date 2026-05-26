@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STACO Insurance | Cueprise ERP Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="ph-duotone ph-database"></i>
+        <span>Cueprise</span>
+      </div>
+      <div class="client-badge">STACO Insurance</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <span class="nav-label">Main</span>
+        <button class="nav-item active" data-module="dashboard">
+          <i class="ph-duotone ph-squares-four"></i>
+          <span>Dashboard</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Insurance Operations</span>
+        <button class="nav-item" data-module="quote">
+          <i class="ph-duotone ph-chart-line-up"></i>
+          <span>Quote Engine</span>
+        </button>
+        <button class="nav-item" data-module="claims">
+          <i class="ph-duotone ph-first-aid-kit"></i>
+          <span>Claims Management</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Lifecycle</span>
+        <button class="nav-item" data-module="policy">
+          <i class="ph-duotone ph-file-text"></i>
+          <span>Policy Management</span>
+        </button>
+        <button class="nav-item" data-module="grc">
+          <i class="ph-duotone ph-shield-check"></i>
+          <span>Compliance & Regulatory</span>
+        </button>
+        <button class="nav-item" data-module="documents">
+          <i class="ph-duotone ph-folder-open"></i>
+          <span>Document Management (DMS)</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Finance & Brokerage</span>
+        <button class="nav-item" data-module="finance">
+          <i class="ph-duotone ph-currency-ngn"></i>
+          <span>Payments & Billing</span>
+        </button>
+        <button class="nav-item" data-module="commissions">
+          <i class="ph-duotone ph-hand-coins"></i>
+          <span>Commissions & Incentives</span>
+        </button>
+      </div>
+
+      <div class="nav-section">
+        <span class="nav-label">Security & Insights</span>
+        <button class="nav-item" data-module="iam">
+          <i class="ph-duotone ph-key"></i>
+          <span>IAM & Access Control</span>
+        </button>
+        <button class="nav-item" data-module="analytics">
+          <i class="ph-duotone ph-chart-bar"></i>
+          <span>Reporting & Analytics</span>
+        </button>
+        <button class="nav-item" data-module="settings">
+          <i class="ph-duotone ph-gear"></i>
+          <span>Settings</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="../" class="back-link">
+        <i class="ph-duotone ph-arrow-left"></i>
+        <span>Back to Proposal</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay (for mobile) -->
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-toggle" onclick="toggleSidebar()">
+          <i class="ph ph-list"></i>
+        </button>
+        <div class="search-box">
+          <i class="ph ph-magnifying-glass"></i>
+          <input type="text" placeholder="Search Anything">
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="notification-wrapper">
+          <button class="icon-btn" onclick="toggleNotifications()">
+            <i class="ph-duotone ph-bell"></i>
+            <span class="badge">3</span>
+          </button>
+          <div id="notification-dropdown" class="dropdown-panel">
+            <div class="dropdown-header">
+              <h4>Notifications</h4>
+              <button class="btn-link"
+                onclick="showToast('Notifications', 'All notifications marked as read', 'success')">Mark
+                all read</button>
+            </div>
+            <div class="dropdown-content">
+              <div class="notification-item urgent">
+                <i class="ph-duotone ph-warning-octagon"></i>
+                <div class="notification-text">
+                  <strong>License Expiring</strong>
+                  <p>NAICOM Underwriting Licence expires in 15 days</p>
+                  <span class="notification-time">2 hours ago</span>
+                </div>
+              </div>
+              <div class="notification-item">
+                <i class="ph-duotone ph-check-circle"></i>
+                <div class="notification-text">
+                  <strong>Requisition Approved</strong>
+                  <p>REQ-2026-0140 has been approved by L3</p>
+                  <span class="notification-time">4 hours ago</span>
+                </div>
+              </div>
+              <div class="notification-item">
+                <i class="ph-duotone ph-file-text"></i>
+                <div class="notification-text">
+                  <strong>Invoice Generated</strong>
+                  <p>INV-2026-0089 for PowerGen Nigeria created</p>
+                  <span class="notification-time">Yesterday</span>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-footer">
+              <button class="btn-link" onclick="showToast('Notifications', 'Opening all notifications...', 'info')">View
+                All
+                Notifications</button>
+            </div>
+          </div>
+        </div>
+        <div class="user-wrapper">
+          <div class="user-profile" onclick="toggleUserMenu()">
+            <img src="https://ui-avatars.com/api/?name=STACO+Admin&background=6366f1&color=fff" alt="User">
+            <span>Admin User</span>
+            <i class="ph ph-caret-down"></i>
+          </div>
+          <div id="user-dropdown" class="dropdown-panel user-menu">
+            <div class="dropdown-content">
+              <button class="dropdown-item" onclick="showToast('Profile', 'Opening profile settings...', 'info')">
+                <i class="ph ph-user"></i> My Profile
+              </button>
+              <button class="dropdown-item" onclick="showToast('Preferences', 'Opening preferences...', 'info')">
+                <i class="ph ph-gear"></i> Preferences
+              </button>
+              <button class="dropdown-item" onclick="showToast('Help', 'Opening help center...', 'info')">
+                <i class="ph ph-question"></i> Help Center
+              </button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item danger" onclick="showToast('Logout', 'Logging out...', 'info')">
+                <i class="ph ph-sign-out"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <!-- Dashboard Module -->
+      <section id="module-dashboard" class="module active">
+        <div class="module-header">
+          <h1>Dashboard</h1>
+          <p class="subtitle">Real-time overview of STACO Insurance underwriting, claims, and broker operations</p>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-shield-check"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Total Active Policies</span>
+              <span class="kpi-value">2,847</span>
+              <span class="kpi-change positive">+12.5% vs last month</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-check-circle"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Premium Collection Rate</span>
+              <span class="kpi-value">98.7%</span>
+              <span class="kpi-change positive">+2.1% on-time</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-warning"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Open Claims</span>
+              <span class="kpi-value">12</span>
+              <span class="kpi-change negative">+3 awaiting adjudication</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-hard-hat"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Active Brokers</span>
+              <span class="kpi-value">211</span>
+              <span class="kpi-change neutral">187 retail · 24 corporate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <div class="chart-card wide">
+            <div class="chart-header">
+              <h3>Premium Collection Trend</h3>
+              <div class="chart-tabs">
+                <button class="active" onclick="switchChartPeriod(this, 'day')">Day</button>
+                <button onclick="switchChartPeriod(this, 'week')">Week</button>
+                <button onclick="switchChartPeriod(this, 'month')">Month</button>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="volumeChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Claims Loss Ratio</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="lossRatioChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activity Table -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Recent Policy Inceptions</h3>
+            <button class="btn-secondary" onclick="viewMore('quote')">View All</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Policyholder</th>
+                <th>Quoted Premium</th>
+                <th>Underwritten GWP</th>
+                <th>Premium Settled</th>
+                <th>Variance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PowerGen Nigeria Ltd</strong></td>
+                <td>1,250</td>
+                <td>1,250</td>
+                <td>1,248</td>
+                <td class="negative">-0.16%</td>
+                <td><span class="status-badge validated">Validated</span></td>
+              </tr>
+              <tr>
+                <td><strong>Lafarge Africa Plc</strong></td>
+                <td>890</td>
+                <td>890</td>
+                <td>890</td>
+                <td class="positive">0.00%</td>
+                <td><span class="status-badge validated">Validated</span></td>
+              </tr>
+              <tr>
+                <td><strong>Dangote Cement</strong></td>
+                <td>2,100</td>
+                <td>2,000</td>
+                <td>1,987</td>
+                <td class="negative">-5.38%</td>
+                <td><span class="status-badge pending">Under Review</span></td>
+              </tr>
+              <tr>
+                <td><strong>BUA Cement Plc</strong></td>
+                <td>750</td>
+                <td>750</td>
+                <td>752</td>
+                <td class="positive">+0.27%</td>
+                <td><span class="status-badge validated">Validated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Quote Engine Module -->
+      <section id="module-quote" class="module">
+        <div class="module-header">
+          <h1>Product & Quote Engine</h1>
+          <p class="subtitle">Modular Product Builder, Algorithmic Underwriting Rules, and Co-Insurance / Reinsurance
+            allocations</p>
+        </div>
+
+        <!-- Module KPIs -->
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-clipboard-text"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Quotes Today</span>
+              <span class="kpi-value">142</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-check-square"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Bound Policies</span>
+              <span class="kpi-value">128</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-clock"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Awaiting Underwriter</span>
+              <span class="kpi-value">11</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon red">
+              <i class="ph-duotone ph-x-circle"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Referrals</span>
+              <span class="kpi-value">3</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Builder: Adaptive risk rating matrices based on client demographic variables. -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Quote Pipeline</h3>
+            <div class="table-actions">
+              <div class="search-inline">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" placeholder="Search policyholder, contract, or quote...">
+              </div>
+              <button class="btn-primary" onclick="openModal('policy-quote-modal')">
+                <i class="ph ph-plus"></i> New Quote
+              </button>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th><input type="checkbox"></th>
+                <th>Policyholder</th>
+                <th>Contract ID</th>
+                <th>Quoted Premium</th>
+                <th>Underwritten GWP</th>
+                <th>Premium Settled</th>
+                <th>Variance</th>
+                <th>Broker</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><strong>PowerGen Nigeria</strong></td>
+                <td>POL-2024-001</td>
+                <td>1,250 ₦M</td>
+                <td>1,250 ₦M</td>
+                <td>1,248 ₦M</td>
+                <td class="negative">-2 ₦M</td>
+                <td>STACO Direct</td>
+                <td><span class="status-badge validated">Validated</span></td>
+                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete quote', 'info')"><i
+                      class="ph ph-dots-three"></i></button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><strong>Dangote Cement</strong></td>
+                <td>POL-2024-003</td>
+                <td>2,100 ₦M</td>
+                <td>2,000 ₦M</td>
+                <td>1,987 ₦M</td>
+                <td class="negative">-113 ₦M</td>
+                <td>Coronation Brokers</td>
+                <td><span class="status-badge pending">Under Review</span></td>
+                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete quote', 'info')"><i
+                      class="ph ph-dots-three"></i></button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><strong>Lafarge Africa</strong></td>
+                <td>POL-2024-002</td>
+                <td>890 ₦M</td>
+                <td>890 ₦M</td>
+                <td>890 ₦M</td>
+                <td class="positive">0 ₦M</td>
+                <td>STACO Direct</td>
+                <td><span class="status-badge validated">Validated</span></td>
+                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete quote', 'info')"><i
+                      class="ph ph-dots-three"></i></button></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td><strong>BUA Cement</strong></td>
+                <td>POL-2024-004</td>
+                <td>750 ₦M</td>
+                <td>750 ₦M</td>
+                <td>752 ₦M</td>
+                <td class="positive">+2 ₦M</td>
+                <td>STACO Direct</td>
+                <td><span class="status-badge validated">Validated</span></td>
+                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete quote', 'info')"><i
+                      class="ph ph-dots-three"></i></button></td>
+              </tr>
+              <tr class="variance-row">
+                <td><input type="checkbox"></td>
+                <td><strong>Notore Chemical</strong></td>
+                <td>POL-2024-005</td>
+                <td>500 ₦M</td>
+                <td>480 ₦M</td>
+                <td>421 ₦M</td>
+                <td class="negative">-79 ₦M</td>
+                <td>Coronation Brokers</td>
+                <td><span class="status-badge alert">Referred</span></td>
+                <td><button class="btn-icon" onclick="showToast('Options', 'View, Edit, or Delete quote', 'info')"><i
+                      class="ph ph-dots-three"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <span>Showing 5 of 142 quotes</span>
+            <div class="pagination">
+              <button class="page-btn" onclick="showToast('Navigation', 'Previous page loaded', 'info')">←</button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn" onclick="showToast('Navigation', 'Page 2 loaded', 'info')">2</button>
+              <button class="page-btn" onclick="showToast('Navigation', 'Page 3 loaded', 'info')">3</button>
+              <span>...</span>
+              <button class="page-btn" onclick="showToast('Navigation', 'Page 15 loaded', 'info')">15</button>
+              <button class="page-btn" onclick="showToast('Navigation', 'Next page loaded', 'info')">→</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GRC & Compliance Module -->
+      <section id="module-grc" class="module">
+        <div class="module-header">
+          <h1>Compliance & Regulatory</h1>
+          <p class="subtitle">Regulatory License Vault and NAICOM/NDPR compliance tracking</p>
+        </div>
+
+        <!-- License Expiry Alerts -->
+        <div class="alert-grid">
+          <div class="alert-card critical">
+            <div class="alert-icon">
+              <i class="ph-duotone ph-warning-octagon"></i>
+            </div>
+            <div class="alert-content">
+              <span class="alert-label">Expiring in 15 Days</span>
+              <span class="alert-value">2 Licenses</span>
+            </div>
+            <button class="alert-action" onclick="openModal('filter-modal')">View</button>
+          </div>
+          <div class="alert-card warning">
+            <div class="alert-icon">
+              <i class="ph-duotone ph-warning"></i>
+            </div>
+            <div class="alert-content">
+              <span class="alert-label">Expiring in 30 Days</span>
+              <span class="alert-value">4 Licenses</span>
+            </div>
+            <button class="alert-action" onclick="openModal('filter-modal')">View</button>
+          </div>
+          <div class="alert-card info">
+            <div class="alert-icon">
+              <i class="ph-duotone ph-info"></i>
+            </div>
+            <div class="alert-content">
+              <span class="alert-label">Expiring in 60 Days</span>
+              <span class="alert-value">7 Licenses</span>
+            </div>
+            <button class="alert-action" onclick="openModal('filter-modal')">View</button>
+          </div>
+        </div>
+
+        <!-- License Vault -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>License Vault</h3>
+            <div class="table-actions">
+              <button class="btn-secondary" onclick="openModal('filter-modal')">
+                <i class="ph ph-funnel"></i> Filter
+              </button>
+              <button class="btn-primary" onclick="openModal('license-modal')">
+                <i class="ph ph-plus"></i> Add License
+              </button>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>License/Permit</th>
+                <th>Issuing Authority</th>
+                <th>Issue Date</th>
+                <th>Expiry Date</th>
+                <th>Days Left</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="critical-row">
+                <td><strong>NAICOM Underwriting Licence</strong></td>
+                <td>NAICOM</td>
+                <td>Jan 15, 2024</td>
+                <td>Jan 22, 2026</td>
+                <td class="negative"><strong>15 days</strong></td>
+                <td><span class="status-badge alert">Critical</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('Renewal Started', 'NAICOM Underwriting Licence renewal initiated', 'success')">Renew</button>
+                </td>
+              </tr>
+              <tr class="critical-row">
+                <td><strong>NDPR Data Controller Registration</strong></td>
+                <td>NDPR</td>
+                <td>Mar 01, 2024</td>
+                <td>Jan 20, 2026</td>
+                <td class="negative"><strong>13 days</strong></td>
+                <td><span class="status-badge alert">Critical</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('Renewal Started', 'NDPR Data Controller Registration renewal initiated', 'success')">Renew</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>NIID Motor Insurance Database Cert.</strong></td>
+                <td>NIA / NIID</td>
+                <td>Jun 10, 2024</td>
+                <td>Feb 15, 2026</td>
+                <td class="warning">39 days</td>
+                <td><span class="status-badge pending">Warning</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('License Details', 'Viewing NIID Motor Insurance Database Cert. details', 'info')">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>NCRIB Brokerage Permit</strong></td>
+                <td>NCRIB</td>
+                <td>Aug 22, 2024</td>
+                <td>Aug 22, 2027</td>
+                <td class="positive">593 days</td>
+                <td><span class="status-badge validated">Active</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('License Details', 'Viewing NCRIB Brokerage Permit details', 'info')">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Contract Repository -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Contract Repository (Reinsurance Treaties / Broker Agreements)</h3>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Contract ID</th>
+                <th>Type</th>
+                <th>Counterparty</th>
+                <th>Effective Date</th>
+                <th>Expiry Date</th>
+                <th>Version</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Treaty-Munich Re-2024-001</strong></td>
+                <td><span class="contract-type treaty">Reinsurance Treaty</span></td>
+                <td>Munich Re Africa</td>
+                <td>Jan 01, 2024</td>
+                <td>Dec 31, 2028</td>
+                <td>v2.1</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>Broker Agreement-Coronation-2024</strong></td>
+                <td><span class="contract-type agreement">Broker Agreement</span></td>
+                <td>Coronation Insurance Brokers</td>
+                <td>Mar 15, 2024</td>
+                <td>Mar 14, 2029</td>
+                <td>v1.0</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>Broker Agreement-FBN-2024</strong></td>
+                <td><span class="contract-type agreement">Broker Agreement</span></td>
+                <td>FBN Insurance Brokers Ltd</td>
+                <td>Apr 01, 2024</td>
+                <td>Mar 31, 2027</td>
+                <td>v1.2</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Policy Management Module -->
+      <section id="module-policy" class="module">
+        <div class="module-header">
+          <h1>Policy Management</h1>
+          <p class="subtitle">Full policy lifecycle: inception, mid-term adjustments, renewals, lapses & reinstatements
+          </p>
+        </div>
+
+        <!-- Project KPIs -->
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-hard-hat"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Active Brokers</span>
+              <span class="kpi-value">211</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-git-branch"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Renewals This Month</span>
+              <span class="kpi-value">421</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-first-aid-kit"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Mid-Term Adjustments</span>
+              <span class="kpi-value">63</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-currency-ngn"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Gross Written Premium</span>
+              <span class="kpi-value">₦4.2B</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project List -->
+        <div class="project-grid">
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-type policy">Motor</span>
+              <span class="project-progress">67%</span>
+            </div>
+            <h4>John Holt Motor Fleet Scheme</h4>
+            <p class="project-desc">Comprehensive fleet motor cover for 120 logistics trucks; renewal active</p>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="ph ph-calendar"></i>
+                <span>Due: Mar 2026</span>
+              </div>
+              <div class="meta-item">
+                <i class="ph ph-currency-ngn"></i>
+                <span>₦1.8B</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 67%"></div>
+            </div>
+            <div class="project-team">
+              <img src="https://ui-avatars.com/api/?name=A&background=6366f1&color=fff&size=28" alt="">
+              <img src="https://ui-avatars.com/api/?name=B&background=10b981&color=fff&size=28" alt="">
+              <img src="https://ui-avatars.com/api/?name=C&background=f59e0b&color=fff&size=28" alt="">
+              <span class="more-team">+5</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-type scheme">Marine</span>
+              <span class="project-progress">45%</span>
+            </div>
+            <h4>Sapele Port Cargo Treaty</h4>
+            <p class="project-desc">Marine cargo cover for inbound shipments via Sapele port</p>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="ph ph-calendar"></i>
+                <span>Due: Jun 2026</span>
+              </div>
+              <div class="meta-item">
+                <i class="ph ph-currency-ngn"></i>
+                <span>₦850M</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 45%"></div>
+            </div>
+            <div class="project-team">
+              <img src="https://ui-avatars.com/api/?name=D&background=ec4899&color=fff&size=28" alt="">
+              <img src="https://ui-avatars.com/api/?name=E&background=8b5cf6&color=fff&size=28" alt="">
+              <span class="more-team">+3</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-header">
+              <span class="project-type scheme">Group Life</span>
+              <span class="project-progress">82%</span>
+            </div>
+            <h4>Warri Group Life Renewal</h4>
+            <p class="project-desc">Group life cover renewal for 1,200 corporate employees</p>
+            <div class="project-meta">
+              <div class="meta-item">
+                <i class="ph ph-calendar"></i>
+                <span>Due: Feb 2026</span>
+              </div>
+              <div class="meta-item">
+                <i class="ph ph-currency-ngn"></i>
+                <span>₦620M</span>
+              </div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 82%"></div>
+            </div>
+            <div class="project-team">
+              <img src="https://ui-avatars.com/api/?name=F&background=14b8a6&color=fff&size=28" alt="">
+              <img src="https://ui-avatars.com/api/?name=G&background=f97316&color=fff&size=28" alt="">
+              <span class="more-team">+4</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Renewal Pipeline -->
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Renewal Pipeline (60 / 30 / 15 days)</h3>
+            <button class="btn-secondary" onclick="exportReport('Renewals Report')">Export
+              Renewals</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Policyholder</th>
+                <th>Renewal Date</th>
+                <th>Premium (₦M)</th>
+                <th>Sum Insured (₦M)</th>
+                <th>Days Remaining</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Dangote Cement Plc</strong></td>
+                <td>Jan 22, 2026</td>
+                <td>12.5</td>
+                <td>1,250</td>
+                <td class="positive">15 days</td>
+                <td><span class="status-badge validated">Notice Sent</span></td>
+              </tr>
+              <tr>
+                <td><strong>Lafarge Africa</strong></td>
+                <td>Feb 06, 2026</td>
+                <td>18.3</td>
+                <td>1,830</td>
+                <td class="positive">30 days</td>
+                <td><span class="status-badge validated">Notice Sent</span></td>
+              </tr>
+              <tr>
+                <td><strong>BUA Cement</strong></td>
+                <td>Mar 06, 2026</td>
+                <td>8.7</td>
+                <td>870</td>
+                <td class="warning">60 days</td>
+                <td><span class="status-badge pending">Pending Review</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Claims Management Module -->
+      <section id="module-claims" class="module">
+        <div class="module-header">
+          <h1>Claims Management</h1>
+          <p class="subtitle">First Notice of Loss (FNOL), intelligent triage, and adjuster assignments</p>
+        </div>
+
+        <!-- Logistics KPIs -->
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-user-gear"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Open Claims</span>
+              <span class="kpi-value">128</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-check-circle"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Settled Today</span>
+              <span class="kpi-value">42</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-first-aid-kit"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Cycle Time (avg)</span>
+              <span class="kpi-value">3.2d</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-shield-check"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Fraud Flags</span>
+              <span class="kpi-value">6</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-Navigation Tabs -->
+        <div class="module-tabs">
+          <button class="module-tab active" data-tab="claims-open">Open Claims</button>
+          <button class="module-tab" data-tab="claims-fnol">FNOL Intake</button>
+        </div>
+
+        <!-- Open Claims Tab -->
+        <div id="claims-open" class="tab-content active">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Open Claims</h3>
+              <div class="table-actions">
+                <div class="search-inline">
+                  <i class="ph ph-magnifying-glass"></i>
+                  <input type="text" placeholder="Search claims...">
+                </div>
+                <button class="btn-primary" onclick="openModal('fnol-modal')">
+                  <i class="ph ph-plus"></i> New FNOL
+                </button>
+              </div>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Claim #</th>
+                  <th>Policyholder</th>
+                  <th>Product Line</th>
+                  <th>Reserve (₦M)</th>
+                  <th>Reported</th>
+                  <th>Adjuster</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>CLM-2026-0233</strong></td>
+                  <td>Dangote Cement</td>
+                  <td>Property All Risk</td>
+                  <td>850</td>
+                  <td>Jan 07, 06:00</td>
+                  <td>A. Okonkwo (L2)</td>
+                  <td><span class="status-badge validated">Adjusting</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CLM-2026-0232</strong></td>
+                  <td>Lafarge Africa</td>
+                  <td>Marine Cargo</td>
+                  <td>620</td>
+                  <td>Jan 07, 05:30</td>
+                  <td>K. Bello (L1)</td>
+                  <td><span class="status-badge validated">Adjusting</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CLM-2026-0231</strong></td>
+                  <td>PowerGen Nigeria</td>
+                  <td>Engineering / CAR</td>
+                  <td>1,200</td>
+                  <td>Jan 07, 04:00</td>
+                  <td>Unassigned</td>
+                  <td><span class="status-badge pending">Pending Triage</span></td>
+                </tr>
+                <tr>
+                  <td><strong>CLM-2026-0230</strong></td>
+                  <td>BUA Cement</td>
+                  <td>Property All Risk</td>
+                  <td>480</td>
+                  <td>Jan 06, 18:00</td>
+                  <td>I. Adebayo (L2)</td>
+                  <td><span class="status-badge validated">Settled</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <span>Showing 1-4 of 128 claims</span>
+              <div class="pagination">
+                <button class="page-btn" onclick="showToast('Navigation', 'Previous page loaded', 'info')">←</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn" onclick="showToast('Navigation', 'Page 2 loaded', 'info')">2</button>
+                <button class="page-btn" onclick="showToast('Navigation', 'Page 3 loaded', 'info')">3</button>
+                <button class="page-btn" onclick="showToast('Navigation', 'Next page loaded', 'info')">→</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FNOL Intake Tab -->
+        <div id="claims-fnol" class="tab-content">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Recent FNOL Submissions</h3>
+              <button class="btn-secondary" onclick="exportReport('FNOL Report')">
+                <i class="ph ph-download"></i> Export Report
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>FNOL #</th>
+                  <th>Channel</th>
+                  <th>Reported By</th>
+                  <th>Reserve (₦M)</th>
+                  <th>Triage Score</th>
+                  <th>Fraud Risk</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>FNOL-2026-0156</strong></td>
+                  <td>Agent PWA</td>
+                  <td>Coronation Brokers</td>
+                  <td>150</td>
+                  <td>87.7%</td>
+                  <td class="positive">Low</td>
+                  <td><span class="status-badge validated">Triaged</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FNOL-2026-0155</strong></td>
+                  <td>Web Portal</td>
+                  <td>Direct Customer</td>
+                  <td>120</td>
+                  <td>89.1%</td>
+                  <td class="positive">Low</td>
+                  <td><span class="status-badge validated">Triaged</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FNOL-2026-0154</strong></td>
+                  <td>WhatsApp</td>
+                  <td>FBN Insurance Brokers</td>
+                  <td>180</td>
+                  <td>85.1%</td>
+                  <td class="positive">Low</td>
+                  <td><span class="status-badge validated">Triaged</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FNOL-2026-0153</strong></td>
+                  <td>Mobile App</td>
+                  <td>Direct Customer</td>
+                  <td>100</td>
+                  <td>90.8%</td>
+                  <td class="positive">Low</td>
+                  <td><span class="status-badge validated">Triaged</span></td>
+                </tr>
+                <tr>
+                  <td><strong>FNOL-2026-0152</strong></td>
+                  <td>Email</td>
+                  <td>Coronation Brokers</td>
+                  <td>80</td>
+                  <td>52.0%</td>
+                  <td class="warning">Medium</td>
+                  <td><span class="status-badge pending">Under Review</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Finance Module -->
+      <section id="module-finance" class="module">
+        <div class="module-header">
+          <h1>Payments & Billing</h1>
+          <p class="subtitle">Naira-centric premium ledger, multi-gateway collections, and automated reconciliation</p>
+        </div>
+
+        <!-- Sub-Navigation Tabs -->
+        <div class="module-tabs">
+          <button class="module-tab active" data-tab="finance-dashboard">Dashboard</button>
+          <button class="module-tab" data-tab="finance-journals">Journals</button>
+          <button class="module-tab" data-tab="finance-ledger">General Ledger</button>
+          <button class="module-tab" data-tab="finance-invoices">Invoices</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="finance-dashboard" class="tab-content active">
+          <!-- Financial KPIs -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-icon green">
+                <i class="ph-duotone ph-trend-up"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Revenue (MTD)</span>
+                <span class="kpi-value">₦2.24B</span>
+                <span class="kpi-change positive">+18.3% vs last month</span>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon blue">
+                <i class="ph-duotone ph-money"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Cash Balance</span>
+                <span class="kpi-value">₦845M</span>
+                <span class="kpi-change neutral">Operating Balance</span>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon purple">
+                <i class="ph-duotone ph-receipt"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Accounts Receivable</span>
+                <span class="kpi-value">₦156M</span>
+                <span class="kpi-change negative">23 pending invoices</span>
+              </div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-icon orange">
+                <i class="ph-duotone ph-arrow-down"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Accounts Payable</span>
+                <span class="kpi-value">₦98M</span>
+                <span class="kpi-change neutral">12 pending bills</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chart of Accounts -->
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Chart of Accounts</h3>
+              <button class="btn-primary" onclick="openModal('account-modal')">
+                <i class="ph ph-plus"></i> Add Account
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Account Name</th>
+                  <th>Type</th>
+                  <th>Balance</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1001</td>
+                  <td><strong>Cash & Bank</strong></td>
+                  <td><span class="badge badge-info">Asset</span></td>
+                  <td>₦845,000,000</td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td>1100</td>
+                  <td><strong>Accounts Receivable</strong></td>
+                  <td><span class="badge badge-info">Asset</span></td>
+                  <td>₦156,420,000</td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td>2001</td>
+                  <td><strong>Accounts Payable</strong></td>
+                  <td><span class="badge badge-warning">Liability</span></td>
+                  <td>₦98,350,000</td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td>3001</td>
+                  <td><strong>Share Capital</strong></td>
+                  <td><span class="badge badge-success">Equity</span></td>
+                  <td>₦500,000,000</td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td>4001</td>
+                  <td><strong>Insurance Premium Revenue</strong></td>
+                  <td><span class="badge badge-success">Revenue</span></td>
+                  <td>₦2,240,000,000</td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Journals Tab -->
+        <div id="finance-journals" class="tab-content">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Journal Entries</h3>
+              <div class="table-actions">
+                <div class="search-inline">
+                  <i class="ph ph-magnifying-glass"></i>
+                  <input type="text" placeholder="Search journals...">
+                </div>
+                <button class="btn-primary" onclick="openModal('entry-modal')">
+                  <i class="ph ph-plus"></i> New Journal Entry
+                </button>
+              </div>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>JE #</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>JE-2026-0147</strong></td>
+                  <td>Jan 07, 2026</td>
+                  <td>Premium received - PowerGen Nigeria (Property)</td>
+                  <td>₦45,000,000</td>
+                  <td>₦45,000,000</td>
+                  <td><span class="status-badge validated">Posted</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td><strong>JE-2026-0146</strong></td>
+                  <td>Jan 06, 2026</td>
+                  <td>Equipment maintenance expense</td>
+                  <td>₦2,500,000</td>
+                  <td>₦2,500,000</td>
+                  <td><span class="status-badge validated">Posted</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td><strong>JE-2026-0145</strong></td>
+                  <td>Jan 05, 2026</td>
+                  <td>Payment received - Dangote Cement</td>
+                  <td>₦78,400,000</td>
+                  <td>₦78,400,000</td>
+                  <td><span class="status-badge validated">Posted</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+                <tr>
+                  <td><strong>JE-2026-0144</strong></td>
+                  <td>Jan 05, 2026</td>
+                  <td>Staff salary accrual - December</td>
+                  <td>₦18,750,000</td>
+                  <td>₦18,750,000</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Details', 'Viewing account details', 'info')"><i
+                        class="ph ph-eye"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- General Ledger Tab -->
+        <div id="finance-ledger" class="tab-content">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>General Ledger - Cash & Bank (1001)</h3>
+              <button class="btn-secondary" onclick="exportReport('Ledger')">
+                <i class="ph ph-download"></i> Export
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Reference</th>
+                  <th>Description</th>
+                  <th>Debit</th>
+                  <th>Credit</th>
+                  <th>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jan 01, 2026</td>
+                  <td>OB-2026</td>
+                  <td>Opening Balance</td>
+                  <td>₦750,000,000</td>
+                  <td>-</td>
+                  <td>₦750,000,000</td>
+                </tr>
+                <tr>
+                  <td>Jan 03, 2026</td>
+                  <td>RCP-001</td>
+                  <td>Receipt - Lafarge Africa</td>
+                  <td>₦32,500,000</td>
+                  <td>-</td>
+                  <td>₦782,500,000</td>
+                </tr>
+                <tr>
+                  <td>Jan 04, 2026</td>
+                  <td>PMT-042</td>
+                  <td>Reinsurance premium ceded - Munich Re Africa</td>
+                  <td>-</td>
+                  <td>₦45,200,000</td>
+                  <td>₦737,300,000</td>
+                </tr>
+                <tr>
+                  <td>Jan 05, 2026</td>
+                  <td>RCP-002</td>
+                  <td>Receipt - Dangote Cement</td>
+                  <td>₦78,400,000</td>
+                  <td>-</td>
+                  <td>₦815,700,000</td>
+                </tr>
+                <tr>
+                  <td>Jan 06, 2026</td>
+                  <td>RCP-003</td>
+                  <td>Receipt - BUA Cement</td>
+                  <td>₦29,300,000</td>
+                  <td>-</td>
+                  <td>₦845,000,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Invoices Tab -->
+        <div id="finance-invoices" class="tab-content">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Invoices</h3>
+              <div class="table-actions">
+                <div class="search-inline">
+                  <i class="ph ph-magnifying-glass"></i>
+                  <input type="text" placeholder="Search invoices...">
+                </div>
+                <button class="btn-primary" onclick="openModal('invoice-modal')">
+                  <i class="ph ph-plus"></i> Generate Invoice
+                </button>
+              </div>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Due Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>INV-2026-0089</strong></td>
+                  <td>PowerGen Nigeria Ltd</td>
+                  <td>Jan 07, 2026</td>
+                  <td>Feb 06, 2026</td>
+                  <td>₦45,000,000</td>
+                  <td><span class="status-badge pending">Pending</span></td>
+                  <td>
+                    <button class="btn-secondary small"
+                      onclick="showToast('Invoice Sent', 'Invoice emailed to PowerGen Nigeria', 'success')">Send</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>INV-2026-0088</strong></td>
+                  <td>Dangote Cement Plc</td>
+                  <td>Jan 05, 2026</td>
+                  <td>Feb 04, 2026</td>
+                  <td>₦78,400,000</td>
+                  <td><span class="status-badge validated">Paid</span></td>
+                  <td>
+                    <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i
+                        class="ph ph-download"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>INV-2026-0087</strong></td>
+                  <td>Lafarge Africa Plc</td>
+                  <td>Jan 03, 2026</td>
+                  <td>Feb 02, 2026</td>
+                  <td>₦32,500,000</td>
+                  <td><span class="status-badge validated">Paid</span></td>
+                  <td>
+                    <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i
+                        class="ph ph-download"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>INV-2026-0086</strong></td>
+                  <td>BUA Cement Plc</td>
+                  <td>Jan 02, 2026</td>
+                  <td>Feb 01, 2026</td>
+                  <td>₦29,300,000</td>
+                  <td><span class="status-badge validated">Paid</span></td>
+                  <td>
+                    <button class="btn-icon" onclick="showToast('Download', 'Invoice PDF downloaded', 'info')"><i
+                        class="ph ph-download"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Document Management (DMS) Module -->
+      <section id="module-documents" class="module">
+        <div class="module-header">
+          <h1>Digital Document Management (DMS)</h1>
+          <p class="subtitle">Digital workplace and secure document management</p>
+        </div>
+
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-files"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Total Documents</span>
+              <span class="kpi-value">1,847</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-cloud-check"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Synced Offline</span>
+              <span class="kpi-value">342</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-lock"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Classified</span>
+              <span class="kpi-value">128</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-clock-counter-clockwise"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Recent Versions</span>
+              <span class="kpi-value">56</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Document Repository</h3>
+            <div class="table-actions">
+              <div class="search-inline">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" placeholder="Search documents...">
+              </div>
+              <button class="btn-primary" onclick="openModal('document-modal')">
+                <i class="ph ph-upload"></i> Upload
+              </button>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Document Name</th>
+                <th>Category</th>
+                <th>Sensitivity</th>
+                <th>Version</th>
+                <th>Modified</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Reinsurance Treaty - Munich Re 2024 Master</strong></td>
+                <td>Contracts</td>
+                <td><span class="status-badge alert">Executive</span></td>
+                <td>v2.1</td>
+                <td>Jan 03, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>Policy ROW Survey Report</strong></td>
+                <td>Projects</td>
+                <td><span class="status-badge pending">Manager</span></td>
+                <td>v1.3</td>
+                <td>Jan 05, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>NAICOM Compliance Checklist</strong></td>
+                <td>Regulatory</td>
+                <td><span class="status-badge validated">Standard</span></td>
+                <td>v3.0</td>
+                <td>Jan 06, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Commissions & Incentives Module -->
+      <section id="module-commissions" class="module">
+        <div class="module-header">
+          <h1>Commission & Incentive Management</h1>
+          <p class="subtitle">Dynamic broker rate matrix, splits, clawbacks, and NIBSS payout queue</p>
+        </div>
+
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-clipboard-text"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Active Brokers</span>
+              <span class="kpi-value">187</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-hourglass"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Pending Payouts</span>
+              <span class="kpi-value">23</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-check-circle"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Settled This Month</span>
+              <span class="kpi-value">156</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-currency-ngn"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Commissions Paid</span>
+              <span class="kpi-value">₦248M</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3>NIBSS Payout Queue</h3>
+            <button class="btn-primary" onclick="openModal('requisition-modal')">
+              <i class="ph ph-plus"></i> New Payout Run
+            </button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Payout ID</th>
+                <th>Broker / Agent</th>
+                <th>Product Line</th>
+                <th>Source Policies</th>
+                <th>Net Commission</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>COM-2026-0142</strong></td>
+                <td>Coronation Insurance Brokers</td>
+                <td>Property All Risk</td>
+                <td>23 policies</td>
+                <td>₦4,850,000</td>
+                <td><span class="status-badge pending">Awaiting NIBSS</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('Payout', 'Viewing COM-2026-0142 details', 'info')">Review</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>COM-2026-0141</strong></td>
+                <td>FBN Insurance Brokers Ltd</td>
+                <td>Motor Comprehensive</td>
+                <td>87 policies</td>
+                <td>₦2,420,000</td>
+                <td><span class="status-badge pending">Pending L3 Approval</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('Payout', 'Viewing COM-2026-0141 details', 'info')">Review</button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>COM-2026-0140</strong></td>
+                <td>Emeka Nwosu (Tied Agent L4)</td>
+                <td>Group Life</td>
+                <td>5 corporate accounts</td>
+                <td>₦1,200,000</td>
+                <td><span class="status-badge validated">Settled</span></td>
+                <td><button class="btn-secondary small"
+                    onclick="showToast('Payout', 'Viewing COM-2026-0140 details', 'info')">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- IAM & Access Control Module -->
+      <section id="module-iam" class="module">
+        <div class="module-header">
+          <h1>Authentication & Access Control (IAM)</h1>
+          <p class="subtitle">Microsoft Entra ID SSO, dual-layer RBAC+ (Role + Rank L1-L5), and field-level
+            invisibility</p>
+        </div>
+
+        <div class="kpi-grid four-col">
+          <div class="kpi-card compact">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-users"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Total Employees</span>
+              <span class="kpi-value">142</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-buildings"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Departments</span>
+              <span class="kpi-value">8</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-calendar-x"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">On Leave</span>
+              <span class="kpi-value">6</span>
+            </div>
+          </div>
+          <div class="kpi-card compact">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-ranking"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Rank Levels</span>
+              <span class="kpi-value">5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Organizational Hierarchy</h3>
+            <button class="btn-primary" onclick="openModal('employee-modal')">
+              <i class="ph ph-user-plus"></i> Add Employee
+            </button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Role</th>
+                <th>Rank</th>
+                <th>Approval Limit</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Oluwaseun Adebisi</strong></td>
+                <td>Executive</td>
+                <td>Managing Director</td>
+                <td><span class="status-badge alert">L5 - Executive</span></td>
+                <td>Unlimited</td>
+                <td><span class="status-badge validated">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>Fatima Mohammed</strong></td>
+                <td>Finance</td>
+                <td>CFO</td>
+                <td><span class="status-badge alert">L5 - Executive</span></td>
+                <td>₦500M</td>
+                <td><span class="status-badge validated">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>Emmanuel Okorie</strong></td>
+                <td>Underwriting</td>
+                <td>Head of Underwriting</td>
+                <td><span class="status-badge pending">L4 - Director</span></td>
+                <td>₦100M</td>
+                <td><span class="status-badge validated">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>Grace Nwankwo</strong></td>
+                <td>Operations</td>
+                <td>Operations Manager</td>
+                <td><span class="status-badge pending">L3 - Manager</span></td>
+                <td>₦25M</td>
+                <td><span class="status-badge validated">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Reporting & Analytics Module -->
+      <section id="module-analytics" class="module">
+        <div class="module-header">
+          <h1>Reporting, BI & Analytics</h1>
+          <p class="subtitle">GWP, Loss Ratio, Expense Ratio, and NAICOM regulatory exports</p>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon green">
+              <i class="ph-duotone ph-trend-up"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Gross Written Premium (Q4)</span>
+              <span class="kpi-value">₦8.7B</span>
+              <span class="kpi-change positive">+22.4% vs Q3</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon blue">
+              <i class="ph-duotone ph-shield-check"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Net Premium Earned</span>
+              <span class="kpi-value">₦7.2B</span>
+              <span class="kpi-change positive">+15.2% vs Q3</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon purple">
+              <i class="ph-duotone ph-chart-pie-slice"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Loss Ratio</span>
+              <span class="kpi-value">42.1%</span>
+              <span class="kpi-change positive">-1.2pp improvement</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon orange">
+              <i class="ph-duotone ph-first-aid-kit"></i>
+            </div>
+            <div class="kpi-content">
+              <span class="kpi-label">Claims Paid Out</span>
+              <span class="kpi-value">₦420M</span>
+              <span class="kpi-change positive">+34.5% vs Q3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card wide">
+            <div class="chart-header">
+              <h3>Quarterly Performance Trend</h3>
+              <div class="chart-tabs">
+                <button class="active">GWP</button>
+                <button>Loss Ratio</button>
+                <button>Expense Ratio</button>
+              </div>
+            </div>
+            <div class="chart-container">
+              <canvas id="analyticsChart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>GWP by Product Line</h3>
+            </div>
+            <div class="chart-container">
+              <canvas id="segmentChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h3>Report Library</h3>
+            <button class="btn-primary"
+              onclick="showToast('Report Generator', 'Select report type from the table below', 'info')">
+              <i class="ph ph-file-arrow-down"></i> Generate Report
+            </button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Report Name</th>
+                <th>Type</th>
+                <th>Period</th>
+                <th>Generated</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Q4 2025 Financial Summary</strong></td>
+                <td>Quarterly</td>
+                <td>Oct - Dec 2025</td>
+                <td>Jan 05, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>Monthly Operations Report</strong></td>
+                <td>Monthly</td>
+                <td>December 2025</td>
+                <td>Jan 03, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+              <tr>
+                <td><strong>NAICOM Regulatory Compliance</strong></td>
+                <td>Regulatory</td>
+                <td>Q4 2025</td>
+                <td>Jan 02, 2026</td>
+                <td><button class="btn-icon" onclick="showToast('Download', 'File download started', 'info')"><i
+                      class="ph ph-download"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Settings Module -->
+      <section id="module-settings" class="module">
+        <div class="module-header">
+          <h1>Settings & Administration</h1>
+          <p class="subtitle">Sovereign-style access control, user management, and system configuration</p>
+        </div>
+
+        <!-- Sub-Navigation Tabs -->
+        <div class="module-tabs">
+          <button class="module-tab active" data-tab="settings-access">Access Control</button>
+          <button class="module-tab" data-tab="settings-users">User Management</button>
+          <button class="module-tab" data-tab="settings-system">System Config</button>
+        </div>
+
+        <!-- Access Control Tab -->
+        <div id="settings-access" class="tab-content active">
+          <div class="kpi-grid four-col">
+            <div class="kpi-card compact">
+              <div class="kpi-icon blue">
+                <i class="ph-duotone ph-shield-check"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Active Users</span>
+                <span class="kpi-value">142</span>
+              </div>
+            </div>
+            <div class="kpi-card compact">
+              <div class="kpi-icon green">
+                <i class="ph-duotone ph-key"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Security Roles</span>
+                <span class="kpi-value">12</span>
+              </div>
+            </div>
+            <div class="kpi-card compact">
+              <div class="kpi-icon purple">
+                <i class="ph-duotone ph-ranking"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">Rank Levels</span>
+                <span class="kpi-value">5</span>
+              </div>
+            </div>
+            <div class="kpi-card compact">
+              <div class="kpi-icon orange">
+                <i class="ph-duotone ph-lock-key"></i>
+              </div>
+              <div class="kpi-content">
+                <span class="kpi-label">MFA Enabled</span>
+                <span class="kpi-value">100%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Rank-Based Access Matrix (Sovereign Model)</h3>
+              <button class="btn-secondary"
+                onclick="showToast('Access Matrix', 'Matrix exported successfully', 'success')">
+                <i class="ph ph-download"></i> Export
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Rank Level</th>
+                  <th>Title</th>
+                  <th>Approval Limit</th>
+                  <th>File Access</th>
+                  <th>Module Access</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge-danger">L5</span></td>
+                  <td><strong>Executive / MD</strong></td>
+                  <td>Unlimited</td>
+                  <td>All Files</td>
+                  <td>Full System</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-warning">L4</span></td>
+                  <td><strong>Manager / HOD</strong></td>
+                  <td>₦50,000,000</td>
+                  <td>Dept + Confidential</td>
+                  <td>Dept + Reports</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-info">L3</span></td>
+                  <td><strong>Supervisor</strong></td>
+                  <td>₦10,000,000</td>
+                  <td>Dept + Internal</td>
+                  <td>Assigned Modules</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-primary">L2</span></td>
+                  <td><strong>Senior Staff</strong></td>
+                  <td>₦2,000,000</td>
+                  <td>Team Files</td>
+                  <td>Limited Modules</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge-success">L1</span></td>
+                  <td><strong>Junior Staff</strong></td>
+                  <td>₦500,000</td>
+                  <td>Own Files Only</td>
+                  <td>Basic Access</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- User Management Tab -->
+        <div id="settings-users" class="tab-content">
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Active Sessions</h3>
+              <div class="table-actions">
+                <div class="search-inline">
+                  <i class="ph ph-magnifying-glass"></i>
+                  <input type="text" placeholder="Search users...">
+                </div>
+                <button class="btn-primary" onclick="openModal('employee-modal')">
+                  <i class="ph ph-user-plus"></i> Add User
+                </button>
+              </div>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role</th>
+                  <th>Rank</th>
+                  <th>Last Active</th>
+                  <th>MFA</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Adeola Johnson</strong></td>
+                  <td>Underwriting Manager</td>
+                  <td><span class="badge badge-warning">L4</span></td>
+                  <td>Now</td>
+                  <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                  <td><span class="status-badge validated">Online</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i
+                        class="ph ph-sign-out"></i></button></td>
+                </tr>
+                <tr>
+                  <td><strong>Chidi Okonkwo</strong></td>
+                  <td>Finance Lead</td>
+                  <td><span class="badge badge-warning">L4</span></td>
+                  <td>5 min ago</td>
+                  <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                  <td><span class="status-badge validated">Online</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i
+                        class="ph ph-sign-out"></i></button></td>
+                </tr>
+                <tr>
+                  <td><strong>Funke Adeyemi</strong></td>
+                  <td>HR Coordinator</td>
+                  <td><span class="badge badge-info">L3</span></td>
+                  <td>12 min ago</td>
+                  <td><i class="ph-fill ph-check-circle" style="color: var(--success)"></i></td>
+                  <td><span class="status-badge pending">Away</span></td>
+                  <td><button class="btn-icon" onclick="showToast('Session', 'User session terminated', 'warning')"><i
+                        class="ph ph-sign-out"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- System Config Tab -->
+        <div id="settings-system" class="tab-content">
+          <div class="kpi-grid">
+            <div class="table-card" style="padding: 1.5rem;">
+              <h3 style="margin-bottom: 1rem;">System Information</h3>
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <span class="detail-label">Environment</span>
+                  <span class="detail-value">Production</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Version</span>
+                  <span class="detail-value">Cueprise v2.4.1</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Azure Region</span>
+                  <span class="detail-value">West Europe</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Last Backup</span>
+                  <span class="detail-value">Today, 03:00 AM</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">SSL Certificate</span>
+                  <span class="detail-value" style="color: var(--success);">Valid (256 days)</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Database Status</span>
+                  <span class="detail-value" style="color: var(--success);">Healthy</span>
+                </div>
+              </div>
+            </div>
+            <div class="table-card" style="padding: 1.5rem;">
+              <h3 style="margin-bottom: 1rem;">Quick Actions</h3>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <button class="btn-secondary" onclick="showToast('Audit Log', 'Downloading audit log...', 'info')">
+                  <i class="ph ph-file-text"></i> Download Audit Log
+                </button>
+                <button class="btn-secondary" onclick="showToast('Cache', 'System cache cleared', 'success')">
+                  <i class="ph ph-trash"></i> Clear Cache
+                </button>
+                <button class="btn-secondary" onclick="showToast('Backup', 'Manual backup initiated', 'info')">
+                  <i class="ph ph-cloud-arrow-up"></i> Manual Backup
+                </button>
+                <button class="btn-secondary" onclick="showToast('Test', 'All systems operational', 'success')">
+                  <i class="ph ph-heartbeat"></i> Health Check
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- MODALS -->
+
+  <!-- New Policy Quote Modal -->
+  <div id="policy-quote-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>New Policy Quote</h2>
+        <button class="modal-close" onclick="closeModal('policy-quote-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handlePolicyQuoteSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Policyholder</label>
+              <select class="form-select" name="policyholder" required>
+                <option value="">Select policyholder...</option>
+                <option value="PowerGen Nigeria">PowerGen Nigeria Ltd</option>
+                <option value="Dangote Cement">Dangote Cement Plc</option>
+                <option value="Lafarge Africa">Lafarge Africa Plc</option>
+                <option value="BUA Cement">BUA Cement Plc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Contract</label>
+              <select class="form-select" name="contract" required>
+                <option value="">Select contract...</option>
+                <option value="POL-2024-001">POL-2024-001</option>
+                <option value="POL-2024-002">POL-2024-002</option>
+                <option value="POL-2024-003">POL-2024-003</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Quoted Premium (₦ Millions)</label>
+              <input type="number" class="form-input" name="premium" placeholder="e.g. 1250" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Policy Quote Date</label>
+              <input type="date" class="form-input" name="quoteDate" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes</label>
+            <textarea class="form-textarea" name="notes" placeholder="Additional notes..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('policy-quote-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Submit Policy Quote</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Journal Entry Modal -->
+  <div id="entry-modal" class="modal-overlay">
+    <div class="modal large">
+      <div class="modal-header">
+        <h2>New Journal Entry</h2>
+        <button class="modal-close" onclick="closeModal('entry-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleEntrySubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Entry Date</label>
+              <input type="date" class="form-input" name="date" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Reference</label>
+              <input type="text" class="form-input" name="reference" placeholder="Auto-generated if blank">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Description</label>
+            <input type="text" class="form-input" name="description" placeholder="Entry description" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Debit Account</label>
+              <select class="form-select" name="debitAccount" required>
+                <option value="">Select account...</option>
+                <option value="1001">1001 - Cash & Bank</option>
+                <option value="1100">1100 - Accounts Receivable</option>
+                <option value="2001">2001 - Accounts Payable</option>
+                <option value="4001">4001 - Insurance Premium Revenue</option>
+                <option value="5001">5001 - Operating Expenses</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Credit Account</label>
+              <select class="form-select" name="creditAccount" required>
+                <option value="">Select account...</option>
+                <option value="1001">1001 - Cash & Bank</option>
+                <option value="1100">1100 - Accounts Receivable</option>
+                <option value="2001">2001 - Accounts Payable</option>
+                <option value="4001">4001 - Insurance Premium Revenue</option>
+                <option value="5001">5001 - Operating Expenses</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Amount (₦)</label>
+            <input type="number" class="form-input" name="amount" placeholder="0.00" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('entry-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Post Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add License Modal -->
+  <div id="license-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add License / Permit</h2>
+        <button class="modal-close" onclick="closeModal('license-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleLicenseSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label required">License Name</label>
+            <input type="text" class="form-input" name="licenseName" placeholder="e.g. NAICOM Underwriting Licence"
+              required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Issuing Authority</label>
+              <select class="form-select" name="authority" required>
+                <option value="">Select authority...</option>
+                <option value="NAICOM">NAICOM</option>
+                <option value="NDPR">NDPR</option>
+                <option value="NESREA">NESREA</option>
+                <option value="NAICOM">NAICOM</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">License Type</label>
+              <select class="form-select" name="type" required>
+                <option value="">Select type...</option>
+                <option value="Operating">Operating License</option>
+                <option value="Environmental">Environmental Permit</option>
+                <option value="Safety">Safety Certificate</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Issue Date</label>
+              <input type="date" class="form-input" name="issueDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Expiry Date</label>
+              <input type="date" class="form-input" name="expiryDate" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('license-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Add License</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Employee Modal -->
+  <div id="employee-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add Employee</h2>
+        <button class="modal-close" onclick="closeModal('employee-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleEmployeeSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">First Name</label>
+              <input type="text" class="form-input" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Last Name</label>
+              <input type="text" class="form-input" name="lastName" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Email</label>
+              <input type="email" class="form-input" name="email" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Department</label>
+              <select class="form-select" name="department" required>
+                <option value="">Select department...</option>
+                <option value="Operations">Operations</option>
+                <option value="Finance">Finance</option>
+                <option value="Underwriting">Underwriting</option>
+                <option value="Projects">Projects</option>
+                <option value="HR">Human Resources</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Rank Level</label>
+              <select class="form-select" name="rank" required>
+                <option value="">Select rank...</option>
+                <option value="L1">L1 - Junior Staff</option>
+                <option value="L2">L2 - Senior Staff</option>
+                <option value="L3">L3 - Supervisor</option>
+                <option value="L4">L4 - Manager</option>
+                <option value="L5">L5 - Executive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Approval Limit (₦)</label>
+              <input type="number" class="form-input" name="approvalLimit" placeholder="Based on rank">
+              <span class="form-hint">Leave blank to use rank default</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('employee-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Add Employee</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Requisition Modal -->
+  <div id="requisition-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Create Requisition</h2>
+        <button class="modal-close" onclick="closeModal('requisition-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleRequisitionSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Category</label>
+              <select class="form-select" name="category" required>
+                <option value="">Select category...</option>
+                <option value="Travel">Travel & Transport</option>
+                <option value="Equipment">Equipment & Supplies</option>
+                <option value="Services">Professional Services</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Priority</label>
+              <select class="form-select" name="priority" required>
+                <option value="">Select priority...</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+                <option value="Urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Description</label>
+            <textarea class="form-textarea" name="description" placeholder="Describe the requisition..."
+              required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label required">Amount (₦)</label>
+            <input type="number" class="form-input" name="amount" placeholder="0.00" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('requisition-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Submit Requisition</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Document Upload Modal -->
+  <div id="document-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Upload Document</h2>
+        <button class="modal-close" onclick="closeModal('document-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleDocumentUpload(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label required">Document Title</label>
+            <input type="text" class="form-input" name="title" placeholder="Enter document title" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Category</label>
+              <select class="form-select" name="category" required>
+                <option value="">Select category...</option>
+                <option value="Contracts">Contracts</option>
+                <option value="Compliance">Compliance</option>
+                <option value="Technical">Technical</option>
+                <option value="Financial">Financial</option>
+                <option value="HR">Human Resources</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Sensitivity Level</label>
+              <select class="form-select" name="sensitivity" required>
+                <option value="">Select level...</option>
+                <option value="Public">Public</option>
+                <option value="Internal">Internal</option>
+                <option value="Confidential">Confidential</option>
+                <option value="Restricted">Restricted</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">File</label>
+            <div class="file-upload">
+              <i class="ph-duotone ph-cloud-arrow-up"></i>
+              <p>Drag and drop files here, or <span>browse</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('document-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Upload Document</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Generate Invoice Modal -->
+  <div id="invoice-modal" class="modal-overlay">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2>Generate Invoice</h2>
+        <button class="modal-close" onclick="closeModal('invoice-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form id="invoice-form" onsubmit="handleInvoiceSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label class="form-label required">Customer</label>
+              <select class="form-select" name="customer" required>
+                <option value="">Select customer...</option>
+                <option value="PowerGen Nigeria">PowerGen Nigeria Ltd</option>
+                <option value="Dangote Cement">Dangote Cement Plc</option>
+                <option value="Lafarge Africa">Lafarge Africa Plc</option>
+                <option value="BUA Cement">BUA Cement Plc</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Invoice Date</label>
+              <input type="date" class="form-input" name="invoiceDate" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Due Date</label>
+              <input type="date" class="form-input" name="dueDate" required>
+            </div>
+          </div>
+
+          <!-- Invoice Line Items -->
+          <div class="invoice-items-section">
+            <div class="invoice-items-header">
+              <h4>Line Items</h4>
+              <button type="button" class="btn-secondary small" onclick="addInvoiceItem()">
+                <i class="ph ph-plus"></i> Add Item
+              </button>
+            </div>
+            <div id="invoice-items-container">
+              <div class="invoice-item" data-item="1">
+                <div class="form-group" style="flex: 2;">
+                  <input type="text" class="form-input" name="item_desc_1"
+                    placeholder="Description (e.g. Policy premium - January)" required>
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-input item-volume" name="item_volume_1"
+                    placeholder="Premium (₦ Millions)" oninput="updateInvoiceTotal()" required>
+                </div>
+                <div class="form-group">
+                  <input type="number" class="form-input item-rate" name="item_rate_1" placeholder="Rate (₦)"
+                    oninput="updateInvoiceTotal()" required>
+                </div>
+                <div class="form-group item-subtotal">
+                  <span class="subtotal-label">₦0</span>
+                </div>
+              </div>
+            </div>
+            <div class="invoice-total">
+              <span class="total-label">Total:</span>
+              <span id="invoice-grand-total" class="total-value">₦0</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Notes</label>
+            <textarea class="form-textarea" name="notes" placeholder="Additional notes..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('invoice-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Generate Invoice</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- New FNOL Claim Modal -->
+  <div id="fnol-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>New FNOL Claim</h2>
+        <button class="modal-close" onclick="closeModal('fnol-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleFnolSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Product Line</label>
+              <select class="form-select" name="productLine" required>
+                <option value="">Select product line...</option>
+                <option value="Property All Risk">Property All Risk</option>
+                <option value="Motor Comprehensive">Motor Comprehensive</option>
+                <option value="Marine Cargo">Marine Cargo</option>
+                <option value="Engineering / CAR">Engineering / CAR</option>
+                <option value="Group Life">Group Life</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Policyholder</label>
+              <select class="form-select" name="policyholder" required>
+                <option value="">Select policyholder...</option>
+                <option value="Dangote Cement Plc">Dangote Cement Plc</option>
+                <option value="Lafarge Africa Plc">Lafarge Africa Plc</option>
+                <option value="PowerGen Nigeria Ltd">PowerGen Nigeria Ltd</option>
+                <option value="BUA Cement Plc">BUA Cement Plc</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Estimated Reserve (₦ Millions)</label>
+              <input type="number" class="form-input" name="reserve" placeholder="e.g. 850" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Date of Loss</label>
+              <input type="datetime-local" class="form-input" name="dateOfLoss" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description of Loss</label>
+            <textarea class="form-textarea" name="description"
+              placeholder="Describe the incident — include cause, location, and witnesses if known..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('fnol-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Submit FNOL</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Filter Modal -->
+  <div id="filter-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Filter Licenses</h2>
+        <button class="modal-close" onclick="closeModal('filter-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleFilterSubmit(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="status">
+              <option value="">All Statuses</option>
+              <option value="critical">Critical (≤15 days)</option>
+              <option value="warning">Warning (≤30 days)</option>
+              <option value="active">Active</option>
+              <option value="expired">Expired</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Issuing Authority</label>
+            <select class="form-select" name="authority">
+              <option value="">All Authorities</option>
+              <option value="NAICOM">NAICOM</option>
+              <option value="NDPR">NDPR</option>
+              <option value="NESREA">NESREA</option>
+              <option value="Federal Min. of Works">Federal Min. of Works</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Expiry From</label>
+              <input type="date" class="form-input" name="expiryFrom">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiry To</label>
+              <input type="date" class="form-input" name="expiryTo">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('filter-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Apply Filters</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Account Modal -->
+  <div id="account-modal" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add Account</h2>
+        <button class="modal-close" onclick="closeModal('account-modal')">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <form onsubmit="handleAccountSubmit(event)">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Account Code</label>
+              <input type="text" class="form-input" name="code" placeholder="e.g. 1001" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label required">Account Name</label>
+              <input type="text" class="form-input" name="name" placeholder="e.g. Cash in Bank" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label required">Account Type</label>
+              <select class="form-select" name="type" required>
+                <option value="">Select type...</option>
+                <option value="Asset">Asset</option>
+                <option value="Liability">Liability</option>
+                <option value="Equity">Equity</option>
+                <option value="Revenue">Revenue</option>
+                <option value="Expense">Expense</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parent Account</label>
+              <select class="form-select" name="parent">
+                <option value="">None (Top Level)</option>
+                <option value="1000">1000 - Assets</option>
+                <option value="2000">2000 - Liabilities</option>
+                <option value="3000">3000 - Equity</option>
+                <option value="4000">4000 - Revenue</option>
+                <option value="5000">5000 - Expenses</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" name="description" placeholder="Account description..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('account-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Add Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="demo.js"></script>
+</body>
+
+</html>
