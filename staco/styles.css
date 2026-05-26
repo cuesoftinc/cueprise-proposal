@@ -173,3 +173,25 @@
 }
 
 /* Slides specific styles moved to centralized design-system.css */
+
+/* Mobile responsive overrides */
+@media (max-width: 480px) {
+
+  /* Make chat window fit smaller phones without horizontal overflow */
+  .chat-widget {
+    bottom: 12px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .chat-window {
+    width: auto;
+    max-width: calc(100vw - 24px);
+    height: 70vh;
+    max-height: 500px;
+  }
+
+  .chat-button {
+    align-self: flex-end;
+  }
+}

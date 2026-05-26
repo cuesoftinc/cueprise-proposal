@@ -1229,7 +1229,14 @@ body {
 
   .kpi-card {
     flex-direction: column;
+    align-items: center;
+    /* override default `align-items: flex-start` so kpi-content centers below the icon */
     text-align: center;
+  }
+
+  .kpi-content {
+    align-items: center;
+    /* center the label/value/change spans inside the flex column */
   }
 
   .kpi-icon {

@@ -330,6 +330,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -449,9 +450,11 @@ body {
 .kpi-change.positive {
   color: var(--success);
 }
+
 .kpi-change.negative {
   color: var(--danger);
 }
+
 .kpi-change.neutral {
   color: var(--gray-500);
 }
@@ -618,10 +621,12 @@ body {
   color: var(--success);
   font-weight: 600;
 }
+
 .data-table td.negative {
   color: var(--danger);
   font-weight: 600;
 }
+
 .data-table td.warning {
   color: var(--warning);
   font-weight: 600;
@@ -788,9 +793,11 @@ body {
 .alert-card.critical .alert-icon {
   color: var(--danger);
 }
+
 .alert-card.warning .alert-icon {
   color: var(--warning);
 }
+
 .alert-card.info .alert-icon {
   color: var(--info);
 }
@@ -1222,7 +1229,14 @@ body {
 
   .kpi-card {
     flex-direction: column;
+    align-items: center;
+    /* override default `align-items: flex-start` so kpi-content centers below the icon */
     text-align: center;
+  }
+
+  .kpi-content {
+    align-items: center;
+    /* center the label/value/change spans inside the flex column */
   }
 
   .kpi-icon {
@@ -1267,7 +1281,8 @@ body {
 }
 
 /* Prevent horizontal overflow globally */
-html, body {
+html,
+body {
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -1507,10 +1522,21 @@ html, body {
   font-size: 1.25rem;
 }
 
-.toast.success .toast-icon { color: var(--success); }
-.toast.error .toast-icon { color: var(--danger); }
-.toast.warning .toast-icon { color: var(--warning); }
-.toast.info .toast-icon { color: var(--info); }
+.toast.success .toast-icon {
+  color: var(--success);
+}
+
+.toast.error .toast-icon {
+  color: var(--danger);
+}
+
+.toast.warning .toast-icon {
+  color: var(--warning);
+}
+
+.toast.info .toast-icon {
+  color: var(--info);
+}
 
 .toast-content {
   flex: 1;
@@ -1848,7 +1874,9 @@ html, body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Financial Module Specific */
@@ -1891,8 +1919,13 @@ html, body {
   font-size: 1.125rem;
 }
 
-.entry-amount.debit { color: var(--danger); }
-.entry-amount.credit { color: var(--success); }
+.entry-amount.debit {
+  color: var(--danger);
+}
+
+.entry-amount.credit {
+  color: var(--success);
+}
 
 .entry-meta {
   font-size: 0.75rem;
@@ -1905,19 +1938,19 @@ html, body {
     width: 95%;
     max-height: 90vh;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
   }
-  
+
   .detail-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .financial-summary {
     grid-template-columns: 1fr;
   }
-  
+
   .toast {
     min-width: auto;
     max-width: calc(100vw - 2rem);
