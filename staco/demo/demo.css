@@ -72,7 +72,10 @@ body {
   background-color: var(--gray-100);
   color: var(--gray-800);
   display: flex;
+  /* `100dvh` adapts to mobile browser chrome (URL bar). `100vh` stays as a
+     fallback for older browsers. */
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
 }
 
